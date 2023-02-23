@@ -2,6 +2,8 @@ package project;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -181,8 +183,9 @@ public class AirplaneFrame extends JFrame {
 						player.down();
 					}
 					break;
-				case KeyEvent.VK_SPACE:
-					player.attack();
+				case KeyEvent.VK_SPACE: 
+				 
+
 					break;
 				case KeyEvent.VK_ENTER:
 					gameState = 1;
@@ -211,6 +214,21 @@ public class AirplaneFrame extends JFrame {
 
 				case KeyEvent.VK_DOWN:
 					player.setDown(false);
+					break;
+				case KeyEvent.VK_SPACE:
+					player.attack();
+					// 연속공격 안되게 하기 아직 보류
+//					 Timer t = new Timer(true);
+//					    TimerTask task1 = new TimerTask() {
+//							
+//							@Override
+//							public void run() {
+//								// TODO Auto-generated method stub
+//								player.attack();
+//							}
+//						};
+//						t.schedule(task1, 3000);
+
 					break;
 				}
 			}

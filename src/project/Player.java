@@ -1,5 +1,8 @@
 package project;
 
+import java.awt.Frame;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -309,7 +312,11 @@ public class Player extends JLabel implements Moveable {
 
 			// 나중에 게임 종료 결과 화면 만들면 2로 바꾸기
 			mContext.setGameState(0);
-			mContext.setInitLayout();
+			new AirplaneFrame();
+			Frame frame = new Frame();
+			frame.dispose();
+			
+			
 		}
 	}
 
@@ -317,6 +324,7 @@ public class Player extends JLabel implements Moveable {
 		// 게임 중일 때만 공격
 		if (mContext.getGameState() == 1) {
 			Bullet bullet = new Bullet(mContext);
+			
 			mContext.add(bullet);
 		}
 	}
