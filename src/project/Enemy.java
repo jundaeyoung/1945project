@@ -318,8 +318,10 @@ public class Enemy extends JLabel implements Moveable {
 	} // end of down
 	
 	public void attack() {
-		EnemyBullet enemyBullet = new EnemyBullet(mContext);
-		mContext.add(enemyBullet);
+		if(mContext.getGameState()==1) {
+			EnemyBullet enemyBullet = new EnemyBullet(mContext);
+			mContext.add(enemyBullet);
+			}
 	}
 	
 } // end of class

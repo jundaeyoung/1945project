@@ -11,7 +11,9 @@ public class AirplaneFrame extends JFrame {
 
 	private AirplaneFrame mContext = this;
 
+	private Background background;
 	private JLabel backgroundMap;
+	private JLabel gameStart;
 	private Time time;
 	private Player player;
 	private Enemy enemy;
@@ -20,11 +22,11 @@ public class AirplaneFrame extends JFrame {
 	private Life life0;
 	private Life life1;
 	private Life life2;
-	
-	// 게임 종료 여부 : 객체 생성하지 않고 사용 가능하게 (0 : 실행, 1 : 종료)
-	private static int gameState;
 
-//	// 여러 적군 만들기
+	// 게임 종료 여부 : 객체 생성하지 않고 사용 가능하게 (0 : 실행, 1 : 종료)
+	private static int gameState=0;
+	
+// 여러 적군 만들기
 //	private Enemy[] enemies = new Enemy[10];
 
 	// 생성자
@@ -41,19 +43,25 @@ public class AirplaneFrame extends JFrame {
 //			new Thread(new BackgroundEnemyService(enemies[i])).start();			
 //		}
 	} // end of 생성자
+
+	
 	
 	public static int getGameState() {
 		return gameState;
 	}
-	
+
+
+
 	public static void setGameState(int gameState) {
 		AirplaneFrame.gameState = gameState;
 	}
 
+
+
 	public Life getLife0() {
 		return life0;
 	}
-	
+
 	public void setLife(Life life0) {
 		this.life0 = life0;
 	}
@@ -104,11 +112,14 @@ public class AirplaneFrame extends JFrame {
 
 	// 생성자 메서드 1
 	private void initData() {
-		backgroundMap = new JLabel(new ImageIcon("imagesProject/background.png"));
+		gameStart = new JLabel(new ImageIcon("imagesProject/GameTitle.gif"));
+		backgroundMap = new JLabel(new ImageIcon("imagesProject/backgroundservice.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setContentPane(backgroundMap);
+		
+		
 		setSize(950, 950);
 
+		background = new Background(mContext);
 		player = new Player(mContext);
 		enemy = new Enemy(mContext);
 		life0 = new Life(mContext);
@@ -127,7 +138,11 @@ public class AirplaneFrame extends JFrame {
 		setResizable(false); // 창 크기 조절 기능( 거짓 )
 		setLocationRelativeTo(null); // JFrame 가운데 배치
 		setVisible(true);
-
+		if(gameState==0) {
+			setContentPane(gameStart);
+		}else {
+			setContentPane(backgroundMap);
+		
 		add(player);
 		add(enemy);
 		add(time.timeLabel);
@@ -138,13 +153,13 @@ public class AirplaneFrame extends JFrame {
 		life1.setLocation(60, 10);
 		add(life2);
 		life2.setLocation(100, 10);
-
+		}
 //		// 여러 적군 만들기
 //		for (int i = 0; i < enemies.length; i++) {
 //			add(enemies[i]);
 //		}
-
 	}
+	
 
 	private void addEventListener() {
 		this.addKeyListener(new KeyAdapter() {
@@ -176,6 +191,10 @@ public class AirplaneFrame extends JFrame {
 					break;
 				case KeyEvent.VK_SPACE:
 					player.attack();
+					break;
+				case KeyEvent.VK_ENTER:
+					gameState=1;
+					setInitLayout();
 					break;
 				}
 
