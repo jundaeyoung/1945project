@@ -12,10 +12,13 @@ public class Player extends JLabel implements Moveable {
 	private int y;
 	private int bulletX;
 	private int bulletY;
+	// 플레이어 생존 여부
 	private int alive;
+	// 아이콘
 	private ImageIcon player;
 	private ImageIcon bullet;
 	private ImageIcon gost;
+	// 플레이어 목숨 개수
 	private int life = 3;
 
 	// 플레이어의 현재 움직임 상태 기록
@@ -32,7 +35,7 @@ public class Player extends JLabel implements Moveable {
 	private boolean downWallCrash;
 
 	// 플레이어의 속도
-	// 상수 선언 X 아이템을 먹으면 속도가 빨라져야 하기 때문에 값이 바뀔 수 있음
+	// 상수 선언 X : 아이템을 먹으면 속도가 빨라져야 하기 때문에 값이 바뀔 수 있음
 	private int speed = 4;
 
 	public int getLife() {
@@ -98,6 +101,14 @@ public class Player extends JLabel implements Moveable {
 	public void setLeft(boolean left) {
 		this.left = left;
 	}
+	
+	public boolean isUpWallCrash() {
+		return upWallCrash;
+	}
+
+	public void setUpWallCrash(boolean upWallCrash) {
+		this.upWallCrash = upWallCrash;
+	}
 
 	public boolean isRight() {
 		return right;
@@ -137,14 +148,6 @@ public class Player extends JLabel implements Moveable {
 
 	public void setRightWallCrash(boolean rightWallCrash) {
 		this.rightWallCrash = rightWallCrash;
-	}
-
-	public boolean isUpWallCrash() {
-		return upWallCrash;
-	}
-
-	public void setUpWallCrash(boolean upWallCrash) {
-		this.upWallCrash = upWallCrash;
 	}
 
 	public boolean isDownWallCrash() {
@@ -298,19 +301,23 @@ public class Player extends JLabel implements Moveable {
 			mContext.getLife1().setIcon(null);
 			System.out.println("2번째 추락");
 			setIcon(gost);
+			
 		} else {
 			mContext.getLife0().setIcon(null);
 			System.out.println("3번째 추락");
 			setIcon(gost);
+
+			// 나중에 게임 종료 결과 화면 만들면 2로 바꾸기
 			mContext.setGameState(0);
 			mContext.setInitLayout();
 		}
 	}
 
 	public void attack() {
-		if(mContext.getGameState()==1) {
-		Bullet bullet = new Bullet(mContext);
-		mContext.add(bullet);
+		// 게임 중일 때만 공격
+		if (mContext.getGameState() == 1) {
+			Bullet bullet = new Bullet(mContext);
+			mContext.add(bullet);
 		}
 	}
 }

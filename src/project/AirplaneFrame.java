@@ -17,15 +17,15 @@ public class AirplaneFrame extends JFrame {
 	private Time time;
 	private Player player;
 	private Enemy enemy;
-	
+
 	// 플레이어 목숨 개수 아이콘
 	private Life life0;
 	private Life life1;
 	private Life life2;
 
 	// 게임 종료 여부 : 객체 생성하지 않고 사용 가능하게 (0 : 실행, 1 : 종료)
-	private static int gameState=0;
-	
+	private static int gameState = 0;
+
 // 여러 적군 만들기
 //	private Enemy[] enemies = new Enemy[10];
 
@@ -44,19 +44,13 @@ public class AirplaneFrame extends JFrame {
 //		}
 	} // end of 생성자
 
-	
-	
 	public static int getGameState() {
 		return gameState;
 	}
 
-
-
 	public static void setGameState(int gameState) {
 		AirplaneFrame.gameState = gameState;
 	}
-
-
 
 	public Life getLife0() {
 		return life0;
@@ -115,8 +109,7 @@ public class AirplaneFrame extends JFrame {
 		gameStart = new JLabel(new ImageIcon("imagesProject/GameTitle.gif"));
 		backgroundMap = new JLabel(new ImageIcon("imagesProject/backgroundservice.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
+
 		setSize(950, 950);
 
 		background = new Background(mContext);
@@ -138,28 +131,27 @@ public class AirplaneFrame extends JFrame {
 		setResizable(false); // 창 크기 조절 기능( 거짓 )
 		setLocationRelativeTo(null); // JFrame 가운데 배치
 		setVisible(true);
-		if(gameState==0) {
+		if (gameState == 0) {
 			setContentPane(gameStart);
-		}else {
+		} else {
 			setContentPane(backgroundMap);
-		
-		add(player);
-		add(enemy);
-		add(time.timeLabel);
 
-		add(life0);
-		life0.setLocation(20, 10);
-		add(life1);
-		life1.setLocation(60, 10);
-		add(life2);
-		life2.setLocation(100, 10);
+			add(player);
+			add(enemy);
+			add(time.timeLabel);
+
+			add(life0);
+			life0.setLocation(20, 10);
+			add(life1);
+			life1.setLocation(60, 10);
+			add(life2);
+			life2.setLocation(100, 10);
 		}
 //		// 여러 적군 만들기
 //		for (int i = 0; i < enemies.length; i++) {
 //			add(enemies[i]);
 //		}
 	}
-	
 
 	private void addEventListener() {
 		this.addKeyListener(new KeyAdapter() {
@@ -193,7 +185,7 @@ public class AirplaneFrame extends JFrame {
 					player.attack();
 					break;
 				case KeyEvent.VK_ENTER:
-					gameState=1;
+					gameState = 1;
 					setInitLayout();
 					break;
 				}
@@ -229,5 +221,6 @@ public class AirplaneFrame extends JFrame {
 
 	public static void main(String[] args) {
 		new AirplaneFrame();
+
 	}
 }

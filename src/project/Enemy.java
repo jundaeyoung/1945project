@@ -34,7 +34,7 @@ public class Enemy extends JLabel implements Moveable {
 	private boolean rightWallCrash;
 	private boolean downWallCrash;
 	private boolean upWallCrash;
-	
+
 	// 적군 속도 상태
 	private final int SPEED = 2;
 
@@ -52,7 +52,7 @@ public class Enemy extends JLabel implements Moveable {
 		enemyDirection();
 
 	}
-	
+
 	public void setLeft(boolean left) {
 		this.left = left;
 	}
@@ -68,7 +68,7 @@ public class Enemy extends JLabel implements Moveable {
 	public void setRightWallCrash(boolean rightWallCrash) {
 		this.rightWallCrash = rightWallCrash;
 	}
-	
+
 	public void setUpWallCrash(boolean upWallCrash) {
 		this.upWallCrash = upWallCrash;
 	}
@@ -104,7 +104,7 @@ public class Enemy extends JLabel implements Moveable {
 	public void setAlive(int alive) {
 		this.alive = alive;
 	}
-	
+
 	public boolean isDown() {
 		return down;
 	}
@@ -127,7 +127,7 @@ public class Enemy extends JLabel implements Moveable {
 		// 초기 x 위치는 랜덤
 		double randomX = Math.random(); // 0~1 범위의 소수 난수 생성
 		x = (int) ((FRAME_SIZE_X - 200) * randomX);
-		
+
 		// 초기 y 위치는 일단 고정 (임시)
 		y = 80;
 
@@ -152,21 +152,18 @@ public class Enemy extends JLabel implements Moveable {
 		new Thread(() -> {
 			// enemy가 살아있는 동안
 			while (alive == 0) {
-				
-				// 플레이어보다 적군이 더 아래쪽에 있으면 up()
-				if (mContext.getPlayer().getY() < this.getY()) {
+
+				// 아래쪽 벽에 충돌하면 up()
+				if (downWallCrash == true) {
 					up();
-					if (upWallCrash == true) {
-						down();
-					}
 				}
-				
+
 				// 이동 방향을 랜덤으로 선택함
 				int randomDirection = random.nextInt(2); // 0 또는 1 생성
 
 				// 이동 메서드 안에 적군이 죽으면 중간에 중단하라는 if 문이 있어서
 				// 죽으면 left(), right() 메서드를 빠져나간 뒤 반복이 종료됨
-				
+
 				// 값이 0인 경우 왼쪽으로
 				if (randomDirection == 0) {
 					// 왼쪽 벽에 부딪친 상태면 left() 실행 X
@@ -179,7 +176,7 @@ public class Enemy extends JLabel implements Moveable {
 //					}
 					down();
 
-				// 값이 1인 경우 오른쪽으로
+					// 값이 1인 경우 오른쪽으로
 				} else {
 					// 오른쪽 벽에 부딪친 상태면 right() 실행 X
 					if (rightWallCrash == true) {
@@ -191,13 +188,13 @@ public class Enemy extends JLabel implements Moveable {
 //					}
 					down();
 				}
-				
+
 				try {
 					Thread.sleep(800);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
+
 			} // end of while
 
 		}).start();
@@ -211,7 +208,7 @@ public class Enemy extends JLabel implements Moveable {
 
 		// 적군의 현재 x 좌표 저장
 		int currentX = this.getX();
-		
+
 		// 최대 이동 거리 (여유 50)
 		int tempX = currentX - 50;
 
@@ -245,10 +242,10 @@ public class Enemy extends JLabel implements Moveable {
 
 		// 최대 이동 거리 (200 = 아이콘 크기 + 여유 50)
 		int tempX = (FRAME_SIZE_X - 200) - currentX;
-	
+
 		// 이동할 거리
 		int goX = (int) (tempX * Math.random());
-		
+
 		new Thread(() -> {
 			right = true;
 			for (int i = 0; i < (goX / SPEED); i++) {
@@ -270,20 +267,19 @@ public class Enemy extends JLabel implements Moveable {
 		right = false;
 	} // end of right
 
-	
 	// up 메서드는 아래 벽과 충돌했거나, 플레이어보다 적군이 아래쪽에 있을 때만 실행
 	@Override
 	public void up() {
 		new Thread(() -> {
 			up = true;
-			for (int i = 0; i < (100 / SPEED); i++) {
+			for (int i = 0; i < (400 / SPEED); i++) {
 				// 적군이 죽었거나, 위쪽 벽에 부딪치면 중단
 				if (alive == 1 || up == false) {
 					return;
 				}
 				y = y - SPEED;
 				setLocation(x, y);
-				
+
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e) {
@@ -294,7 +290,7 @@ public class Enemy extends JLabel implements Moveable {
 			up = false;
 		}).start();
 	}
-	
+
 	@Override
 	public void down() {
 		new Thread(() -> {
@@ -306,7 +302,7 @@ public class Enemy extends JLabel implements Moveable {
 				}
 				y = y + SPEED;
 				setLocation(x, y);
-				
+
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e) {
@@ -316,12 +312,13 @@ public class Enemy extends JLabel implements Moveable {
 			down = false;
 		}).start();
 	} // end of down
-	
+
 	public void attack() {
-		if(mContext.getGameState()==1) {
+		// 게임 중일 때만 공격함
+		if (mContext.getGameState() == 1) {
 			EnemyBullet enemyBullet = new EnemyBullet(mContext);
 			mContext.add(enemyBullet);
-			}
+		}
 	}
-	
+
 } // end of class

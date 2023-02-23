@@ -27,8 +27,8 @@ public class BackgroundEnemyService implements Runnable {
 		while (true) {
 			Color leftColor = new Color(image.getRGB(enemy.getX() - 20, enemy.getY()));
 			Color rightColor = new Color(image.getRGB(enemy.getX() + 55, enemy.getY()));
-			Color bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 20));
-			Color highColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 20));
+			Color bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 150));
+//			Color highColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 20));
 
 			if (leftColor.getRed() == 255 && leftColor.getGreen() == 0 && leftColor.getBlue() == 0) {
 //				System.out.println("현재 상태는 왼쪽 벽에 충돌했어요!!!");
@@ -42,10 +42,10 @@ public class BackgroundEnemyService implements Runnable {
 //				System.out.println("현재 상태는 바닥벽에 충돌했어요");
 				enemy.setDown(false);
 				enemy.setDownWallCrash(true);
-			} else if (highColor.getRed() == 255 && highColor.getGreen() == 0 && highColor.getBlue() == 0) {
-				System.out.println("현재 위벽에 충돌했어요");
-				enemy.setUp(false);
-				enemy.setUpWallCrash(true);
+//			} else if (highColor.getRed() == 255 && highColor.getGreen() == 0 && highColor.getBlue() == 0) {
+//				System.out.println("현재 위벽에 충돌했어요");
+//				enemy.setUp(false);
+//				enemy.setUpWallCrash(true);
 			} else {
 				enemy.setLeftWallCrash(false);
 				enemy.setRightWallCrash(false);
