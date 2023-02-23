@@ -32,7 +32,8 @@ public class Player extends JLabel implements Moveable {
    private boolean downWallCrash;
 
    // 플레이어의 속도
-   private final int SPEED = 4;
+   // 상수 선언 X 아이템을 먹으면 속도가 빨라져야 하기 때문에 값이 바뀔 수 있음
+	private int speed = 4;
 
    public int getLife() {
       return life;
@@ -154,8 +155,8 @@ public class Player extends JLabel implements Moveable {
       this.downWallCrash = downWallCrash;
    }
 
-   public int getSPEED() {
-      return SPEED;
+   public int getSpeed() {
+      return speed;
    }
 
    public Player(AirplaneFrame mContext) {
@@ -187,13 +188,12 @@ public class Player extends JLabel implements Moveable {
          @Override
          public void run() {
             while (left) {
-               x -= SPEED;
+               x -= speed;
                setLocation(x, y);
 
                try {
                   Thread.sleep(15);
                } catch (InterruptedException e) {
-                  // TODO Auto-generated catch block
                   e.printStackTrace();
                }
             }
@@ -210,13 +210,12 @@ public class Player extends JLabel implements Moveable {
          @Override
          public void run() {
             while (right) {
-               x += SPEED;
+               x += speed;
                setLocation(x, y);
 
                try {
                   Thread.sleep(15);
                } catch (InterruptedException e) {
-                  // TODO Auto-generated catch block
                   e.printStackTrace();
                }
             }
@@ -233,13 +232,12 @@ public class Player extends JLabel implements Moveable {
          @Override
          public void run() {
             while (up) {
-               y -= SPEED;
+               y -= speed;
                setLocation(x, y);
 
                try {
                   Thread.sleep(15);
                } catch (InterruptedException e) {
-                  // TODO Auto-generated catch block
                   e.printStackTrace();
                }
             }
@@ -257,13 +255,12 @@ public class Player extends JLabel implements Moveable {
          @Override
          public void run() {
             while (down) {
-               y += SPEED;
+               y += speed;
                setLocation(x, y);
 
                try {
                   Thread.sleep(15);
                } catch (InterruptedException e) {
-                  // TODO Auto-generated catch block
                   e.printStackTrace();
                }
             }

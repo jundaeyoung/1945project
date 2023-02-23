@@ -29,7 +29,7 @@ public class Bullet extends JLabel implements Moveable {
 		this.mContext = mContext;
 		initData();
 		setInitLayout();
-		backgroundBulletService = new BackgroundBulletService(this);
+//		backgroundBulletService = new BackgroundBulletService(this);
 		initThread();
 	}
 
