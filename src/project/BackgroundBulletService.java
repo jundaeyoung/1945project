@@ -14,7 +14,7 @@ public class BackgroundBulletService {
 
 	public BackgroundBulletService(Bullet bullet) {
 		this.bullet = bullet;
-
+ 
 		try {
 			image = ImageIO.read(new File("images/backgroundService.png"));
 		} catch (IOException e) {
