@@ -133,7 +133,7 @@ public class AirplaneFrame extends JFrame {
 	}
 
 	// 생성자 메서드 2
-	private void setInitLayout() {
+	public void setInitLayout() {
 		setLayout(null); // 좌표기반
 		setResizable(false); // 창 크기 조절 기능( 거짓 )
 		setLocationRelativeTo(null); // JFrame 가운데 배치

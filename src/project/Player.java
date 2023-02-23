@@ -302,12 +302,15 @@ public class Player extends JLabel implements Moveable {
 			mContext.getLife0().setIcon(null);
 			System.out.println("3번째 추락");
 			setIcon(gost);
-			mContext.setGameState(2);
+			mContext.setGameState(0);
+			mContext.setInitLayout();
 		}
 	}
 
 	public void attack() {
+		if(mContext.getGameState()==1) {
 		Bullet bullet = new Bullet(mContext);
 		mContext.add(bullet);
+		}
 	}
 }
