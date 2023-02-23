@@ -98,7 +98,7 @@ public class EnemyBullet extends JLabel implements Moveable {
          y++;
          setLocation(x, y);
          if (Math.abs(x - mContext.getPlayer().getX()) < 10 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
-            if (mContext.getPlayer().getStatus() == 0) {
+            if (mContext.getPlayer().getAlive() == 0) {
                crash();
             }
          }
