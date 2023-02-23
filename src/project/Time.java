@@ -56,11 +56,10 @@ public class Time {
 			@Override
 			public void run() {
 				
-				// 게임이 종료되어, 시간을 멈춰야 하는 경우
-				// 게임 종료 조건 1 : 플레이어가 사망함
-				if (AirplaneFrame.getGameState() == 1) {
+				// 게임이 종료되어, 시간을 멈춰야 함
+				// 플레이어가 사망함 or 적군 보스를 잡음 (나중에 구현)
+				if (AirplaneFrame.getGameState() == 2) {
 					cancel();
-//				// 게임 종료 조건 2 : 적군 보스를 잡음 (나중에 구현)
 				}
 
 				timeS++;
