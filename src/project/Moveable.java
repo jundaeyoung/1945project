@@ -1,13 +1,17 @@
 package project;
 
 public interface Moveable {
-	public abstract void left();
+	default public void left() {};
+	default public void left(int speed) {};
 
-	public abstract void right();
+	default public void right() {};
+	default public void right(int speed) {};
 	
-	public abstract void up();
+	default public void up() {};
+	default public void up(int speed) {};
 
-	public abstract void down();
+	default public void down() {};
+	default public void down(int speed) {};
 	
 	// 필요하면 재정의해서 사용 (대각선 이동)
 	

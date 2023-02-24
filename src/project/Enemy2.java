@@ -13,22 +13,25 @@ public class Enemy2 extends JLabel implements Moveable {
 	final int FRAME_SIZE_X = 950;
 	final int FRAME_SIZE_Y = 950;
 
-	// 적군 이동속도
+	// 적군 이동속도 -> 생성자에서 초기화
 	private int speed;
 	
-	// 적군 공격속도
-	private int attackSpeed;
+//	// 적군 공격속도
+//	private int attackSpeed;
 	
-	// 적군 생명력
+	// 적군 생명력 -> 생성자에서 초기화
 	private int hp;
+	
+	// 피격 횟수
+	private int beattackedCount;
 
 	// 생존 여부 (살아 있음 : 0, 죽음 : 1)
 	private int alive;
 
-	// 이미지
+	// 이미지 -> 생성자에서 초기화
 	private ImageIcon enemyImage;
 
-	// 위치 상태
+	// 위치 상태 -> 생성자에서 초기화
 	private int x;
 	private int y;
 
@@ -46,51 +49,34 @@ public class Enemy2 extends JLabel implements Moveable {
 	private boolean rightWallCrash;
 	private boolean downWallCrash;
 	private boolean upWallCrash;
-
-	
-	// 생성자
-	public Enemy2(AirplaneFrame mContext) {
-		this.mContext = mContext;
-
-		initData();
-		setInitLayout();
-
-		// 적군의 방향 결정 + 이동 메서드 호출
-		enemyDirection();
-
-	}
-
-	
-	
-	
 	
 
-	// 생성자 메서드 1
-	private void initData() {
-		enemyImage = new ImageIcon("imagesProject/enemy.png");
-		// 초기 x 위치는 랜덤
-		double randomX = Math.random(); // 0~1 범위의 소수 난수 생성
-		x = (int) ((FRAME_SIZE_X - 200) * randomX);
+//	// 생성자 메서드 1
+//	private void initData() {
+//		enemyImage = new ImageIcon("imagesProject/enemy.png");
+//		// 초기 x 위치는 랜덤
+//		double randomX = Math.random(); // 0~1 범위의 소수 난수 생성
+//		x = (int) ((FRAME_SIZE_X - 200) * randomX);
+//
+//		// 초기 y 위치는 일단 고정 (임시)
+//		y = 80;
+//
+//		// 초기 값 세팅 (기본값이라서 생략 가능)
+//		left = false;
+//		right = false;
+//		alive = 0; // 살아 있음
+//	}
+//
+//	// 생성자 메서드 2
+//	private void setInitLayout() {
+//		setSize(150, 150); // 임시 크기
+//		setLocation(x, y);
+//		setIcon(enemyImage);
+//
+//	}
 
-		// 초기 y 위치는 일단 고정 (임시)
-		y = 80;
-
-		// 초기 값 세팅 (기본값이라서 생략 가능)
-		left = false;
-		right = false;
-		alive = 0; // 살아 있음
-	}
-
-	// 생성자 메서드 2
-	private void setInitLayout() {
-		setSize(150, 150); // 임시 크기
-		setLocation(x, y);
-		setIcon(enemyImage);
-
-	}
-
-//	 생성자 메서드 3
-	private void enemyDirection() {
+	
+	private void randomDirection() {
 		Random random = new Random();
 
 		new Thread(() -> {
@@ -148,7 +134,7 @@ public class Enemy2 extends JLabel implements Moveable {
 	// 이동 메서드
 
 	@Override
-	public void left() {
+	public void left(int speed) {
 
 		// 적군의 현재 x 좌표 저장
 		int currentX = this.getX();
@@ -180,7 +166,7 @@ public class Enemy2 extends JLabel implements Moveable {
 	} // end of left
 
 	@Override
-	public void right() {
+	public void right(int speed) {
 
 		int currentX = this.getX();
 
@@ -213,7 +199,7 @@ public class Enemy2 extends JLabel implements Moveable {
 
 	// up 메서드는 아래 벽과 충돌했거나, 플레이어보다 적군이 아래쪽에 있을 때만 실행
 	@Override
-	public void up() {
+	public void up(int speed) {
 		new Thread(() -> {
 			up = true;
 			for (int i = 0; i < (400 / speed); i++) {
@@ -236,7 +222,7 @@ public class Enemy2 extends JLabel implements Moveable {
 	}
 
 	@Override
-	public void down() {
+	public void down(int speed) {
 		new Thread(() -> {
 			down = true;
 			for (int i = 0; i < 20; i++) {
@@ -257,6 +243,8 @@ public class Enemy2 extends JLabel implements Moveable {
 		}).start();
 	} // end of down
 
+	
+	// 공격속도는 나중에 고려
 	public void attack() {
 		// 게임 중일 때만 공격함
 		if (mContext.getGameState() == 1) {
