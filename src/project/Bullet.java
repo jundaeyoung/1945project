@@ -18,7 +18,7 @@ public class Bullet extends JLabel implements Moveable {
 	private BackgroundBulletService backgroundBulletService;
 
 	private Item item;
-	
+
 	public int getState() {
 		return state;
 	}
@@ -60,13 +60,15 @@ public class Bullet extends JLabel implements Moveable {
 
 	public void crash() {
 		mContext.getEnemy().setAlive(1);
-		setIcon(boom);
 		state = 1;
 		mContext.remove(mContext.getEnemy());
+		setIcon(boom);
 		mContext.repaint();
-		
 		item = new Item(mContext);
 		item.itemDirection();
+
+		
+
 	}
 
 	@Override
@@ -85,7 +87,7 @@ public class Bullet extends JLabel implements Moveable {
 		while (true) {
 			y--;
 			setLocation(x, y);
-			if (Math.abs(x - mContext.getEnemy().getX()) < 10 && Math.abs(y - mContext.getEnemy().getY()) < 50) {
+			if (Math.abs(x - mContext.getEnemy().getX()) < 50 && Math.abs(y - mContext.getEnemy().getY()) < 50) {
 				if (mContext.getEnemy().getAlive() == 0) {
 					crash();
 				}
@@ -94,6 +96,10 @@ public class Bullet extends JLabel implements Moveable {
 				Thread.sleep(3);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+			}
+			if (y == 0) {
+				setIcon(null);
+				break;
 			}
 		}
 	}

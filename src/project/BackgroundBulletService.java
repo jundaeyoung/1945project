@@ -47,7 +47,8 @@ public class BackgroundBulletService {
 		if (topColor.getRed() == 255 && topColor.getGreen() == 0 && topColor.getBlue() == 0) {
 			// 빨간색
 			return true;
-		}
+		
+			}
 		return false;
 	}
 

@@ -49,9 +49,9 @@ public class AirplaneFrame extends JFrame {
 		setInitLayout();
 		addEventListener();
 
+		new Thread(new BackgroundItemService(item)).start();
 		new Thread(new BackgroundPlayerService(player)).start();
 		new Thread(new BackgroundEnemyService(enemy)).start();
-		new Thread(new BackgroundItemService(item)).start();
 //		// 적군 배열 각각에 백그라운드서비스 적용
 //		for (int i = 0; i < enemies.length; i++) {
 //			new Thread(new BackgroundEnemyService(enemies[i])).start();			
@@ -162,8 +162,6 @@ public class AirplaneFrame extends JFrame {
 			setContentPane(new MyPanel());
 			add(player);
 			add(enemy);
-			add(item);
-
 			add(life0);
 			add(life1);
 			add(life2);

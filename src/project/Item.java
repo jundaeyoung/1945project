@@ -41,6 +41,7 @@ public class Item extends JLabel implements Moveable {
 
 		initData();
 		setInitLayout();
+
 //		createRandomItem();
 //		initThread();
 	}
@@ -62,10 +63,6 @@ public class Item extends JLabel implements Moveable {
 	public void itemDirection() {
 		while (true) {
 			if (mContext.getEnemy().getAlive() == 1) {
-				// ItemX, ItemY 좌표값을 Enemy X, Y좌표값으로 세팅
-				this.setItemX(mContext.getEnemy().getX());
-				this.setItemY(mContext.getEnemy().getY());
-
 				setLocation(itemX, itemY);
 				mContext.add(this);
 
@@ -82,34 +79,17 @@ public class Item extends JLabel implements Moveable {
 					setLocation(itemX, itemY);
 					setIcon(fastIcon);
 					down();
+
 					return;
 				} else if (itemChance >= recoverItemVal) {
 					setLocation(itemX, itemY);
 					setIcon(recoverIcon);
 					down();
+
 					return;
 				}
 
 			}
-		}
-	}
-
-	public void plusSpeed() {
-		if ((itemX == mContext.getPlayer().getX()) && (itemY == mContext.getPlayer().getY())) {
-
-			// setSpeed에서 += 사용하기
-			mContext.getPlayer().setSpeed(5);
-			setIcon(null);
-		}
-	}
-
-	// 라이프 이미지 아이콘 다시 추가하는 방법
-	public void plusRecover() {
-		if ((itemX == mContext.getPlayer().getX()) && (itemY == mContext.getPlayer().getY())) {
-//			mContext.getLife(); 
-//			mContext.getPlayer().setLife(life++);
-//			mContext.getPlayer().setLife(alive);
-			setIcon(null);
 		}
 	}
 
@@ -204,16 +184,28 @@ public class Item extends JLabel implements Moveable {
 		while (true) {
 			itemY++;
 			setLocation(itemX, itemY);
-			if (Math.abs(itemX - mContext.getEnemy().getX()) < 50
-					&& Math.abs(itemY - mContext.getEnemy().getY()) < 800) {
-				if (mContext.getEnemy().getAlive() == 1) {
-					try {
-						Thread.sleep(3);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
 
+			try {
+				Thread.sleep(3);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			if (Math.abs(itemX - mContext.getPlayer().getX()) < 50
+					&& Math.abs(itemY - mContext.getPlayer().getY()) < 50) {
+
+				// setSpeed에서 += 사용하기
+				mContext.getPlayer().setSpeed(5);
+				setIcon(null);
+				return;
+			}
+			if (Math.abs(itemX - mContext.getPlayer().getX()) < 50
+					&& Math.abs(itemY - mContext.getPlayer().getY()) < 50) {
+//				mContext.getLife(); 
+//				mContext.getPlayer().setLife(life++);
+//				mContext.getPlayer().setLife(alive);
+				setIcon(null);
+				return;
 			}
 		}
 
