@@ -29,6 +29,7 @@ public class AirplaneFrame extends JFrame {
 	private Time time;
 	private Player player;
 	private Enemy enemy;
+	private EnemyBullet enemyBullet;
 
 	// 플레이어 목숨 개수 아이콘
 	private Life life0;
@@ -55,6 +56,20 @@ public class AirplaneFrame extends JFrame {
 //			new Thread(new BackgroundEnemyService(enemies[i])).start();			
 //		}
 	} // end of 생성자
+
+	
+	
+	public EnemyBullet getEnemyBullet() {
+		return enemyBullet;
+	}
+
+
+
+	public void setEnemyBullet(EnemyBullet enemyBullet) {
+		this.enemyBullet = enemyBullet;
+	}
+
+
 
 	public static int getGameState() {
 		return gameState;

@@ -23,6 +23,14 @@ public class EnemyBullet extends JLabel implements Moveable {
 	private AirplaneFrame mContext;
 	private BackgroundEnemyBulletService backgroundenemyBulletService;
 
+	public ImageIcon getEnemyBullet() {
+		return enemyBullet;
+	}
+
+	public void setEnemyBullet(ImageIcon enemyBullet) {
+		this.enemyBullet = enemyBullet;
+	}
+
 	public EnemyBullet(AirplaneFrame mContext) {
 		this.mContext = mContext;
 		initData();
@@ -35,7 +43,6 @@ public class EnemyBullet extends JLabel implements Moveable {
 		enemyBullet = new ImageIcon("imagesProject/bullet4.png");
 		boom = new ImageIcon("imagesProject/explosion.gif");
 		player = new ImageIcon("imagesProject/BigPlane2.png");
-		
 		state = 0;
 		// 1로 계속 초기화
 		attackCount = 1;
@@ -98,13 +105,13 @@ public class EnemyBullet extends JLabel implements Moveable {
 		while (true) {
 			y++;
 			setLocation(x, y);
-			if (Math.abs(x - mContext.getPlayer().getX()) < 10 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
+			if (Math.abs(x - mContext.getPlayer().getX()-40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
 				if (mContext.getPlayer().getAlive() == 0) {
 					crash();
 				}
 			}
 			try {
-				Thread.sleep(3);
+				Thread.sleep(5);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 

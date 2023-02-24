@@ -20,6 +20,9 @@ public class Enemy extends JLabel implements Moveable {
 	private int x;
 	private int y;
 
+	// 플레이어가 한번에 죽는 현상 방지
+	private int attackCount;
+
 	// 적군의 방향
 	private EnemyWay enemyWay;
 
@@ -53,16 +56,13 @@ public class Enemy extends JLabel implements Moveable {
 
 	}
 
-	
 	public void setX(int x) {
 		this.x = x;
 	}
 
-
 	public void setY(int y) {
 		this.y = y;
 	}
-
 
 	public void setLeft(boolean left) {
 		this.left = left;
@@ -146,6 +146,7 @@ public class Enemy extends JLabel implements Moveable {
 		left = false;
 		right = false;
 		alive = 0; // 살아 있음
+		attackCount = 1;
 	}
 
 	// 생성자 메서드 2
@@ -158,6 +159,7 @@ public class Enemy extends JLabel implements Moveable {
 
 //	 생성자 메서드 3
 	private void enemyDirection() {
+
 		Random random = new Random();
 
 		new Thread(() -> {
@@ -244,6 +246,13 @@ public class Enemy extends JLabel implements Moveable {
 			}
 		}).start();
 		left = false;
+		// player와 부딧히면 player공격
+		if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
+			if (mContext.getPlayer().getAlive() == 0) {
+				crash();
+
+			}
+		}
 	} // end of left
 
 	@Override
@@ -276,11 +285,18 @@ public class Enemy extends JLabel implements Moveable {
 			attack();
 		}).start();
 		right = false;
+		if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
+			if (mContext.getPlayer().getAlive() == 0) {
+				crash();
+
+			}
+		}
 	} // end of right
 
 	// up 메서드는 아래 벽과 충돌했거나, 플레이어보다 적군이 아래쪽에 있을 때만 실행
 	@Override
 	public void up() {
+
 		new Thread(() -> {
 			up = true;
 			for (int i = 0; i < (400 / SPEED); i++) {
@@ -300,6 +316,12 @@ public class Enemy extends JLabel implements Moveable {
 			attack();
 			up = false;
 		}).start();
+		if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
+			if (mContext.getPlayer().getAlive() == 0) {
+				crash();
+
+			}
+		}
 	}
 
 	@Override
@@ -322,7 +344,26 @@ public class Enemy extends JLabel implements Moveable {
 			}
 			down = false;
 		}).start();
+		if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
+			if (mContext.getPlayer().getAlive() == 0) {
+				crash();
+
+			}
+		}
 	} // end of down
+
+	public void crash() {
+		if (attackCount == 1) {
+			attackCount--;
+			mContext.getPlayer().beAttack();
+			mContext.repaint();
+
+			if (mContext.getPlayer().getLife() == 0) {
+				mContext.remove(mContext.getPlayer());
+				mContext.repaint();
+			}
+		}
+	}
 
 	public void attack() {
 		// 게임 중일 때만 공격함
@@ -330,6 +371,7 @@ public class Enemy extends JLabel implements Moveable {
 			EnemyBullet enemyBullet = new EnemyBullet(mContext);
 			mContext.add(enemyBullet);
 		}
+
 	}
 
 } // end of class
