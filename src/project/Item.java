@@ -4,29 +4,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /*
-적군이 폭발돼서 죽으면 아이템을 랜덤으로 
-패스트 아이템은 2분의 1 확률로
-목숨 아이템은 5분의 1 확률로 뿌리기
+적 비행기가 죽으면 아이템을 랜덤한 값에 따라 밑으로 뿌림
+그 아이템을 Player가 먹었을 때 ( fastIcon을 먹으면 fast가 증가, 
+recoverIcon 먹으면 생명력 추가 : 최대 목숨 3개 !상수로 선언!)
 */
 
 public class Item extends JLabel implements Moveable {
 
 	private AirplaneFrame mContext;
-	private BackgroundItemService backgroundItemService;
-	Enemy enemy = new Enemy(mContext);
-	
-	int itemX;
-	int itemY;
+	private Item item;
 
-	private boolean left;
-	private boolean right;
-	private boolean up;
+	private int itemX;
+	private int itemY;
+
 	private boolean down;
-
-	private boolean leftWallCrash;
-	private boolean rightWallCrash;
-	private boolean upWallCrash;
-	private boolean downWallCrash;
 
 	// 적군이 살아있는 상태 : 0, 죽었을 때 : 1
 	private int alive;
@@ -38,52 +29,143 @@ public class Item extends JLabel implements Moveable {
 		this.mContext = mContext;
 
 		initData();
-		getInitLayout();
-		// 만들면 생성하기
-//		BackgroundItemService = new BackgroundItemService(this);
+		setInitLayout();
+//		createRandomItem();
 		initThread();
 	}
 
-	// 임시 이미지
 	private void initData() {
-		fastIcon = new ImageIcon("images/fastIcon.png");
-		recoverIcon = new ImageIcon("images/recoverIcon.png");
+		fastIcon = new ImageIcon("imagesProject/fastIcon.png");
+		recoverIcon = new ImageIcon("imagesProject/recoverIcon.png");
 	}
 
-	private void getInitLayout() {
+	private void setInitLayout() {
 		itemX = mContext.getEnemy().getX();
 		itemY = mContext.getEnemy().getY();
 
-		setIcon(fastIcon);
-		setIcon(recoverIcon);
-		setSize(30, 30);
+//		int limitMin = 50;
+//		int limitMax = 900;
+//
+//		itemX = (int) (Math.random() * limitMax - limitMin);
+//		if (itemX <= limitMin) {
+//			itemX = limitMin;
+//		}
+//		itemY = (int) (Math.random() * limitMax);
+
+		setLocation(itemX, itemY);
+		setSize(80, 80);
 	}
 
 	private void initThread() {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				itemDirection();
+				down();
+			}
+		}).start();
+	}
+
+	// 랜덤 아이템 생성
+	public void itemDirection() {
+
+		while (true) {
+			if (mContext.getEnemy().getAlive() == 1) {
+				// ItemX, ItemY 좌표값을 Enemy X, Y좌표값으로 세팅
+				this.setItemX(mContext.getEnemy().getX());
+				this.setItemY(mContext.getEnemy().getY());
+
+				setLocation(itemX, itemY);
+				mContext.add(this);
+
+				// 확률적으로 최소 20
+				int itemChance = (int) (Math.random() * 100) + 20;
+				System.out.println("적 잡을 때 생기는 값 : " + itemChance);
+
+				// 확률적으로 fastItemVal가 recoveItemVal보다 더 많이 나옴
+				// 확률이 20보다 작으면 아이템 나오지 않음
+				int fastItemVal = 40;
+				int recoverItemVal = 80;
+
+				if (itemChance >= fastItemVal) {
+					setIcon(fastIcon);
+					return;
+				} else if (itemChance >= recoverItemVal) {
+					setIcon(recoverIcon);
+				}
+
+				down();
+
+			}
+		}
 
 	}
-	
-	public void randomItem(){
-		
+
+	public void plusSpeed() {
+		if (itemX == mContext.getPlayer().getX() && itemY == mContext.getPlayer().getY()) {
+			mContext.getPlayer().setSpeed(5);
+			setIcon(null);
+		}
+	}
+
+	// 라이프 이미지 아이콘 다시 추가하는 방법
+	public void plusRecover() {
+		if (itemX == mContext.getPlayer().getX() && itemY == mContext.getPlayer().getY()) {
+//			mContext.getLife(); 
+//			mContext.getPlayer().setLife(life++);
+//			mContext.getPlayer().setLife(alive);
+			setIcon(null);
+		}
+	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
 	@Override
 	public void left() {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void right() {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void up() {
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void down() {
+		itemDirection();
+
+		down = true;
+
+		while (true) {
+			itemY++;
+			setLocation(itemX, itemY);
+			if (Math.abs(itemX - mContext.getEnemy().getX()) < 10
+					&& Math.abs(itemY - mContext.getEnemy().getY()) < 50) {
+				if (mContext.getEnemy().getAlive() == 1) {
+					down();
+				}
+			}
+
+			try {
+				Thread.sleep(3);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 
 	}
 
@@ -103,68 +185,12 @@ public class Item extends JLabel implements Moveable {
 		this.itemY = itemY;
 	}
 
-	public boolean isLeft() {
-		return left;
-	}
-
-	public void setLeft(boolean left) {
-		this.left = left;
-	}
-
-	public boolean isRight() {
-		return right;
-	}
-
-	public void setRight(boolean right) {
-		this.right = right;
-	}
-
-	public boolean isUp() {
-		return up;
-	}
-
-	public void setUp(boolean up) {
-		this.up = up;
-	}
-
 	public boolean isDown() {
 		return down;
 	}
 
 	public void setDown(boolean down) {
 		this.down = down;
-	}
-
-	public boolean isLeftWallCrash() {
-		return leftWallCrash;
-	}
-
-	public void setLeftWallCrash(boolean leftWallCrash) {
-		this.leftWallCrash = leftWallCrash;
-	}
-
-	public boolean isRightWallCrash() {
-		return rightWallCrash;
-	}
-
-	public void setRightWallCrash(boolean rightWallCrash) {
-		this.rightWallCrash = rightWallCrash;
-	}
-
-	public boolean isUpWallCrash() {
-		return upWallCrash;
-	}
-
-	public void setUpWallCrash(boolean upWallCrash) {
-		this.upWallCrash = upWallCrash;
-	}
-
-	public boolean isDownWallCrash() {
-		return downWallCrash;
-	}
-
-	public void setDownWallCrash(boolean downWallCrash) {
-		this.downWallCrash = downWallCrash;
 	}
 
 	public int getAlive() {
