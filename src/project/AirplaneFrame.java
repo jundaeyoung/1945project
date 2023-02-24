@@ -131,7 +131,6 @@ public class AirplaneFrame extends JFrame {
 		life0 = new Life(mContext);
 		life1 = new Life(mContext);
 		life2 = new Life(mContext);
-		time = new Time();
 //		// 테스트
 //		for (int i = 0; i < enemies.length; i++) {
 //			enemies[i] = new Enemy(mContext);
@@ -146,12 +145,10 @@ public class AirplaneFrame extends JFrame {
 		setVisible(true);
 		if (gameState == 0) {
 			setContentPane(gameStart);
-			add(time.timeLabel);
 		} else {
 			setContentPane(new MyPanel());
 			add(player);
 			add(enemy);
-			add(time.timeLabel);
 
 			add(life0);
 			add(life1);
@@ -198,6 +195,8 @@ public class AirplaneFrame extends JFrame {
 				case KeyEvent.VK_ENTER:
 					gameState = 1;
 					setInitLayout();
+					time = new Time();
+					add(time.timeLabel);
 					break;
 				}
 
