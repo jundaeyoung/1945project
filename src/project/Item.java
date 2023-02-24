@@ -1,5 +1,7 @@
 package project;
 
+import java.util.Random;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -12,9 +14,10 @@ recoverIcon 먹으면 생명력 추가 : 최대 목숨 3개 !상수로 선언!)
 // Bullet 클래스에 적군과 충돌했을 때 아이템 객체를 new 하고 화면에 붙여야 됨
 public class Item extends JLabel implements Moveable {
 
+	Random rd = new Random();
+	private AirplaneFrame mContext;
 	ItemWay itemWay;
 
-	private AirplaneFrame mContext;
 	private Item item;
 
 	private int itemX;
@@ -36,117 +39,18 @@ public class Item extends JLabel implements Moveable {
 	private ImageIcon fastIcon;
 	private ImageIcon recoverIcon;
 
-	public Item(AirplaneFrame mContext) {
-		this.mContext = mContext;
+	int itemChance = rd.nextInt(150);
+	// 확률적으로 fastItemVal가 recoveItemVal보다 더 많이 나옴
+	// 확률이 20보다 작으면 아이템 나오지 않음
+	int fastItemVal = 80;
+	int recoverItemVal = 50;
 
-		initData();
-		setInitLayout();
-
-//		createRandomItem();
-//		initThread();
+	public boolean isDown() {
+		return down;
 	}
 
-	private void initData() {
-		fastIcon = new ImageIcon("imagesProject/fastIcon.png");
-		recoverIcon = new ImageIcon("imagesProject/recoverIcon.png");
-	}
-
-	private void setInitLayout() {
-		itemX = mContext.getEnemy().getX();
-		itemY = mContext.getEnemy().getY();
-
-		setLocation(itemX, itemY);
-		setSize(100, 100);
-	}
-
-	// 랜덤 아이템 생성
-	public void itemDirection() {
-		while (true) {
-			if (mContext.getEnemy().getAlive() == 1) {
-				setLocation(itemX, itemY);
-				mContext.add(this);
-
-				// 확률적으로 최소 20
-				int itemChance = (int) (Math.random() * 100) + 20;
-				System.out.println("적 잡을 때 생기는 값 : " + itemChance);
-
-				// 확률적으로 fastItemVal가 recoveItemVal보다 더 많이 나옴
-				// 확률이 20보다 작으면 아이템 나오지 않음
-				int fastItemVal = 80;
-				int recoverItemVal = 50;
-
-				if (itemChance >= fastItemVal) {
-					setLocation(itemX, itemY);
-					setIcon(fastIcon);
-					down();
-
-					return;
-				} else if (itemChance >= recoverItemVal) {
-					setLocation(itemX, itemY);
-					setIcon(recoverIcon);
-					down();
-
-					return;
-				}
-
-			}
-		}
-	}
-
-	public boolean isLeftWallCrash() {
-		return leftWallCrash;
-	}
-
-	public void setLeftWallCrash(boolean leftWallCrash) {
-		this.leftWallCrash = leftWallCrash;
-	}
-
-	public boolean isRightWallCrash() {
-		return rightWallCrash;
-	}
-
-	public void setRightWallCrash(boolean rightWallCrash) {
-		this.rightWallCrash = rightWallCrash;
-	}
-
-	public boolean isUpWallCrash() {
-		return upWallCrash;
-	}
-
-	public void setUpWallCrash(boolean upWallCrash) {
-		this.upWallCrash = upWallCrash;
-	}
-
-	public boolean isDownWallCrash() {
-		return downWallCrash;
-	}
-
-	public void setDownWallCrash(boolean downWallCrash) {
-		this.downWallCrash = downWallCrash;
-	}
-
-	public boolean isLeft() {
-		return left;
-	}
-
-	public void setLeft(boolean left) {
-		this.left = left;
-	}
-
-	public boolean isRight() {
-		return right;
-	}
-
-	public void setRight(boolean right) {
-		this.right = right;
-	}
-
-	public boolean isUp() {
-		return up;
-	}
-
-	public void setUp(boolean up) {
-		this.up = up;
+	public void setDown(boolean down) {
+		this.down = down;
 	}
 
 	public Item getItem() {
@@ -157,98 +61,86 @@ public class Item extends JLabel implements Moveable {
 		this.item = item;
 	}
 
-	@Override
-	public void left() {
-		// TODO Auto-generated method stub
+	public Item(AirplaneFrame mContext) {
+		this.mContext = mContext;
+
+		initData();
+		setInitLayout();
+		itemX = mContext.getEnemy().getX();
+		itemY = mContext.getEnemy().getY();
+
+//		createRandomItem();
+		initThread();
+	}
+
+	private void initData() {
+		down = false;
+		fastIcon = new ImageIcon("imagesProject/fastIcon.png");
+		recoverIcon = new ImageIcon("imagesProject/recoverIcon.png");
+	}
+
+	private void setInitLayout() {
 
 	}
 
-	@Override
-	public void right() {
-		// TODO Auto-generated method stub
-
+	public void initThread() {
+		new Thread(new Runnable() {
+			public void run() {
+				down();
+			}
+		}).start();
 	}
 
 	@Override
-	public void up() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public synchronized void down() {
+	public void down() {
 //		itemDirection();
 
-		down = true;
-
-		while (true) {
-			itemY++;
+		if (itemChance >= fastItemVal) {
+			setIcon(fastIcon);
+			setSize(100, 100);
+			setLocation(itemX, itemY);
+		} else if (itemChance >= recoverItemVal) {
+			setIcon(recoverIcon);
+			setSize(100, 100);
 			setLocation(itemX, itemY);
 
+		}
+		down = true;
+		mContext.add(this);
+
+		while (down) {
+			setLocation(itemX, itemY++);
+			System.out.println("2313123");
+			if (Math.abs(itemX - mContext.getPlayer().getX()) < 50
+					&& Math.abs(itemY - mContext.getPlayer().getY()) < 50) {
+				setIcon(null);
+				if (itemChance >= fastItemVal) {
+					mContext.getPlayer().setSpeed(2);
+					down = false;
+					return;
+				} else if (itemChance >= recoverItemVal) {
+					down = false;
+
+				}
+
+				// setSpeed에서 += 사용하기
+//				mContext.getPlayer().setSpeed(5);
+
+			}
 			try {
-				Thread.sleep(3);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
-			if (Math.abs(itemX - mContext.getPlayer().getX()) < 50
-					&& Math.abs(itemY - mContext.getPlayer().getY()) < 50) {
-
-				// setSpeed에서 += 사용하기
-				mContext.getPlayer().setSpeed(5);
+			repaint();
+			if (itemY == 840) {
+				System.out.println("0999");
 				setIcon(null);
+				down = false;
 				return;
 			}
-			if (Math.abs(itemX - mContext.getPlayer().getX()) < 50
-					&& Math.abs(itemY - mContext.getPlayer().getY()) < 50) {
-//				mContext.getLife(); 
-//				mContext.getPlayer().setLife(life++);
-//				mContext.getPlayer().setLife(alive);
-				setIcon(null);
-				return;
-			}
+//			mContext.add(this);
+
 		}
-
 	}
-
-	public int getItemX() {
-		return itemX;
-	}
-
-	public void setItemX(int itemX) {
-		this.itemX = itemX;
-	}
-
-	public int getItemY() {
-		return itemY;
-	}
-
-	public void setItemY(int itemY) {
-		this.itemY = itemY;
-	}
-
-	public boolean isDown() {
-		return down;
-	}
-
-	public void setDown(boolean down) {
-		this.down = down;
-	}
-
-	public int getAlive() {
-		return alive;
-	}
-
-	public void setAlive(int alive) {
-		this.alive = alive;
-	}
-
-	public ImageIcon getFastIcon() {
-		return fastIcon;
-	}
-
-	public void setFastIcon(ImageIcon fastIcon) {
-		this.fastIcon = fastIcon;
-	}
-
 }

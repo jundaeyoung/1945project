@@ -48,8 +48,9 @@ public class AirplaneFrame extends JFrame {
 		initData();
 		setInitLayout();
 		addEventListener();
+		mContext.getItem().setDown(false);
 
-		new Thread(new BackgroundItemService(item)).start();
+//		new Thread(new BackgroundItemService(item)).start();
 		new Thread(new BackgroundPlayerService(player)).start();
 		new Thread(new BackgroundEnemyService(enemy)).start();
 //		// 적군 배열 각각에 백그라운드서비스 적용
@@ -57,6 +58,14 @@ public class AirplaneFrame extends JFrame {
 //			new Thread(new BackgroundEnemyService(enemies[i])).start();			
 //		}
 	} // end of 생성자
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
 
 	public EnemyBullet getEnemyBullet() {
 		return enemyBullet;
@@ -126,6 +135,10 @@ public class AirplaneFrame extends JFrame {
 		return enemy;
 	}
 
+	public void setEnemy(Enemy enemy) {
+		this.enemy = enemy;
+	}
+
 	// 생성자 메서드 1
 	private void initData() {
 		gameStart = new JLabel(new ImageIcon("imagesProject/GameTitle.gif"));
@@ -165,6 +178,7 @@ public class AirplaneFrame extends JFrame {
 			add(life0);
 			add(life1);
 			add(life2);
+			mContext.getItem().setDown(false);
 
 		}
 //		// 여러 적군 만들기
@@ -273,7 +287,7 @@ public class AirplaneFrame extends JFrame {
 						backY++;
 						repaint();
 						try {
-							Thread.sleep(80);
+							Thread.sleep(8);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

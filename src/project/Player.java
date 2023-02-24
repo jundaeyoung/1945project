@@ -303,6 +303,7 @@ public class Player extends JLabel implements Moveable {
 		if (life == 2) {
 			mContext.getLife2().setIcon(null);
 			setIcon(gost);
+			System.out.println("10101010");
 
 		} else if (life == 1) {
 			mContext.getLife1().setIcon(null);
@@ -321,13 +322,20 @@ public class Player extends JLabel implements Moveable {
 			frame.dispose();
 
 		}
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		setIcon(player);
 	}
 
 	public void attack() {
 		// 게임 중일 때만 공격
 		if (mContext.getGameState() == 1) {
 			Bullet bullet = new Bullet(mContext);
-
+			System.out.println("1010101");
 			mContext.add(bullet);
 		}
 	}

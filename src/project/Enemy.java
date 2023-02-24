@@ -43,6 +43,7 @@ public class Enemy extends JLabel implements Moveable {
 
 	// 이미지
 	private ImageIcon enemyImage;
+	private ImageIcon boom;
 
 	// 생성자
 	public Enemy(AirplaneFrame mContext) {
@@ -135,6 +136,7 @@ public class Enemy extends JLabel implements Moveable {
 	// 생성자 메서드 1
 	private void initData() {
 		enemyImage = new ImageIcon("imagesProject/enemy.png");
+		boom = new ImageIcon("imagesProject/explosion.gif");
 		// 초기 x 위치는 랜덤
 		double randomX = Math.random(); // 0~1 범위의 소수 난수 생성
 		x = (int) ((FRAME_SIZE_X - 200) * randomX);
@@ -203,14 +205,12 @@ public class Enemy extends JLabel implements Moveable {
 				}
 
 				try {
-					Thread.sleep(800);
+					Thread.sleep(900);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 
 			} // end of while
-			
-			
 
 		}).start();
 
@@ -241,7 +241,7 @@ public class Enemy extends JLabel implements Moveable {
 				setLocation(x, y);
 
 				try {
-					Thread.sleep(10);
+					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -279,7 +279,7 @@ public class Enemy extends JLabel implements Moveable {
 				setLocation(x, y);
 
 				try {
-					Thread.sleep(10);
+					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -310,7 +310,7 @@ public class Enemy extends JLabel implements Moveable {
 				setLocation(x, y);
 
 				try {
-					Thread.sleep(10);
+					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -339,7 +339,7 @@ public class Enemy extends JLabel implements Moveable {
 				setLocation(x, y);
 
 				try {
-					Thread.sleep(100);
+					Thread.sleep(10);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -358,11 +358,9 @@ public class Enemy extends JLabel implements Moveable {
 		if (attackCount == 1) {
 			attackCount--;
 			mContext.getPlayer().beAttack();
-			mContext.repaint();
 
 			if (mContext.getPlayer().getLife() == 0) {
 				mContext.remove(mContext.getPlayer());
-				mContext.repaint();
 			}
 		}
 	}
@@ -373,6 +371,11 @@ public class Enemy extends JLabel implements Moveable {
 			EnemyBullet enemyBullet = new EnemyBullet(mContext);
 			mContext.add(enemyBullet);
 		}
+	}
+
+	public void beattacked() {
+//		setIcon(boom);
+		setLocation(x, y);
 	}
 
 } // end of class

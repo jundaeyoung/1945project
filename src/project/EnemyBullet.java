@@ -72,13 +72,11 @@ public class EnemyBullet extends JLabel implements Moveable {
 		if (attackCount == 1) {
 			attackCount--;
 			mContext.getPlayer().beAttack();
-			mContext.repaint();
-
+			System.out.println("공격?");
 			if (mContext.getPlayer().getLife() == 0) {
 				setIcon(boom);
 				state = 1;
 				mContext.remove(mContext.getPlayer());
-				mContext.repaint();
 			}
 		}
 
@@ -105,9 +103,8 @@ public class EnemyBullet extends JLabel implements Moveable {
 		while (true) {
 			y++;
 			setLocation(x, y);
-			if (Math.abs(x - mContext.getPlayer().getX()-40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
+			if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
 				if (mContext.getPlayer().getAlive() == 0) {
-					crash();
 				}
 			}
 			try {

@@ -15,7 +15,7 @@ public class Bullet extends JLabel implements Moveable {
 	private ImageIcon boom;
 
 	private AirplaneFrame mContext;
-	private BackgroundBulletService backgroundBulletService;
+//	private BackgroundBulletService backgroundBulletService;
 
 	private Item item;
 
@@ -62,12 +62,25 @@ public class Bullet extends JLabel implements Moveable {
 		mContext.getEnemy().setAlive(1);
 		state = 1;
 		mContext.remove(mContext.getEnemy());
-		setIcon(boom);
-		mContext.repaint();
-		item = new Item(mContext);
-		item.itemDirection();
+		System.out.println("3333");
+//		setIcon(boom);
+		System.out.println("111111");
+//		mContext.getItem().setDown(true);
+//		mContext.getItem().down();
+//		mContext.repaint();
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		setIcon(null);
 
-		
+	}
+
+	public void item() {
+		item = new Item(mContext);
+		item.initThread();
 
 	}
 
@@ -89,9 +102,13 @@ public class Bullet extends JLabel implements Moveable {
 			setLocation(x, y);
 			if (Math.abs(x - mContext.getEnemy().getX()) < 50 && Math.abs(y - mContext.getEnemy().getY()) < 50) {
 				if (mContext.getEnemy().getAlive() == 0) {
+					mContext.getEnemy().beattacked();
 					crash();
+					setIcon(boom);
+					item();
 				}
 			}
+
 			try {
 				Thread.sleep(3);
 			} catch (InterruptedException e) {
