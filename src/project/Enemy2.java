@@ -130,6 +130,59 @@ public class Enemy2 extends JLabel implements Moveable {
 		}).start();
 
 	}
+	
+	// 왼쪽 방향으로 끝까지 이동하는 메서드
+	protected void leftMove() {
+		new Thread(() -> {
+			// enemy가 살아있는 동안
+			while (alive == 0) {
+
+				// 아래쪽 벽에 충돌하면 up()
+				if (downWallCrash == true) {
+					up(speed);
+				}
+				
+				if (leftWallCrash == false) {
+					left(speed);					
+				}
+				down(speed);
+
+				try {
+					Thread.sleep(800);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+			} // end of while
+		}).start();
+	} // leftMove
+	
+	// 오른쪽 방향으로 끝까지 이동하는 메서드
+	protected void rightMove() {
+		new Thread(() -> {
+			// enemy가 살아있는 동안
+			while (alive == 0) {
+
+				// 아래쪽 벽에 충돌하면 up()
+				if (downWallCrash == true) {
+					up(speed);
+				}
+				
+				if (rightWallCrash == false) {
+					right(speed);					
+				}
+				down(speed);
+
+				try {
+					Thread.sleep(800);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+			} // end of while
+		}).start();
+	}
+	
 
 	// 이동 메서드
 
@@ -139,8 +192,8 @@ public class Enemy2 extends JLabel implements Moveable {
 		// 적군의 현재 x 좌표 저장
 		int currentX = this.getX();
 
-		// 최대 이동 거리 (여유 50)
-		int tempX = currentX - 50;
+		// 최대 이동 거리
+		int tempX = currentX - 100;
 
 		// 이동할 거리
 		int goX = (int) (currentX * Math.random());
@@ -156,7 +209,7 @@ public class Enemy2 extends JLabel implements Moveable {
 				setLocation(x, y);
 
 				try {
-					Thread.sleep(10);
+					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -170,8 +223,8 @@ public class Enemy2 extends JLabel implements Moveable {
 
 		int currentX = this.getX();
 
-		// 최대 이동 거리 (200 = 아이콘 크기 + 여유 50)
-		int tempX = (FRAME_SIZE_X - 200) - currentX;
+		// 최대 이동 거리
+		int tempX = (FRAME_SIZE_X - 250) - currentX;
 
 		// 이동할 거리
 		int goX = (int) (tempX * Math.random());
@@ -197,7 +250,7 @@ public class Enemy2 extends JLabel implements Moveable {
 		right = false;
 	} // end of right
 
-	// up 메서드는 아래 벽과 충돌했거나, 플레이어보다 적군이 아래쪽에 있을 때만 실행
+	// up 메서드는 아래 벽과 충돌했을 때만 실행
 	@Override
 	public void up(int speed) {
 		new Thread(() -> {
@@ -225,7 +278,7 @@ public class Enemy2 extends JLabel implements Moveable {
 	public void down(int speed) {
 		new Thread(() -> {
 			down = true;
-			for (int i = 0; i < 20; i++) {
+			for (int i = 0; i < 200; i++) {
 				// 적군이 죽었거나, 아래쪽 벽에 부딪치면 중단
 				if (alive == 1 || down == false) {
 					return;
@@ -234,7 +287,7 @@ public class Enemy2 extends JLabel implements Moveable {
 				setLocation(x, y);
 
 				try {
-					Thread.sleep(100);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -243,6 +296,14 @@ public class Enemy2 extends JLabel implements Moveable {
 		}).start();
 	} // end of down
 
+	@Override
+	public void downLeft() {
+		// TODO Auto-generated method stub
+		Moveable.super.downLeft();
+	}
+	
+	
+	
 	public int getX() {
 		return x;
 	}

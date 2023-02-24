@@ -31,7 +31,7 @@ public class EnemyUnit1 extends Enemy2 {
 			public void run() {
 				down = true;
 				while (alive == 0) {
-					attack();
+//					attack();
 					y += speed;
 					setLocation(x, y);
 					try {

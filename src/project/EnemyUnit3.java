@@ -10,9 +10,6 @@ public class EnemyUnit3 extends Enemy2 {
 		initData();
 		setInitLayout();
 		
-		// 이동 패턴 : 랜덤으로 움직임
-		this.randomDirection();
-		
 	}
 	
 	private void initData() {
