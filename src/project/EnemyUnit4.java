@@ -1,17 +1,18 @@
 package project;
 
+import java.util.Random;
+
 import javax.swing.ImageIcon;
 
 public class EnemyUnit4 extends Enemy2 {
+	
+	EnemyTestFrame mContext;
 	
 	// 생성자
 	public EnemyUnit4(EnemyTestFrame mContext) {
 		this.mContext = mContext;
 		initData();
 		setInitLayout();
-		
-		// 이동 패턴 : 랜덤으로 움직임
-		this.randomDirection();
 		
 	}
 	
@@ -21,17 +22,14 @@ public class EnemyUnit4 extends Enemy2 {
 		alive = 0; // 살아 있는 상태
 		enemyImage = new ImageIcon("imagesProject/enemy4.png");
 		
-		// 초기 x 위치는 랜덤
-		double randomX = Math.random(); // 0~1 범위의 소수 난수 생성
-		x = (int) ((FRAME_SIZE_X - 200) * randomX);
-
+		// x 위치는 arrayMove 메서드에서
+		
 		// 초기 y 위치는 일단 고정 (임시)
-		y = 80;
 	}
 	
 	private void setInitLayout() {
 		setSize(220, 160);
-		setLocation(x, y);
+		// 다른 메서드에서 setLocation(x, y);
 		setIcon(enemyImage);
 	}
 	

@@ -243,6 +243,29 @@ public class Enemy2 extends JLabel implements Moveable {
 		}).start();
 	} // end of down
 
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
 	
 	// 공격속도는 나중에 고려
 //	public void attack() {
