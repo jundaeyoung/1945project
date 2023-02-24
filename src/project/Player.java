@@ -46,7 +46,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	public void setLife(int life) {
-		life = life;
+		this.life = life;
 	}
 
 	public int getAlive() {
@@ -104,7 +104,7 @@ public class Player extends JLabel implements Moveable {
 	public void setLeft(boolean left) {
 		this.left = left;
 	}
-	
+
 	public boolean isUpWallCrash() {
 		return upWallCrash;
 	}
@@ -165,6 +165,10 @@ public class Player extends JLabel implements Moveable {
 		return speed;
 	}
 
+	public void setSpeed(int speed) {
+		this.speed += speed;
+	}
+
 	public Player(AirplaneFrame mContext) {
 		this.mContext = mContext;
 
@@ -181,7 +185,7 @@ public class Player extends JLabel implements Moveable {
 	public void setInitLayout() {
 		x = 470;
 		y = 805;
-		setSize(70, 70);
+		setSize(100, 70);
 		setLocation(x, y);
 		setIcon(player);
 	}
@@ -304,7 +308,7 @@ public class Player extends JLabel implements Moveable {
 			mContext.getLife1().setIcon(null);
 			System.out.println("2번째 추락");
 			setIcon(gost);
-			
+
 		} else {
 			mContext.getLife0().setIcon(null);
 			System.out.println("3번째 추락");
@@ -315,8 +319,7 @@ public class Player extends JLabel implements Moveable {
 			new AirplaneFrame();
 			Frame frame = new Frame();
 			frame.dispose();
-			
-			
+
 		}
 	}
 
@@ -324,7 +327,7 @@ public class Player extends JLabel implements Moveable {
 		// 게임 중일 때만 공격
 		if (mContext.getGameState() == 1) {
 			Bullet bullet = new Bullet(mContext);
-			
+
 			mContext.add(bullet);
 		}
 	}

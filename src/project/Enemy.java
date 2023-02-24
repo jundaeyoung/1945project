@@ -56,6 +56,7 @@ public class Enemy extends JLabel implements Moveable {
 
 	}
 
+<<<<<<< HEAD
 	public void setX(int x) {
 		this.x = x;
 	}
@@ -64,6 +65,8 @@ public class Enemy extends JLabel implements Moveable {
 		this.y = y;
 	}
 
+=======
+>>>>>>> 89b8daa3faa4770108969c32b4457a0f6d9d7787
 	public void setLeft(boolean left) {
 		this.left = left;
 	}
@@ -166,9 +169,12 @@ public class Enemy extends JLabel implements Moveable {
 			// enemy가 살아있는 동안
 			while (alive == 0) {
 
-				// 아래쪽 벽에 충돌하면 up()
-				if (downWallCrash == true) {
+				// 플레이어보다 적군이 더 아래쪽에 있으면 up()
+				if (mContext.getPlayer().getY() < this.getY()) {
 					up();
+					if (upWallCrash == true) {
+						down();
+					}
 				}
 
 				// 이동 방향을 랜덤으로 선택함
@@ -209,6 +215,8 @@ public class Enemy extends JLabel implements Moveable {
 				}
 
 			} // end of while
+			
+			
 
 		}).start();
 
@@ -299,7 +307,7 @@ public class Enemy extends JLabel implements Moveable {
 
 		new Thread(() -> {
 			up = true;
-			for (int i = 0; i < (400 / SPEED); i++) {
+			for (int i = 0; i < (100 / SPEED); i++) {
 				// 적군이 죽었거나, 위쪽 벽에 부딪치면 중단
 				if (alive == 1 || up == false) {
 					return;
@@ -366,12 +374,17 @@ public class Enemy extends JLabel implements Moveable {
 	}
 
 	public void attack() {
+<<<<<<< HEAD
 		// 게임 중일 때만 공격함
 		if (mContext.getGameState() == 1) {
 			EnemyBullet enemyBullet = new EnemyBullet(mContext);
 			mContext.add(enemyBullet);
 		}
 
+=======
+		EnemyBullet enemyBullet = new EnemyBullet(mContext);
+		mContext.add(enemyBullet);
+>>>>>>> 89b8daa3faa4770108969c32b4457a0f6d9d7787
 	}
 
 } // end of class
