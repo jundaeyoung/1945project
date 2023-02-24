@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 
 public class Enemy2 extends JLabel implements Moveable {
 
-	protected AirplaneFrame mContext;
+	protected EnemyTestFrame mContext;
 
 	// 프레임 사이즈
 	final int FRAME_SIZE_X = 950;
@@ -76,7 +76,7 @@ public class Enemy2 extends JLabel implements Moveable {
 //	}
 
 	
-	private void randomDirection() {
+	protected void randomDirection() {
 		Random random = new Random();
 
 		new Thread(() -> {
@@ -85,7 +85,7 @@ public class Enemy2 extends JLabel implements Moveable {
 
 				// 아래쪽 벽에 충돌하면 up()
 				if (downWallCrash == true) {
-					up();
+					up(speed);
 				}
 
 				// 이동 방향을 랜덤으로 선택함
@@ -100,11 +100,11 @@ public class Enemy2 extends JLabel implements Moveable {
 					if (leftWallCrash == true) {
 						continue;
 					}
-					left();
+					left(speed);
 //					if (downWallCrash == true) {
 //						up();
 //					}
-					down();
+					down(speed);
 
 					// 값이 1인 경우 오른쪽으로
 				} else {
@@ -112,11 +112,11 @@ public class Enemy2 extends JLabel implements Moveable {
 					if (rightWallCrash == true) {
 						continue;
 					}
-					right();
+					right(speed);
 //					if (downWallCrash == true) {
 //						up();
 //					}
-					down();
+					down(speed);
 				}
 
 				try {
@@ -192,7 +192,7 @@ public class Enemy2 extends JLabel implements Moveable {
 					e.printStackTrace();
 				}
 			}
-			attack();
+//			attack();
 		}).start();
 		right = false;
 	} // end of right
@@ -216,7 +216,7 @@ public class Enemy2 extends JLabel implements Moveable {
 					e.printStackTrace();
 				}
 			}
-			attack();
+//			attack();
 			up = false;
 		}).start();
 	}
@@ -245,12 +245,12 @@ public class Enemy2 extends JLabel implements Moveable {
 
 	
 	// 공격속도는 나중에 고려
-	public void attack() {
-		// 게임 중일 때만 공격함
-		if (mContext.getGameState() == 1) {
-			EnemyBullet enemyBullet = new EnemyBullet(mContext);
-			mContext.add(enemyBullet);
-		}
-	}
+//	public void attack() {
+//		// 게임 중일 때만 공격함
+//		if (mContext.getGameState() == 1) {
+//			EnemyBullet enemyBullet = new EnemyBullet(mContext);
+//			mContext.add(enemyBullet);
+//		}
+//	}
 
 } // end of class
