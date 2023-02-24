@@ -30,6 +30,7 @@ public class AirplaneFrame extends JFrame {
 	private Player player;
 	private Enemy enemy;
 	private EnemyBullet enemyBullet;
+	private Item item;
 
 	// 플레이어 목숨 개수 아이콘
 	private Life life0;
@@ -50,7 +51,7 @@ public class AirplaneFrame extends JFrame {
 
 		new Thread(new BackgroundPlayerService(player)).start();
 		new Thread(new BackgroundEnemyService(enemy)).start();
-
+		new Thread(new BackgroundItemService(item)).start();
 //		// 적군 배열 각각에 백그라운드서비스 적용
 //		for (int i = 0; i < enemies.length; i++) {
 //			new Thread(new BackgroundEnemyService(enemies[i])).start();			
