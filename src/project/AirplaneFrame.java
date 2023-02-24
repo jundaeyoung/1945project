@@ -1,5 +1,7 @@
 package project;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
@@ -8,10 +10,18 @@ import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class AirplaneFrame extends JFrame {
 
 	private AirplaneFrame mContext = this;
+
+	// 배경 흐르기 실험
+
+	ImageIcon backIc = new ImageIcon("imagesProject/stage1.png");
+	Image backImg = backIc.getImage();
+
+	int backY = -17200;
 
 	private Background background;
 	private JLabel backgroundMap;
@@ -114,6 +124,7 @@ public class AirplaneFrame extends JFrame {
 
 		setSize(950, 950);
 
+//		JPanel panel = new  MyPanel();
 		background = new Background(mContext);
 		player = new Player(mContext);
 		enemy = new Enemy(mContext);
@@ -135,9 +146,9 @@ public class AirplaneFrame extends JFrame {
 		setVisible(true);
 		if (gameState == 0) {
 			setContentPane(gameStart);
+			add(time.timeLabel);
 		} else {
-			setContentPane(backgroundMap);
-
+			setContentPane(new MyPanel());
 			add(player);
 			add(enemy);
 			add(time.timeLabel);
@@ -239,5 +250,38 @@ public class AirplaneFrame extends JFrame {
 	public static void main(String[] args) {
 		new AirplaneFrame();
 
+	}
+
+	class MyPanel extends JPanel {
+		public MyPanel() {
+
+			setFocusable(true);
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					while (true) {
+						backY++;
+						repaint();
+						try {
+							Thread.sleep(80);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+					}
+
+				}
+			}).start();
+
+		}
+
+		@Override
+		protected void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.drawImage(backImg, -10, backY, 950, 18327, this);
+
+		}
 	}
 }

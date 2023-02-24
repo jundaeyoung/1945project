@@ -35,6 +35,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 		enemyBullet = new ImageIcon("imagesProject/bullet4.png");
 		boom = new ImageIcon("imagesProject/explosion.gif");
 		player = new ImageIcon("imagesProject/BigPlane2.png");
+		
 		state = 0;
 		// 1로 계속 초기화
 		attackCount = 1;
