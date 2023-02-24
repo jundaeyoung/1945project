@@ -183,8 +183,7 @@ public class AirplaneFrame extends JFrame {
 						player.down();
 					}
 					break;
-				case KeyEvent.VK_SPACE: 
-				 
+				case KeyEvent.VK_SPACE:
 
 					break;
 				case KeyEvent.VK_ENTER:

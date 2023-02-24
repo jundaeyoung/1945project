@@ -63,7 +63,7 @@ public class Bullet extends JLabel implements Moveable {
 		state = 1;
 		mContext.remove(mContext.getEnemy());
 		mContext.repaint();
-		
+
 	}
 
 	@Override
@@ -91,6 +91,10 @@ public class Bullet extends JLabel implements Moveable {
 				Thread.sleep(3);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+			}
+			// 총알 화면밖으로 나가면 삭제됨
+			if (y == 0) {
+				setIcon(null);
 			}
 		}
 	}
