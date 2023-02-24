@@ -154,11 +154,9 @@ public class AirplaneFrame extends JFrame {
 			add(time.timeLabel);
 
 			add(life0);
-			life0.setLocation(20, 10);
 			add(life1);
-			life1.setLocation(60, 10);
 			add(life2);
-			life2.setLocation(100, 10);
+
 		}
 //		// 여러 적군 만들기
 //		for (int i = 0; i < enemies.length; i++) {
@@ -281,6 +279,10 @@ public class AirplaneFrame extends JFrame {
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			g.drawImage(backImg, -10, backY, 950, 18327, this);
+			life0.setLocation(20, 10);
+			life1.setLocation(60, 10);
+			life2.setLocation(100, 10);
+			time.timeLabel.setLocation(830, 20);
 
 		}
 	}
