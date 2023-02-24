@@ -55,46 +55,36 @@ public class Time {
 
 			@Override
 			public void run() {
-
-				// 로딩 화면에서는 시간이 흐르지 않음
-				// 재시작할 경우 시간이 0으로 초기화
-				if (AirplaneFrame.getGameState() == 0) {
-					timeS = 0;
-					timeM = 0;
-					return;
-					
-				// 게임이 시작되면 시간이 흐름
-				} else if (AirplaneFrame.getGameState() == 1) {
-					timeS++;
-					
-					// 60초가 되면 분으로 변환
-					if (timeS >= 60) {
-						timeM++;
-						timeS %= 60;
-					}
-					
-					// 분이 1 자릿수인 경우 01 이런 식으로 표시
-					if (timeM < 10) {
-						textTimeM = "0" + timeM;
-					} else {
-						textTimeM = "" + timeM;
-					}
-					
-					// 초가 1 자릿수인 경우
-					if (timeS < 10) {
-						textTimeS = "0" + timeS;
-					} else {
-						textTimeS = "" + timeS;
-					}
-					
-					timeLabel.setText(textTimeM + " : " + textTimeS);
-					
-				// 게임이 종료되면 시간이 흐르지 않음
-			    // 플레이어가 사망함 or 적군 보스를 잡음 (나중에 구현)
-				} else if (AirplaneFrame.getGameState() == 2) {
-					return;
-				}
 				
+				// 게임이 종료되어, 시간을 멈춰야 함
+				// 플레이어가 사망함 or 적군 보스를 잡음 (나중에 구현)
+				if (AirplaneFrame.getGameState() == 2) {
+					cancel();
+				}
+
+				timeS++;
+
+				// 60초가 되면 분으로 변환
+				if (timeS >= 60) {
+					timeM++;
+					timeS %= 60;
+				}
+
+				// 분이 1 자릿수인 경우 01 이런 식으로 표시
+				if (timeM < 10) {
+					textTimeM = "0" + timeM;
+				} else {
+					textTimeM = "" + timeM;
+				}
+
+				// 초가 1 자릿수인 경우
+				if (timeS < 10) {
+					textTimeS = "0" + timeS;
+				} else {
+					textTimeS = "" + timeS;
+				}
+
+				timeLabel.setText(textTimeM + " : " + textTimeS);
 			}
 		}; // end of timerTask
 
