@@ -9,7 +9,8 @@ import javax.swing.JLabel;
 recoverIcon 먹으면 생명력 추가 : 최대 목숨 3개 !상수로 선언!)
 */
 
-public class Item extends JLabel implements Moveable, Runnable {
+// Bullet 클래스에 적군과 충돌했을 때 아이템 객체를 new 하고 화면에 붙여야 됨
+public class Item extends JLabel implements Moveable {
 
 	ItemWay itemWay;
 
@@ -23,7 +24,7 @@ public class Item extends JLabel implements Moveable, Runnable {
 	private boolean right;
 	private boolean up;
 	private boolean down;
-	
+
 	private boolean leftWallCrash;
 	private boolean rightWallCrash;
 	private boolean upWallCrash;
@@ -53,21 +54,12 @@ public class Item extends JLabel implements Moveable, Runnable {
 		itemX = mContext.getEnemy().getX();
 		itemY = mContext.getEnemy().getY();
 
-//		int limitMin = 50;
-//		int limitMax = 900;
-//
-//		itemX = (int) (Math.random() * limitMax - limitMin);
-//		if (itemX <= limitMin) {
-//			itemX = limitMin;
-//		}
-//		itemY = (int) (Math.random() * limitMax);
-
 		setLocation(itemX, itemY);
-		setSize(80, 80);
+		setSize(100, 100);
 	}
 
-	@Override
-	public void run() {
+	// 랜덤 아이템 생성
+	public void itemDirection() {
 		while (true) {
 			if (mContext.getEnemy().getAlive() == 1) {
 				// ItemX, ItemY 좌표값을 Enemy X, Y좌표값으로 세팅
@@ -83,66 +75,29 @@ public class Item extends JLabel implements Moveable, Runnable {
 
 				// 확률적으로 fastItemVal가 recoveItemVal보다 더 많이 나옴
 				// 확률이 20보다 작으면 아이템 나오지 않음
-				int fastItemVal = 40;
-				int recoverItemVal = 80;
+				int fastItemVal = 80;
+				int recoverItemVal = 50;
 
 				if (itemChance >= fastItemVal) {
+					setLocation(itemX, itemY);
 					setIcon(fastIcon);
+					down();
 					return;
 				} else if (itemChance >= recoverItemVal) {
+					setLocation(itemX, itemY);
 					setIcon(recoverIcon);
+					down();
+					return;
 				}
 
-				down();
 			}
 		}
 	}
 
-//	private void initThread() {
-//		new Thread(new Runnable() {
-//			@Override
-//			public void run() {
-//				itemDirection();
-//				down();
-//			}
-//		}).start();
-//	}
-
-	// 랜덤 아이템 생성
-//	public void itemDirection() {
-//		while (true) {
-//			if (mContext.getEnemy().getAlive() == 1) {
-//				// ItemX, ItemY 좌표값을 Enemy X, Y좌표값으로 세팅
-//				this.setItemX(mContext.getEnemy().getX());
-//				this.setItemY(mContext.getEnemy().getY());
-//
-//				setLocation(itemX, itemY);
-//				mContext.add(this);
-//
-//				// 확률적으로 최소 20
-//				int itemChance = (int) (Math.random() * 100) + 20;
-//				System.out.println("적 잡을 때 생기는 값 : " + itemChance);
-//
-//				// 확률적으로 fastItemVal가 recoveItemVal보다 더 많이 나옴
-//				// 확률이 20보다 작으면 아이템 나오지 않음
-//				int fastItemVal = 40;
-//				int recoverItemVal = 80;
-//
-//				if (itemChance >= fastItemVal) {
-//					setIcon(fastIcon);
-//					return;
-//				} else if (itemChance >= recoverItemVal) {
-//					setIcon(recoverIcon);
-//				}
-//
-//				down();
-//
-//			}
-//		}
-//	}
-
 	public void plusSpeed() {
-		if (itemX == mContext.getPlayer().getX() && itemY == mContext.getPlayer().getY()) {
+		if ((itemX == mContext.getPlayer().getX()) && (itemY == mContext.getPlayer().getY())) {
+
+			// setSpeed에서 += 사용하기
 			mContext.getPlayer().setSpeed(5);
 			setIcon(null);
 		}
@@ -150,7 +105,7 @@ public class Item extends JLabel implements Moveable, Runnable {
 
 	// 라이프 이미지 아이콘 다시 추가하는 방법
 	public void plusRecover() {
-		if (itemX == mContext.getPlayer().getX() && itemY == mContext.getPlayer().getY()) {
+		if ((itemX == mContext.getPlayer().getX()) && (itemY == mContext.getPlayer().getY())) {
 //			mContext.getLife(); 
 //			mContext.getPlayer().setLife(life++);
 //			mContext.getPlayer().setLife(alive);
@@ -158,7 +113,6 @@ public class Item extends JLabel implements Moveable, Runnable {
 		}
 	}
 
-	
 	public boolean isLeftWallCrash() {
 		return leftWallCrash;
 	}
@@ -242,7 +196,7 @@ public class Item extends JLabel implements Moveable, Runnable {
 	}
 
 	@Override
-	public void down() {
+	public synchronized void down() {
 //		itemDirection();
 
 		down = true;
@@ -250,17 +204,16 @@ public class Item extends JLabel implements Moveable, Runnable {
 		while (true) {
 			itemY++;
 			setLocation(itemX, itemY);
-			if (Math.abs(itemX - mContext.getEnemy().getX()) < 10
-					&& Math.abs(itemY - mContext.getEnemy().getY()) < 50) {
+			if (Math.abs(itemX - mContext.getEnemy().getX()) < 50
+					&& Math.abs(itemY - mContext.getEnemy().getY()) < 800) {
 				if (mContext.getEnemy().getAlive() == 1) {
-					down();
+					try {
+						Thread.sleep(3);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
-			}
 
-			try {
-				Thread.sleep(3);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
 		}
 

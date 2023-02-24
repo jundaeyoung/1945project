@@ -17,6 +17,8 @@ public class Bullet extends JLabel implements Moveable {
 	private AirplaneFrame mContext;
 	private BackgroundBulletService backgroundBulletService;
 
+	private Item item;
+	
 	public int getState() {
 		return state;
 	}
@@ -38,7 +40,6 @@ public class Bullet extends JLabel implements Moveable {
 		boom = new ImageIcon("imagesProject/explosion.gif");
 		state = 0;
 		up = false;
-
 	}
 
 	public void setInitLayout() {
@@ -49,7 +50,7 @@ public class Bullet extends JLabel implements Moveable {
 		setLocation(x, y);
 	}
 
-	public void initThread() {
+	public synchronized void initThread() {
 		new Thread(new Runnable() {
 			public void run() {
 				up();
@@ -63,7 +64,9 @@ public class Bullet extends JLabel implements Moveable {
 		state = 1;
 		mContext.remove(mContext.getEnemy());
 		mContext.repaint();
-
+		
+		item = new Item(mContext);
+		item.itemDirection();
 	}
 
 	@Override
@@ -77,7 +80,7 @@ public class Bullet extends JLabel implements Moveable {
 	}
 
 	@Override
-	public void up() {
+	public synchronized void up() {
 		up = true;
 		while (true) {
 			y--;
@@ -91,10 +94,6 @@ public class Bullet extends JLabel implements Moveable {
 				Thread.sleep(3);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
-			// 총알 화면밖으로 나가면 삭제됨
-			if (y == 0) {
-				setIcon(null);
 			}
 		}
 	}

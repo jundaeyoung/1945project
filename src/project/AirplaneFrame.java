@@ -58,19 +58,13 @@ public class AirplaneFrame extends JFrame {
 //		}
 	} // end of 생성자
 
-	
-	
 	public EnemyBullet getEnemyBullet() {
 		return enemyBullet;
 	}
 
-
-
 	public void setEnemyBullet(EnemyBullet enemyBullet) {
 		this.enemyBullet = enemyBullet;
 	}
-
-
 
 	public static int getGameState() {
 		return gameState;
@@ -147,6 +141,8 @@ public class AirplaneFrame extends JFrame {
 		life0 = new Life(mContext);
 		life1 = new Life(mContext);
 		life2 = new Life(mContext);
+		item = new Item(mContext);
+
 //		// 테스트
 //		for (int i = 0; i < enemies.length; i++) {
 //			enemies[i] = new Enemy(mContext);
@@ -159,12 +155,14 @@ public class AirplaneFrame extends JFrame {
 		setResizable(false); // 창 크기 조절 기능( 거짓 )
 		setLocationRelativeTo(null); // JFrame 가운데 배치
 		setVisible(true);
+
 		if (gameState == 0) {
 			setContentPane(gameStart);
 		} else {
 			setContentPane(new MyPanel());
 			add(player);
 			add(enemy);
+			add(item);
 
 			add(life0);
 			add(life1);
