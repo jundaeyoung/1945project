@@ -7,48 +7,48 @@ import javax.swing.JLabel;
 
 public class Enemy2 extends JLabel implements Moveable {
 
-	private AirplaneFrame mContext;
+	protected AirplaneFrame mContext;
 
 	// 프레임 사이즈
 	final int FRAME_SIZE_X = 950;
 	final int FRAME_SIZE_Y = 950;
 
 	// 적군 이동속도 -> 생성자에서 초기화
-	private int speed;
+	protected int speed;
 	
 //	// 적군 공격속도
 //	private int attackSpeed;
 	
 	// 적군 생명력 -> 생성자에서 초기화
-	private int hp;
+	protected int hp;
 	
 	// 피격 횟수
-	private int beattackedCount;
+	protected int beattackedCount;
 
 	// 생존 여부 (살아 있음 : 0, 죽음 : 1)
-	private int alive;
+	protected int alive;
 
 	// 이미지 -> 생성자에서 초기화
-	private ImageIcon enemyImage;
+	protected ImageIcon enemyImage;
 
 	// 위치 상태 -> 생성자에서 초기화
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
 
 	// 적군의 방향 (지워도 될듯)
-	private EnemyWay enemyWay;
+	protected EnemyWay enemyWay;
 
 	// 움직임 상태 (우선 좌우만 구현 // 움직이지 않음 : false)
-	private boolean left;
-	private boolean right;
-	private boolean up;
-	private boolean down;
+	protected boolean left;
+	protected boolean right;
+	protected boolean up;
+	protected boolean down;
 
 	// 벽에 충돌한 상태
-	private boolean leftWallCrash;
-	private boolean rightWallCrash;
-	private boolean downWallCrash;
-	private boolean upWallCrash;
+	protected boolean leftWallCrash;
+	protected boolean rightWallCrash;
+	protected boolean downWallCrash;
+	protected boolean upWallCrash;
 	
 
 //	// 생성자 메서드 1
