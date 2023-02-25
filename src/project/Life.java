@@ -1,43 +1,43 @@
 package project;
 
-	import java.awt.FlowLayout;
+import java.awt.FlowLayout;
 
-	import javax.swing.ImageIcon;
-	import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
-	public class Life extends JLabel{
-		AirplaneFrame mContext;
-		
-		private int x;
-		private int y;
+public class Life extends JLabel {
+	AirplaneFrame mContext;
 
-		private ImageIcon life;
+	private int x;
+	private int y;
 
-		
-		
-		public Life(AirplaneFrame mContext){
-			this.mContext = mContext;
-			initData();
-			setInitLayout();
-		}
+	private ImageIcon life;
 
-		public void initData() {
-			setSize(50, 50);
-			setVisible(true);
-			life = new ImageIcon("imagesProject/LifeCount.png");
-			
+	public Life(AirplaneFrame mContext) {
+		this.mContext = mContext;
+		initData();
+		setInitLayout();
+	}
 
-		}
-
-		public void setInitLayout() {
-			setIcon(life);
-			
-		}
-		
-		public void crash(Life life) {
-			setIcon(null);
-			mContext.remove(mContext.getPlayer());
-			mContext.repaint();
-		}
+	public void initData() {
+		setSize(50, 50);
+		setVisible(true);
+		life = new ImageIcon("imagesProject/LifeCount.png");
 
 	}
+
+	public void setInitLayout() {
+		setIcon(life);
+
+	}
+
+	public void crash(Life life) {
+		setIcon(null);
+		mContext.remove(mContext.getPlayer());
+		mContext.repaint();
+	}
+
+	public void lifeUp() {
+			setIcon(life);
+	}
+}

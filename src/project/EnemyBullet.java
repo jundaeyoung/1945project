@@ -73,6 +73,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 			attackCount--;
 			mContext.getPlayer().beAttack();
 			System.out.println("공격?");
+			setIcon(null);
 			if (mContext.getPlayer().getLife() == 0) {
 				setIcon(boom);
 				state = 1;
@@ -105,6 +106,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 			setLocation(x, y);
 			if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
 				if (mContext.getPlayer().getAlive() == 0) {
+				crash();
 				}
 			}
 			try {

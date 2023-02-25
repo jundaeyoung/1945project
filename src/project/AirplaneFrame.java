@@ -282,12 +282,11 @@ public class AirplaneFrame extends JFrame {
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
-					// TODO Auto-generated method stub
 					while (true) {
 						backY++;
 						repaint();
 						try {
-							Thread.sleep(8);
+							Thread.sleep(7);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -299,6 +298,7 @@ public class AirplaneFrame extends JFrame {
 			}).start();
 
 		}
+		
 
 		@Override
 		protected void paintComponent(Graphics g) {

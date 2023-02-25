@@ -299,21 +299,20 @@ public class Player extends JLabel implements Moveable {
 
 	public void beAttack() {
 		life = life - 1;
-		System.out.println("추락합니다.");
 		if (life == 2) {
-			mContext.getLife2().setIcon(null);
 			setIcon(gost);
-			System.out.println("10101010");
+			mContext.getLife2().setIcon(null);
+			System.out.println("1번째 추락 ");
 
 		} else if (life == 1) {
+			setIcon(gost);
 			mContext.getLife1().setIcon(null);
 			System.out.println("2번째 추락");
-			setIcon(gost);
 
 		} else {
+			setIcon(gost);
 			mContext.getLife0().setIcon(null);
 			System.out.println("3번째 추락");
-			setIcon(gost);
 
 			// 나중에 게임 종료 결과 화면 만들면 2로 바꾸기
 			mContext.setGameState(0);
@@ -323,13 +322,16 @@ public class Player extends JLabel implements Moveable {
 
 		}
 		try {
-			Thread.sleep(1);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		setIcon(player);
 	}
+	
+	
+	
 
 	public void attack() {
 		// 게임 중일 때만 공격

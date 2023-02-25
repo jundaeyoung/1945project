@@ -39,7 +39,7 @@ public class Item extends JLabel implements Moveable {
 	private ImageIcon fastIcon;
 	private ImageIcon recoverIcon;
 
-	int itemChance = rd.nextInt(150);
+	int itemChance = rd.nextInt(110);
 	// 확률적으로 fastItemVal가 recoveItemVal보다 더 많이 나옴
 	// 확률이 20보다 작으면 아이템 나오지 않음
 	int fastItemVal = 80;
@@ -119,6 +119,15 @@ public class Item extends JLabel implements Moveable {
 					down = false;
 					return;
 				} else if (itemChance >= recoverItemVal) {
+					if (mContext.getPlayer().getLife() == 2) {
+						mContext.getLife2().lifeUp();
+						System.out.println("생명력 1번");
+
+					} else if (mContext.getPlayer().getLife() == 1) {
+						mContext.getLife1().lifeUp();
+						System.out.println("생명력 2번째 ");
+
+					}
 					down = false;
 
 				}
