@@ -23,9 +23,6 @@ public class Enemy extends JLabel implements Moveable {
 	// 플레이어가 한번에 죽는 현상 방지
 	private int attackCount;
 
-	// 적군의 방향
-	private EnemyWay enemyWay;
-
 	// 움직임 상태 (우선 좌우만 구현 // 움직이지 않음 : false)
 	private boolean left;
 	private boolean right;
@@ -54,21 +51,6 @@ public class Enemy extends JLabel implements Moveable {
 //		 적군의 방향 결정 + 이동 메서드 호출
 		enemyDirection();
 		
-		////// 테스트 중 /////
-//		new Thread(() -> {
-//			while (alive == 0 && downWallCrash == false) {
-//				y += 5;
-//				setLocation(x, y);
-//				try {
-//					Thread.sleep(100);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		}).start();
-//		
-
 	}
 
 	public void setX(int x) {
@@ -215,7 +197,7 @@ public class Enemy extends JLabel implements Moveable {
 				}
 
 				try {
-					Thread.sleep(900);
+					Thread.sleep(600);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -251,7 +233,7 @@ public class Enemy extends JLabel implements Moveable {
 				setLocation(x, y);
 
 				try {
-					Thread.sleep(5);
+					Thread.sleep(10);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -289,7 +271,7 @@ public class Enemy extends JLabel implements Moveable {
 				setLocation(x, y);
 
 				try {
-					Thread.sleep(5);
+					Thread.sleep(10);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

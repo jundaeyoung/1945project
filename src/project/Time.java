@@ -29,6 +29,10 @@ public class Time {
 	private void initData() {
 		x = 800;
 		y = 25;
+		
+		// 초기 값 세팅 (임시)
+		timeM = 2;
+		timeS = 0;
 
 		timeLabel = new JLabel();
 	}
@@ -56,18 +60,16 @@ public class Time {
 			@Override
 			public void run() {
 				
-				// 게임이 종료되어, 시간을 멈춰야 함
-				// 플레이어가 사망함 or 적군 보스를 잡음 (나중에 구현)
-				if (AirplaneFrame.getGameState() == 2) {
+				// 게임 종료
+				if (timeS == 0 && timeM == 0) {
 					cancel();
 				}
 
-				timeS++;
+				timeS--;
 
-				// 60초가 되면 분으로 변환
-				if (timeS >= 60) {
-					timeM++;
-					timeS %= 60;
+				if (timeS < 0) {
+					timeM--;
+					timeS += 60;
 				}
 
 				// 분이 1 자릿수인 경우 01 이런 식으로 표시
