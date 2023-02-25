@@ -42,10 +42,6 @@ public class BackgroundEnemyService implements Runnable {
 //				System.out.println("현재 상태는 바닥벽에 충돌했어요");
 				enemy.setDown(false);
 				enemy.setDownWallCrash(true);
-			} else if (highColor.getRed() == 255 && highColor.getGreen() == 0 && highColor.getBlue() == 0) {
-				System.out.println("현재 위벽에 충돌했어요");
-				enemy.setUp(false);
-				enemy.setUpWallCrash(true);
 			} else {
 				enemy.setLeftWallCrash(false);
 				enemy.setRightWallCrash(false);

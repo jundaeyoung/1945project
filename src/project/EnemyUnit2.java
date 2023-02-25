@@ -16,7 +16,7 @@ public class EnemyUnit2 extends Enemy2{
 		hp = 1;
 		speed = 1;
 		alive = 0;
-		enemyImage = new ImageIcon("imagesProject/enemy1.png");
+		enemyImage = new ImageIcon("imagesProject/enemy2.png");
 	}
 
 	private void setInitLayout() {

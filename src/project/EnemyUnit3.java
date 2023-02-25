@@ -13,7 +13,7 @@ public class EnemyUnit3 extends Enemy2 {
 	}
 	
 	private void initData() {
-		speed = 1; // 이동속도
+		speed = 3; // 이동속도
 		hp = 3; // 생명력, 0이 되면 alive = 1;
 		alive = 0; // 살아 있는 상태
 		enemyImage = new ImageIcon("imagesProject/enemy3.png");

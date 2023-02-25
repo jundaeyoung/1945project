@@ -36,10 +36,9 @@ public class Enemy extends JLabel implements Moveable {
 	private boolean leftWallCrash;
 	private boolean rightWallCrash;
 	private boolean downWallCrash;
-	private boolean upWallCrash;
 
 	// 적군 속도 상태
-	private final int SPEED = 2;
+	private final int SPEED = 1;
 
 	// 이미지
 	private ImageIcon enemyImage;
@@ -52,8 +51,23 @@ public class Enemy extends JLabel implements Moveable {
 		initData();
 		setInitLayout();
 
-		// 적군의 방향 결정 + 이동 메서드 호출
+//		 적군의 방향 결정 + 이동 메서드 호출
 		enemyDirection();
+		
+		////// 테스트 중 /////
+//		new Thread(() -> {
+//			while (alive == 0 && downWallCrash == false) {
+//				y += 5;
+//				setLocation(x, y);
+//				try {
+//					Thread.sleep(100);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		}).start();
+//		
 
 	}
 
@@ -79,10 +93,6 @@ public class Enemy extends JLabel implements Moveable {
 
 	public void setRightWallCrash(boolean rightWallCrash) {
 		this.rightWallCrash = rightWallCrash;
-	}
-
-	public void setUpWallCrash(boolean upWallCrash) {
-		this.upWallCrash = upWallCrash;
 	}
 
 	public boolean isUp() {

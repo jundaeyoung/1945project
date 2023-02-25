@@ -19,6 +19,8 @@ public class EnemyTestFrame extends JFrame {
 		setInitLayout();
 		createEnemy();
 		createEnemy2();
+		
+		
 
 	} // end of 생성자
 
@@ -49,8 +51,10 @@ public class EnemyTestFrame extends JFrame {
 		TimerTask task1 = new TimerTask() {
 			@Override
 			public void run() {
-				// 1개의 enemyUnit3 생성
-//				unit3OneMove();
+//				 1개의 enemyUnit3 생성
+				unit3OneMove();
+				
+//				unit3ArrayMove();
 			}
 		};
 		timer.schedule(task1, delay);
@@ -65,8 +69,6 @@ public class EnemyTestFrame extends JFrame {
 				// 4개의 enemyUnit4 생성
 //				unit4ArrayMove();
 				
-				// 1개의 enemyUnit4 생성
-				unit4OneMove();
 			}
 		};
 		delay = 1000L;
@@ -115,50 +117,10 @@ public class EnemyTestFrame extends JFrame {
 			units[i].setLocation(units[i].getX(), units[i].getY());
 			mContext.add(units[i]);
 		}
-		new Thread(() -> {
-			while (true) {
-				for (int i = 0; i < units.length; i++) {
-					units[i].down(units[i].getSpeed());
-					try {
-						Thread.sleep(15);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}).start();
-	}
-
-	// 유닛4 하나를 소환하는 메서드
-	public void unit4OneMove() {
-		EnemyUnit4 unit4 = new EnemyUnit4(mContext);
-
-		// y 위치 고정
-		unit4.setY(70);
-
-		// 난수에 따라, 왼쪽 끝에서 오른쪽으로 이동하거나
-		// 오른쪽 끝에서 왼쪽으로 이동함
-		Random random = new Random();
-		int randomNumber = random.nextInt(2); // 0 또는 1
-
-		switch (randomNumber) {
-		// 왼쪽 끝에서 오른쪽으로
-		case 0: {
-			unit4.setX(50);
-			unit4.setLocation(unit4.getX(), unit4.getY());
-			mContext.add(unit4);
-			unit4.rightMove();
-			break;
+		for (int i = 0; i < units.length; i++) {
+			units[i].down(units[i].getSpeed());
 		}
-		// 오른쪽 끝에서 왼쪽으로
-		case 1: {
-			unit4.setX(800);
-			unit4.setLocation(unit4.getX(), unit4.getY());
-			mContext.add(unit4);
-			unit4.leftMove();
-			break;
-		}
-		} // end of switch
+		
 	}
 
 	// 유닛4 배열을 소환하는 메서드
@@ -183,18 +145,10 @@ public class EnemyTestFrame extends JFrame {
 
 		// 백그라운드서비스
 
-		new Thread(() -> {
-			while (true) {
-				for (int i = 0; i < units.length; i++) {
-					units[i].down(units[i].getSpeed());
-					try {
-						Thread.sleep(15);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}).start();
+		for (int i = 0; i < units.length; i++) {
+			units[i].down(units[i].getSpeed());
+		}
+		
 	}
 
 	public static void main(String[] args) {

@@ -21,9 +21,6 @@ public class Enemy2 extends JLabel implements Moveable {
 	
 	// 적군 생명력 -> 생성자에서 초기화
 	protected int hp;
-	
-	// 피격 횟수
-	protected int beattackedCount;
 
 	// 생존 여부 (살아 있음 : 0, 죽음 : 1)
 	protected int alive;
@@ -35,20 +32,16 @@ public class Enemy2 extends JLabel implements Moveable {
 	protected int x;
 	protected int y;
 
-	// 적군의 방향 (지워도 될듯)
-	protected EnemyWay enemyWay;
-
-	// 움직임 상태 (우선 좌우만 구현 // 움직이지 않음 : false)
+	// 움직임 상태 (움직이지 않음 : false)
 	protected boolean left;
 	protected boolean right;
-	protected boolean up;
 	protected boolean down;
+	protected boolean up;
 
 	// 벽에 충돌한 상태
 	protected boolean leftWallCrash;
 	protected boolean rightWallCrash;
 	protected boolean downWallCrash;
-	protected boolean upWallCrash;
 	
 
 //	// 생성자 메서드 1
@@ -130,59 +123,6 @@ public class Enemy2 extends JLabel implements Moveable {
 		}).start();
 
 	}
-	
-	// 왼쪽 방향으로 끝까지 이동하는 메서드
-	protected void leftMove() {
-		new Thread(() -> {
-			// enemy가 살아있는 동안
-			while (alive == 0) {
-
-				// 아래쪽 벽에 충돌하면 up()
-				if (downWallCrash == true) {
-					up(speed);
-				}
-				
-				if (leftWallCrash == false) {
-					left(speed);					
-				}
-				down(speed);
-
-				try {
-					Thread.sleep(800);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
-			} // end of while
-		}).start();
-	} // leftMove
-	
-	// 오른쪽 방향으로 끝까지 이동하는 메서드
-	protected void rightMove() {
-		new Thread(() -> {
-			// enemy가 살아있는 동안
-			while (alive == 0) {
-
-				// 아래쪽 벽에 충돌하면 up()
-				if (downWallCrash == true) {
-					up(speed);
-				}
-				
-				if (rightWallCrash == false) {
-					right(speed);					
-				}
-				down(speed);
-
-				try {
-					Thread.sleep(800);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
-			} // end of while
-		}).start();
-	}
-	
 
 	// 이동 메서드
 
@@ -278,7 +218,7 @@ public class Enemy2 extends JLabel implements Moveable {
 	public void down(int speed) {
 		new Thread(() -> {
 			down = true;
-			for (int i = 0; i < 200; i++) {
+			while(down) {
 				// 적군이 죽었거나, 아래쪽 벽에 부딪치면 중단
 				if (alive == 1 || down == false) {
 					return;
@@ -327,6 +267,72 @@ public class Enemy2 extends JLabel implements Moveable {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
+
+	public int getAlive() {
+		return alive;
+	}
+
+	public void setAlive(int alive) {
+		this.alive = alive;
+	}
+
+	public boolean isLeft() {
+		return left;
+	}
+
+	public void setLeft(boolean left) {
+		this.left = left;
+	}
+
+	public boolean isRight() {
+		return right;
+	}
+
+	public void setRight(boolean right) {
+		this.right = right;
+	}
+
+	public boolean isUp() {
+		return up;
+	}
+
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+
+	public boolean isDown() {
+		return down;
+	}
+
+	public void setDown(boolean down) {
+		this.down = down;
+	}
+
+	public boolean isLeftWallCrash() {
+		return leftWallCrash;
+	}
+
+	public void setLeftWallCrash(boolean leftWallCrash) {
+		this.leftWallCrash = leftWallCrash;
+	}
+
+	public boolean isRightWallCrash() {
+		return rightWallCrash;
+	}
+
+	public void setRightWallCrash(boolean rightWallCrash) {
+		this.rightWallCrash = rightWallCrash;
+	}
+
+	public boolean isDownWallCrash() {
+		return downWallCrash;
+	}
+
+	public void setDownWallCrash(boolean downWallCrash) {
+		this.downWallCrash = downWallCrash;
+	}
+	
+	
 	
 	// 공격속도는 나중에 고려
 //	public void attack() {
