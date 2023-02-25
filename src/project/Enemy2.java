@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 public class Enemy2 extends JLabel implements Moveable {
 
+//	protected AirplaneFrame mContext;
 	protected EnemyTestFrame mContext;
 
 	// 프레임 사이즈
@@ -44,6 +45,11 @@ public class Enemy2 extends JLabel implements Moveable {
 	protected boolean downWallCrash;
 	
 
+//	public Enemy2(AirplaneFrame mContext) {
+//		this.mContext = mContext;
+//	}
+	
+	
 //	// 생성자 메서드 1
 //	private void initData() {
 //		enemyImage = new ImageIcon("imagesProject/enemy.png");
@@ -332,15 +338,27 @@ public class Enemy2 extends JLabel implements Moveable {
 		this.downWallCrash = downWallCrash;
 	}
 	
-	
-	
-	// 공격속도는 나중에 고려
+//	public void crash() {
+//		if (hp == 0) {
+//			mContext.getPlayer().beAttack();
+//
+//			if (mContext.getPlayer().getLife() == 0) {
+//				mContext.remove(mContext.getPlayer());
+//			}
+//		}
+//	}
+//
 //	public void attack() {
 //		// 게임 중일 때만 공격함
 //		if (mContext.getGameState() == 1) {
 //			EnemyBullet enemyBullet = new EnemyBullet(mContext);
 //			mContext.add(enemyBullet);
 //		}
+//	}
+//
+//	public void beattacked() {
+////		setIcon(boom);
+//		setLocation(x, y);
 //	}
 
 } // end of class

@@ -27,7 +27,7 @@ public class EnemyUnit3 extends Enemy2 {
 	}
 	
 	private void setInitLayout() {
-		setSize(220, 160);
+		setSize(225, 160);
 		setLocation(x, y);
 		setIcon(enemyImage);
 	}

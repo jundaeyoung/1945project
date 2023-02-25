@@ -38,7 +38,7 @@ public class BackgroundEnemyService implements Runnable {
 		// + 수정 : enemy가 살아있는 동안에만 감시함
 		while (enemy.getAlive() == 0) {
 			
-			// + 수정 : 자료형에 따라 보정 값 조정
+			// + 수정 : 자료형에 따라 보정 값 조정 (enemy2 기준)
 			
 //			if (enemy instanceof EnemyUnit1) {
 //				leftColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY()));
@@ -65,7 +65,7 @@ public class BackgroundEnemyService implements Runnable {
 			// 테스트용 enemy.png (기존 버전) 
 			leftColor = new Color(image.getRGB(enemy.getX() - 20, enemy.getY()));
 			rightColor = new Color(image.getRGB(enemy.getX() + 55, enemy.getY()));
-			bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 20));
+			bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 50));
 
 			// 충돌 여부 확인
 			if (leftColor.getRed() == 255 && leftColor.getGreen() == 0 && leftColor.getBlue() == 0) {

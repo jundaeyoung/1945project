@@ -51,8 +51,29 @@ public class EnemyBullet extends JLabel implements Moveable {
 	}
 
 	public void setInitLayout() {
-		x = mContext.getEnemy().getX() + 30;
-		y = mContext.getEnemy().getY() + 50;
+		
+		// + 수정 : 자료형에 따라 보정
+//		if (mContext.getEnemy() instanceof EnemyUnit1) {
+//			x = mContext.getEnemy().getX() + 240;
+//			y = mContext.getEnemy().getY() + 80;
+			
+//		} else if (mContext.getEnemy() instanceof EnemyUnit2) {
+//			x = mContext.getEnemy().getX() + 10;
+//			y = mContext.getEnemy().getY() + 10;
+//			
+//		} else if (mContext.getEnemy() instanceof EnemyUnit3) {
+//			x = mContext.getEnemy().getX() + 107;
+//			y = mContext.getEnemy().getY() + 80;
+//			
+//		} else if (mContext.getEnemy() instanceof EnemyUnit4) {
+//			x = mContext.getEnemy().getX() + 43;
+//			y = mContext.getEnemy().getY() + 24;
+//			
+//		}
+		
+		// 기존 버전
+		x = mContext.getEnemy().getX() + 27;
+		y = mContext.getEnemy().getY() + 45;
 		setIcon(enemyBullet);
 		setSize(100, 100);
 		setLocation(x, y);

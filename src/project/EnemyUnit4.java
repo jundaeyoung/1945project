@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 
 public class EnemyUnit4 extends Enemy2 {
 	
-	EnemyTestFrame mContext;
 	
 	// 생성자
 	public EnemyUnit4(EnemyTestFrame mContext) {
@@ -28,7 +27,7 @@ public class EnemyUnit4 extends Enemy2 {
 	}
 	
 	private void setInitLayout() {
-		setSize(220, 160);
+		setSize(100, 100);
 		// 다른 메서드에서 setLocation(x, y);
 		setIcon(enemyImage);
 	}

@@ -36,12 +36,9 @@ public class AirplaneFrame extends JFrame {
 	private Life life0;
 	private Life life1;
 	private Life life2;
-
+ 
 	// 게임 종료 여부 : 객체 생성하지 않고 사용 가능하게 (0 : 실행, 1 : 종료)
 	private static int gameState = 0;
-
-// 여러 적군 만들기
-//	private Enemy[] enemies = new Enemy[10];
 
 	// 생성자
 	public AirplaneFrame() {
@@ -78,7 +75,7 @@ public class AirplaneFrame extends JFrame {
 	public static int getGameState() {
 		return gameState;
 	}
-
+	
 	public static void setGameState(int gameState) {
 		AirplaneFrame.gameState = gameState;
 	}
@@ -307,7 +304,7 @@ public class AirplaneFrame extends JFrame {
 			life0.setLocation(20, 10);
 			life1.setLocation(60, 10);
 			life2.setLocation(100, 10);
-			time.timeLabel.setLocation(830, 20);
+			time.timeLabel.setLocation(840, 20);
 
 		}
 	}

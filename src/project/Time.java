@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Time {
@@ -15,6 +16,8 @@ public class Time {
 
 	// 시간을 표시할 라벨
 	JLabel timeLabel;
+	
+	AirplaneFrame mContext;
 
 	// 시간
 	int timeS; // 초
@@ -27,8 +30,6 @@ public class Time {
 	}
 
 	private void initData() {
-		x = 800;
-		y = 25;
 		
 		// 초기 값 세팅 (임시)
 		timeM = 2;
@@ -41,12 +42,12 @@ public class Time {
 	private void setInitLayout() {
 		Font f = new Font("맑은고딕", Font.BOLD, 20);
 		timeLabel.setFont(f);
+		timeLabel.setForeground(Color.white);
 		timeLabel.setHorizontalAlignment(JLabel.CENTER); // 텍스트 가운데 정렬
 
-		timeLabel.setSize(90, 40);
-		timeLabel.setOpaque(true); // 배경색 보이게
-		timeLabel.setBackground(Color.white);
-		timeLabel.setLocation(x, y);
+		timeLabel.setSize(100, 40);
+//		timeLabel.setOpaque(true); // 배경색 보이게
+//		timeLabel.setBackground(Color.black);
 	}
 
 	private void timerStart() {
@@ -60,16 +61,23 @@ public class Time {
 			@Override
 			public void run() {
 				
-				// 게임 종료
+				// 시간이 끝나서 게임 종료
 				if (timeS == 0 && timeM == 0) {
-					cancel();
+					return;
+				}
+				
+				// 게임이 종료되어서 시간이 멈춤
+				if (mContext.getGameState() == 0) {
+					return;
 				}
 
-				timeS--;
+				timeS--;					
 
 				if (timeS < 0) {
-					timeM--;
-					timeS += 60;
+					if (timeM > 0) {
+						timeM--;												
+						timeS += 60;
+					}
 				}
 
 				// 분이 1 자릿수인 경우 01 이런 식으로 표시

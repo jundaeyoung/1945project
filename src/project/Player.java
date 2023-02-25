@@ -314,11 +314,11 @@ public class Player extends JLabel implements Moveable {
 			mContext.getLife0().setIcon(null);
 			System.out.println("3번째 추락");
 
-			// 나중에 게임 종료 결과 화면 만들면 2로 바꾸기
+			// 게임 재시작
 			mContext.setGameState(0);
 			new AirplaneFrame();
-			Frame frame = new Frame();
-			frame.dispose();
+//			Frame frame = new Frame();
+			mContext.dispose();
 
 		}
 		try {

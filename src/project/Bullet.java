@@ -100,6 +100,51 @@ public class Bullet extends JLabel implements Moveable {
 		while (true) {
 			y--;
 			setLocation(x, y);
+
+			// +++ 수정 자료형에 따라 맞는 범위 보정 (enemy2 기준)
+
+//			if (mContext.getEnemy() instanceof EnemyUnit1 && mContext.getEnemy().getAlive() == 0) {
+	//			if (Math.abs(x - (mContext.getEnemy().getX()+250)) < 230 && (y - mContext.getEnemy().getY()) < 100) {
+	//				if (mContext.getEnemy().getAlive() == 0) {
+	//					mContext.getEnemy().beattacked();
+	//					crash();
+	//					setIcon(boom);
+	//					item();
+	//				}
+	//			}
+
+//			} else if (mContext.getEnemy() instanceof EnemyUnit2 && mContext.getEnemy().getAlive() == 0) {
+	//			if (Math.abs(x - (mContext.getEnemy().getX() + 15)) < 15 && (y - mContext.getEnemy().getY()) < 15) {
+	//				if (mContext.getEnemy().getAlive() == 0) {
+	//					mContext.getEnemy().beattacked();
+	//					crash();
+	//					setIcon(boom);
+	//					item();
+	//				}
+	//			}
+
+//			} else if (mContext.getEnemy() instanceof EnemyUnit3 && mContext.getEnemy().getAlive() == 0) {
+	//			if (Math.abs(x - (mContext.getEnemy().getX() + 100)) < 100 && (y - mContext.getEnemy().getY()) < 90) {
+	//				if (mContext.getEnemy().getAlive() == 0) {
+	//					mContext.getEnemy().beattacked();
+	//					crash();
+	//					setIcon(boom);
+	//					item();
+	//				}
+	//			}	
+
+//			} else if (mContext.getEnemy() instanceof EnemyUnit4 && mContext.getEnemy().getAlive() == 0) {
+//				if (Math.abs(x - (mContext.getEnemy().getX() + 43)) < 45 && (y - mContext.getEnemy().getY()) < 45) {
+//					if (mContext.getEnemy().getAlive() == 0) {
+//						mContext.getEnemy().beattacked();
+//						crash();
+//						setIcon(boom);
+//						item();
+//					}
+//				}
+//			}
+
+			// 기존 버전
 			if (Math.abs(x - mContext.getEnemy().getX()) < 50 && Math.abs(y - mContext.getEnemy().getY()) < 50) {
 				if (mContext.getEnemy().getAlive() == 0) {
 					mContext.getEnemy().beattacked();

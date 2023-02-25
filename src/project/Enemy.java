@@ -51,6 +51,13 @@ public class Enemy extends JLabel implements Moveable {
 //		 적군의 방향 결정 + 이동 메서드 호출
 		enemyDirection();
 		
+		
+//		// 테스트용 //
+//		x = 100;
+//		y = 100;
+//		setLocation(x, y);
+//		down();
+		
 	}
 
 	public void setX(int x) {
@@ -241,12 +248,7 @@ public class Enemy extends JLabel implements Moveable {
 		}).start();
 		left = false;
 		// player와 부딪히면 player공격
-		if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
-			if (mContext.getPlayer().getAlive() == 0) {
-				crash();
-
-			}
-		}
+		contact();
 	} // end of left
 
 	@Override
@@ -279,12 +281,7 @@ public class Enemy extends JLabel implements Moveable {
 			attack();
 		}).start();
 		right = false;
-		if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
-			if (mContext.getPlayer().getAlive() == 0) {
-				crash();
-
-			}
-		}
+		contact();
 	} // end of right
 
 	// up 메서드는 아래 벽과 충돌했거나, 플레이어보다 적군이 아래쪽에 있을 때만 실행
@@ -310,40 +307,30 @@ public class Enemy extends JLabel implements Moveable {
 			attack();
 			up = false;
 		}).start();
-		if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
-			if (mContext.getPlayer().getAlive() == 0) {
-				crash();
-
-			}
-		}
+		contact();
 	}
 
 	@Override
 	public void down() {
 		new Thread(() -> {
 			down = true;
-			for (int i = 0; i < 20; i++) {
+			while(down) {
 				// 적군이 죽었거나, 아래쪽 벽에 부딪치면 중단
 				if (alive == 1 || down == false) {
 					return;
 				}
 				y = y + SPEED;
 				setLocation(x, y);
+				contact();
 
 				try {
-					Thread.sleep(10);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
 			down = false;
 		}).start();
-		if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
-			if (mContext.getPlayer().getAlive() == 0) {
-				crash();
-
-			}
-		}
 	} // end of down
 
 	public void crash() {
@@ -369,5 +356,41 @@ public class Enemy extends JLabel implements Moveable {
 //		setIcon(boom);
 		setLocation(x, y);
 	}
+	
+	
+	// 적군과 플레이어가 접촉하면 플레이어의 목숨이 하나 감소함
+	public void contact() {
+//		if (mContext.getEnemy() instanceof EnemyUnit1 && mContext.getPlayer().getAlive() == 0) {
+//			if (Math.abs((x + 220) - mContext.getPlayer().getX()) < 200 && Math.abs((y + 50) - mContext.getPlayer().getY()) < 40) {
+//				crash();
+//			}
+			
+//		} else if (mContext.getEnemy() instanceof EnemyUnit2 && mContext.getPlayer().getAlive() == 0) {
+//			if (Math.abs(x - (mContext.getPlayer().getX())) < 30 && Math.abs((y + 10) - mContext.getPlayer().getY()) < 20) {
+//				crash();
+//			}
+		
+//		} else if (mContext.getEnemy() instanceof EnemyUnit3 && mContext.getPlayer().getAlive() == 0) {
+//			if (Math.abs((x + 100) - mContext.getPlayer().getX()) < 100 && Math.abs((y + 40) - mContext.getPlayer().getY()) < 40) {
+//				crash();
+//			}
+			
+//		} else if (mContext.getEnemy() instanceof EnemyUnit4 && mContext.getPlayer().getAlive() == 0) {
+//			if (Math.abs(x - mContext.getPlayer().getX()) < 40 && Math.abs((y + 25) - mContext.getPlayer().getY()) < 30) {
+//				crash();
+//			}
+			
+//		}
+		
+		
+		// 기존 버전
+		if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
+			if (mContext.getPlayer().getAlive() == 0) {
+				crash();
+			}
+		}
+	} // end of method
+	
+	
 
 } // end of class

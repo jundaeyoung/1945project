@@ -47,7 +47,7 @@ public class EnemyTestFrame extends JFrame {
 //		// 1개의 enemyUnit3 생성
 //		unit3OneMove();
 
-		delay = 3000L;
+		delay = 1000L;
 		TimerTask task1 = new TimerTask() {
 			@Override
 			public void run() {
@@ -67,7 +67,7 @@ public class EnemyTestFrame extends JFrame {
 			@Override
 			public void run() {
 				// 4개의 enemyUnit4 생성
-//				unit4ArrayMove();
+				unit4ArrayMove();
 				
 			}
 		};
