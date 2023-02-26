@@ -10,9 +10,8 @@ public class Bullet extends JLabel implements Moveable {
 
 	private boolean up;
 
-	// 적군 점수
+	// 메인 프레임의 score에 추가될 점수
 	private int score;
-	protected int point;
 
 	private int state;
 	private ImageIcon bullet;
@@ -25,8 +24,6 @@ public class Bullet extends JLabel implements Moveable {
 	private Item item;
 	private Enemy targetEnemy;
 
-	
-	
 	public int getScore() {
 		return score;
 	}
@@ -55,7 +52,7 @@ public class Bullet extends JLabel implements Moveable {
 		bullet = new ImageIcon("imagesProject/PlayerBullet1.png");
 		boom = new ImageIcon("imagesProject/explosion.gif");
 		state = 0;
-		score=0;
+		score = 0;
 		up = false;
 	}
 
@@ -89,8 +86,13 @@ public class Bullet extends JLabel implements Moveable {
 			targetEnemy.setAlive(1);
 			mContext.remove(targetEnemy);
 			System.out.println("적군 사망");
+			
+			// 확률에 따라 아이템 생성됨
 			item();
-			score += targetEnemy.getPoint();
+			
+			// 점수 : 현재 점수 + 잡은 유닛의 점수
+			score = mContext.getScore() + targetEnemy.getPoint();
+			mContext.setScore(targetEnemy.getPoint());
 			System.out.println("score : " + score);
 		}
 
@@ -137,7 +139,6 @@ public class Bullet extends JLabel implements Moveable {
 						enemy.beattacked();
 						targetEnemy = enemy;
 						if (this.state == 0) {
-							mContext.setScore(targetEnemy.getPoint());
 
 							crash();
 							setIcon(boom);
@@ -149,7 +150,6 @@ public class Bullet extends JLabel implements Moveable {
 						enemy.beattacked();
 						targetEnemy = enemy;
 						if (this.state == 0) {
-							mContext.setScore(targetEnemy.getPoint());
 
 							crash();
 							setIcon(boom);
@@ -161,7 +161,6 @@ public class Bullet extends JLabel implements Moveable {
 						enemy.beattacked();
 						targetEnemy = enemy;
 						if (this.state == 0) {
-							mContext.setScore(targetEnemy.getPoint());
 
 							crash();
 							setIcon(boom);
@@ -173,7 +172,6 @@ public class Bullet extends JLabel implements Moveable {
 						enemy.beattacked();
 						targetEnemy = enemy;
 						if (this.state == 0) {
-							mContext.setScore(targetEnemy.getPoint());
 
 							crash();
 							setIcon(boom);

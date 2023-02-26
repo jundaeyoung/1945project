@@ -2,16 +2,11 @@ package project_list;
 
 import java.awt.Color;
 import java.awt.Font;
-<<<<<<< HEAD
 import java.awt.Graphics;
-=======
-import java.awt.Graphics; 
->>>>>>> 2aa3ed2d41fed2db25f71ed0bfe729ffe403a578
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -57,11 +52,7 @@ public class AirplaneFrame extends JFrame {
 	// 점수
 	private Score scoreTitle;
 	private int score;
-
-	// 점수
-	private Score scoreTitle;
-	private int score;
-
+	
 	// 게임 종료 여부 : 객체 생성하지 않고 사용 가능하게 (0 : 실행, 1 : 종료)
 	private static int gameState = 0;
 
@@ -87,23 +78,6 @@ public class AirplaneFrame extends JFrame {
 	public void setBullet(Bullet bullet) {
 		this.bullet = bullet;
 	}
-	
-
-
-
-
-	
-	public int getScore() {
-		return score;
-	}
-
-
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
-
 
 	public EnemyBullet getEnemyBullet() {
 		return enemyBullet;
@@ -342,7 +316,7 @@ public class AirplaneFrame extends JFrame {
 		// 초기 x 위치는 랜덤
 		Random random = new Random();
 		targetEnemy.setX(random.nextInt(500) + 50);
-		targetEnemy.setY(200);
+		targetEnemy.setY(10);
 		targetEnemy.setLocation(targetEnemy.getX(), targetEnemy.getY());
 
 		// 추가
@@ -352,13 +326,8 @@ public class AirplaneFrame extends JFrame {
 		new Thread(new BackgroundEnemyService(targetEnemy)).start();
 
 		// 랜덤한 방향으로 이동
-<<<<<<< HEAD
-//		targetEnemy.randomDirection();
-		targetEnemy.attack(targetEnemy.getAttackSpeed());
-=======
 		targetEnemy.randomDirection();
-		targetEnemy.attack();
->>>>>>> 2aa3ed2d41fed2db25f71ed0bfe729ffe403a578
+		targetEnemy.attack(targetEnemy.getAttackSpeed());
 	}
 
 	// 유닛4 배열을 소환하는 메서드
@@ -493,17 +462,10 @@ public class AirplaneFrame extends JFrame {
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			g.drawImage(backImg, -10, backY, 950, 18327, this);
-<<<<<<< HEAD
 			g.setColor(new Color(255, 255, 255));
 			g.setFont(new Font(null, 30, 30));
 			g.drawString("SCORE : ", 380, 45);
 			g.drawString(Integer.toString(mContext.getScore()), 530, 45);
-=======
-			g.setColor(new Color(255,255,255));
-			g.setFont(new Font(null, 30, 30));
-			g.drawString("SCORE : ", 400, 30);
-			g.drawString(Integer.toString(mContext.getScore()), 550, 30);
->>>>>>> 2aa3ed2d41fed2db25f71ed0bfe729ffe403a578
 
 			life0.setLocation(20, 10);
 			life1.setLocation(60, 10);
