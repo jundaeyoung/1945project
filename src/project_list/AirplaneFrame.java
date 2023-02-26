@@ -263,7 +263,7 @@ public class AirplaneFrame extends JFrame {
 
 	// 적군 소환 흐름 1
 	public void createEnemy() {
-		unit4ArrayMove();
+//		unit4ArrayMove();
 
 		Timer timer = new Timer();
 		long delay;
@@ -347,6 +347,7 @@ public class AirplaneFrame extends JFrame {
 		// 아래로만 움직임
 		for (int i = index1; i <= index2; i++) {
 			enemyList.get(i).down(enemyList.get(i).getSpeed());
+			enemyList.get(i).attack();
 		}
 	}
 
@@ -387,7 +388,9 @@ public class AirplaneFrame extends JFrame {
 
 		// 아래로만 움직임
 		for (int i = index1; i <= index2; i++) {
-			enemyList.get(i).down(enemyList.get(i).getSpeed());
+//			enemyList.get(i).down(enemyList.get(i).getSpeed());
+			enemyList.get(i).attack();
+			
 		}
 
 	}

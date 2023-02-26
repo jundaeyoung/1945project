@@ -29,7 +29,7 @@ public class BackgroundPlayerService implements Runnable {
 		while (true) {
 			Color leftColor = new Color(image.getRGB(player.getX() - 20, player.getY()));
 			Color rightColor = new Color(image.getRGB(player.getX() + 40, player.getY()));
-			Color bottomColor = new Color(image.getRGB(player.getX() - 20, player.getY() + 60));
+			Color bottomColor = new Color(image.getRGB(player.getX(), player.getY() + 60));
 			Color highColor = new Color(image.getRGB(player.getX() + 40, player.getY()));
 
 			if (leftColor.getRed() == 255 && leftColor.getGreen() == 0 && leftColor.getBlue() == 0

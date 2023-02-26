@@ -43,7 +43,6 @@ public class Enemy extends JLabel implements Moveable {
 	protected boolean rightWallCrash;
 	protected boolean downWallCrash;
 
-	// 아예 자신의 순서를 자기가 가지고 있는 게 더 편할 거 같아서 이 방법으로 바꿔봄
 	protected static int enemyCount; // 생성된 적군의 총 숫자
 	protected int myIndex; // 자신이 생성된 순서
 
@@ -88,7 +87,7 @@ public class Enemy extends JLabel implements Moveable {
 //					}
 					down(speed);
 				}
-
+				
 				try {
 					Thread.sleep(600);
 				} catch (InterruptedException e) {
@@ -194,7 +193,7 @@ public class Enemy extends JLabel implements Moveable {
 		new Thread(() -> {
 			down = true;
 			while (down) {
-				// 적군이 죽었거나, 아래쪽 벽에 부딪치면 중단
+				// 적군이 죽으면 중단
 				if (alive == 1) {
 					return;
 				}
@@ -214,7 +213,6 @@ public class Enemy extends JLabel implements Moveable {
 					setIcon(null);
 				}
 			}
-			attack();
 //			down = false;
 		}).start();
 	} // end of down
@@ -340,8 +338,19 @@ public class Enemy extends JLabel implements Moveable {
 	public void attack() {
 		// 게임 중일 때만 공격함
 		if (mContext.getGameState() == 1) {
-			EnemyBullet enemyBullet = new EnemyBullet(mContext, myIndex);
-			mContext.add(enemyBullet);
+			new Thread(() -> {
+				while (alive == 0) {
+					EnemyBullet enemyBullet = new EnemyBullet(mContext, myIndex);
+					mContext.add(enemyBullet);
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}).start();
 		}
 	}
 

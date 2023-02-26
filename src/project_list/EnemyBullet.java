@@ -22,7 +22,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 
 	private AirplaneFrame mContext;
 	private BackgroundEnemyBulletService backgroundenemyBulletService;
-	
+
 	private Enemy targetEnemy;
 
 	public ImageIcon getEnemyBullet() {
@@ -54,24 +54,24 @@ public class EnemyBullet extends JLabel implements Moveable {
 	}
 
 	public void setInitLayout() {
-		
+
 		// + 수정 : 자료형에 따라 보정 (발사 위치)
 		if (targetEnemy instanceof EnemyUnit1) {
 			x = targetEnemy.getX() + 240;
 			y = targetEnemy.getY() + 80;
-			
+
 		} else if (targetEnemy instanceof EnemyUnit2) {
 			x = targetEnemy.getX() + 10;
 			y = targetEnemy.getY() + 10;
-			
+
 		} else if (targetEnemy instanceof EnemyUnit3) {
 			x = targetEnemy.getX() + 107;
 			y = targetEnemy.getY() + 80;
-			
+
 		} else if (targetEnemy instanceof EnemyUnit4) {
 			x = targetEnemy.getX() + 43;
 			y = targetEnemy.getY() + 24;
-			
+
 		}
 
 	}
@@ -91,7 +91,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 			attackCount--;
 			mContext.getPlayer().beAttack();
 			System.out.println("공격?");
-//			setIcon(null);
+			setIcon(null);
 			if (mContext.getPlayer().getLife() == 0) {
 				setIcon(boom);
 				state = 1;
@@ -124,7 +124,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 			setLocation(x, y);
 			if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
 				if (mContext.getPlayer().getAlive() == 0) {
-				crash();
+					crash();
 				}
 			}
 			try {
