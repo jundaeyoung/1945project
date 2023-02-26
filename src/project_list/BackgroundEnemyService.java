@@ -43,22 +43,22 @@ public class BackgroundEnemyService implements Runnable {
 			if (enemy instanceof EnemyUnit1) {
 				leftColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY()));
 				rightColor = new Color(image.getRGB(enemy.getX() + 440, enemy.getY()));
-				bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 130));
+				bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 110));
 				
 			} else if (enemy instanceof EnemyUnit2) {
 				leftColor = new Color(image.getRGB(enemy.getX() - 20, enemy.getY()));
 				rightColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY()));
-				bottomColor = new Color(image.getRGB(enemy.getX() -20, enemy.getY() + 30));
+				bottomColor = new Color(image.getRGB(enemy.getX() -20, enemy.getY() + 10));
 			
 			} else if (enemy instanceof EnemyUnit3) {
 				leftColor = new Color(image.getRGB(enemy.getX() - 8, enemy.getY()));
 				rightColor = new Color(image.getRGB(enemy.getX() + 200, enemy.getY()));
-				bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 150));
+				bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 130));
 				
 			} else if (enemy instanceof EnemyUnit4) {
 				leftColor = new Color(image.getRGB(enemy.getX() - 20, enemy.getY()));
 				rightColor = new Color(image.getRGB(enemy.getX() + 55, enemy.getY()));
-				bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 70));
+				bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 50));
 				
 			}
 		
@@ -73,7 +73,6 @@ public class BackgroundEnemyService implements Runnable {
 				enemy.setRightWallCrash(true);
 			} else if (bottomColor.getRed() == 255 && bottomColor.getGreen() == 0 && bottomColor.getBlue() == 0) {
 //				System.out.println("현재 상태는 바닥벽에 충돌했어요");
-				enemy.setDown(false);
 				enemy.setDownWallCrash(true);
 			} else {
 				enemy.setLeftWallCrash(false);

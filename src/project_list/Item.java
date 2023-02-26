@@ -70,6 +70,9 @@ public class Item extends JLabel implements Moveable {
 		
 		initData();
 		setInitLayout();
+		
+		// 유닛별로 아이템 위치 보정해야 함
+		
 		itemX = targetEnemy.getX();
 		itemY = targetEnemy.getY();
 

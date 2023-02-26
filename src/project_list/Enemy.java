@@ -22,7 +22,7 @@ public class Enemy extends JLabel implements Moveable {
 	// 적군 생명력
 	protected int hp;
 
-	// 생존 여부 (살아 있음 : 0, 죽음 : 1)
+	// 생존 여부 (살아 있음 : 0, 죽음 : 1, 범위 벗어나서 사라짐 : 2)
 	protected int alive;
 
 	// 이미지 -> 생성자에서 초기화
@@ -57,11 +57,6 @@ public class Enemy extends JLabel implements Moveable {
 		new Thread(() -> {
 			// enemy가 살아있는 동안
 			while (alive == 0) {
-
-				// 아래쪽 벽에 충돌하면 up()
-				if (downWallCrash == true) {
-					up(speed);
-				}
 
 				// 이동 방향을 랜덤으로 선택함
 				int randomDirection = random.nextInt(2); // 0 또는 1 생성
@@ -171,28 +166,28 @@ public class Enemy extends JLabel implements Moveable {
 		}).start();
 	} // end of right
 
-	// up 메서드는 아래 벽과 충돌했을 때만 실행
-	@Override
-	public void up(int speed) {
-		new Thread(() -> {
-			up = true;
-			for (int i = 0; i < (400 / speed); i++) {
-				// 적군이 죽었거나, 위쪽 벽에 부딪치면 중단
-				if (alive == 1 || up == false) {
-					return;
-				}
-				y = y - speed;
-				setLocation(x, y);
-
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			up = false;
-		}).start();
-	}
+//	// up 메서드는 아래 벽과 충돌했을 때만 실행
+//	@Override
+//	public void up(int speed) {
+//		new Thread(() -> {
+//			up = true;
+//			for (int i = 0; i < (400 / speed); i++) {
+//				// 적군이 죽었거나, 위쪽 벽에 부딪치면 중단
+//				if (alive == 1 || up == false) {
+//					return;
+//				}
+//				y = y - speed;
+//				setLocation(x, y);
+//
+//				try {
+//					Thread.sleep(10);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//			up = false;
+//		}).start();
+//	}
 
 	@Override
 	public void down(int speed) {
@@ -212,11 +207,15 @@ public class Enemy extends JLabel implements Moveable {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				if (downWallCrash == true) {
+					alive = 2;
+				}
+				if (y == 950) {
+					setIcon(null);
+				}
 			}
 			attack();
-			down = false;
-			
-			
+//			down = false;
 		}).start();
 	} // end of down
 
@@ -305,14 +304,6 @@ public class Enemy extends JLabel implements Moveable {
 	public void setRightWallCrash(boolean rightWallCrash) {
 		this.rightWallCrash = rightWallCrash;
 	}
-
-	public boolean isDownWallCrash() {
-		return downWallCrash;
-	}
-
-	public void setDownWallCrash(boolean downWallCrash) {
-		this.downWallCrash = downWallCrash;
-	}
 	
 	public int getMyIndex() {
 		return myIndex;
@@ -321,8 +312,14 @@ public class Enemy extends JLabel implements Moveable {
 	public void setMyIndex(int myIndex) {
 		this.myIndex = myIndex;
 	}
-	
-	
+
+	public boolean isDownWallCrash() {
+		return downWallCrash;
+	}
+
+	public void setDownWallCrash(boolean downWallCrash) {
+		this.downWallCrash = downWallCrash;
+	}
 
 	public int getHp() {
 		return hp;

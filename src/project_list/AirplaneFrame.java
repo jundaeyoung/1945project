@@ -33,21 +33,20 @@ public class AirplaneFrame extends JFrame {
 	private Player player;
 	private EnemyBullet enemyBullet;
 //	private Item item;
-	
+
 	// 적군 관련
 	// 이 두 변수 외에 enemy 관련 다른 변수는 선언하지 않아도 됨
 	// 생성된 적군 객체들을 담을 리스트
 	// 생성될 때마다 순서대로 리스트에 담김
 	ArrayList<Enemy> enemyList = new ArrayList<>();
-	
+
 	ArrayList<Item> itemList = new ArrayList<>();
-	
-	
+
 	// 플레이어 목숨 개수 아이콘
 	private Life life0;
 	private Life life1;
 	private Life life2;
- 
+
 	// 게임 종료 여부 : 객체 생성하지 않고 사용 가능하게 (0 : 실행, 1 : 종료)
 	private static int gameState = 0;
 
@@ -59,7 +58,6 @@ public class AirplaneFrame extends JFrame {
 //		mContext.getItem().setDown(false);
 
 		new Thread(new BackgroundPlayerService(player)).start();
-		
 
 	} // end of 생성자
 
@@ -74,7 +72,7 @@ public class AirplaneFrame extends JFrame {
 	public static int getGameState() {
 		return gameState;
 	}
-	
+
 	public static void setGameState(int gameState) {
 		AirplaneFrame.gameState = gameState;
 	}
@@ -134,7 +132,7 @@ public class AirplaneFrame extends JFrame {
 	public void setEnemyList(ArrayList<Enemy> enemyList) {
 		this.enemyList = enemyList;
 	}
-	
+
 	// 생성자 메서드 1
 	private void initData() {
 		gameStart = new JLabel(new ImageIcon("imagesProject/GameTitle.gif"));
@@ -258,17 +256,18 @@ public class AirplaneFrame extends JFrame {
 			}
 
 		});
+		
+		
 
 	}
 
 	// 적군 소환 흐름 1
 	public void createEnemy() {
-//		unit4ArrayMove();
-		
-		
+		unit4ArrayMove();
+
 		Timer timer = new Timer();
 		long delay;
-		
+
 		delay = 1000L;
 		TimerTask task1 = new TimerTask() {
 			@Override
@@ -279,74 +278,72 @@ public class AirplaneFrame extends JFrame {
 		timer.schedule(task1, delay);
 	}
 
-
 	// 유닛3 하나를 소환하는 메서드
 	public void unit3OneMove() {
 		int index1 = enemyList.size();
-		
+
 		int enemyCount = 1;
 		int index2 = index1 + (enemyCount - 1);
 
 		// 객체 생성 및 리스트에 추가
 		enemyList.add(new EnemyUnit3(mContext));
-		
+
 		// 알아보기 쉽게 변수로 선언
 		Enemy targetEnemy = enemyList.get(index1);
-		
+
 		// 초기 x 위치는 랜덤
 		Random random = new Random();
-		targetEnemy.setX(random.nextInt(700) + 50);
-		targetEnemy.setY(10);
+		targetEnemy.setX(random.nextInt(500) + 50);
+		targetEnemy.setY(40);
 		targetEnemy.setLocation(targetEnemy.getX(), targetEnemy.getY());
-		
+
 		// 추가
 		mContext.add(targetEnemy);
-		
+
 		// 백그라운드 서비스 적용
 		new Thread(new BackgroundEnemyService(targetEnemy)).start();
-		
+
 		// 랜덤한 방향으로 이동
 		targetEnemy.randomDirection();
 	}
-	
+
 	// 유닛4 배열을 소환하는 메서드
 	public void unit4ArrayMove() {
-		// 먼저, 해당 적군 소환 메서드가 인덱스 몇 번부터 몇 번까지의 적군을 다루는 것인지 맵에 저장하기 위해
 		// 적군 객체를 담기 전에 지금 리스트의 사이즈를 확인함
 		// (사이즈 == 0이면 인덱스 0번부터 객체가 추가될 것이고, 사이즈 == 1이면 인덱스 1번부터 객체가 추가될 것임)
 		int index1 = enemyList.size();
-		
+
 		// 소환할 객체 수 지정
 		int enemyCount = 4;
 		int index2 = index1 + (enemyCount - 1);
-		
+
 		// x 위치를 배열 값으로 지정해두기
 		int[] intArrX = { 110, 310, 510, 710 };
 
 		for (int i = index1; i <= index2; i++) {
 			// 인스턴스화 및 리스트에 추가
 			enemyList.add(new EnemyUnit4(mContext));
-			
+
 			// 알아보기 쉽게 변수로 선언
 			Enemy targetEnemy = enemyList.get(i);
-			
+
 			// x 값 세팅
 			targetEnemy.setX(intArrX[i]);
-			
+
 			// y 값 세팅 (모두 동일하게)
 			targetEnemy.setY(80);
-			
+
 			// 위치 시키기
 			targetEnemy.setLocation(targetEnemy.getX(), targetEnemy.getY());
-			
+
 			// 추가
 			mContext.add(targetEnemy);
-			
+
 			// 백그라운드 서비스 적용
 			new Thread(new BackgroundEnemyService(targetEnemy)).start();
 
 		}
-		
+
 		// 아래로만 움직임
 		for (int i = index1; i <= index2; i++) {
 			enemyList.get(i).down(enemyList.get(i).getSpeed());
@@ -356,24 +353,24 @@ public class AirplaneFrame extends JFrame {
 	// 유닛3 배열을 소환하는 메서드
 	public void unit3ArrayMove() {
 		int index1 = enemyList.size();
-		
+
 		// 소환할 객체 수 지정
 		int enemyCount = 3;
 		int index2 = index1 + (enemyCount - 1);
-		
+
 		// x 위치를 배열 값으로 지정해두기
-		int[] intArrX = {200, 500, 350};
+		int[] intArrX = { 200, 500, 350 };
 
 		// y 위치를 배열 값으로 지정해두기
-		int[] intArrY = {150, 150, 50};
+		int[] intArrY = { 150, 150, 50 };
 
 		for (int i = index1; i <= index2; i++) {
 			// 인스턴스화 및 리스트에 추가
 			enemyList.add(new EnemyUnit3(mContext));
-			
+
 			// 알아보기 쉽게 변수로 선언
 			Enemy targetEnemy = enemyList.get(i);
-			
+
 			// x 값 세팅
 			targetEnemy.setX(intArrX[i]);
 			// y 값 세팅 (모두 동일하게)
@@ -382,39 +379,19 @@ public class AirplaneFrame extends JFrame {
 			targetEnemy.setLocation(targetEnemy.getX(), targetEnemy.getY());
 			// 추가
 			mContext.add(targetEnemy);
-			
+
 			// 백그라운드 서비스 적용
 			new Thread(new BackgroundEnemyService(targetEnemy)).start();
-			
+
 		}
-		
+
 		// 아래로만 움직임
-		new Thread(() -> {
-			while (true) {
-				for (int i = index1; i <= index2; i++) {
-					// 살아 있다면
-					if (enemyList.get(i).getAlive() == 0) {
-						enemyList.get(i).down(enemyList.get(i).getSpeed());
-						if (enemyList.get(i).downWallCrash == true) {
-							enemyList.get(i).up(enemyList.get(i).getSpeed());
-						}	
-					}
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			}			
-		}).start();
-		
+		for (int i = index1; i <= index2; i++) {
+			enemyList.get(i).down(enemyList.get(i).getSpeed());
+		}
+
 	}
-	
-	
-	
-	
-	
+
 	// 배경
 	class MyPanel extends JPanel {
 		public MyPanel() {
@@ -439,7 +416,6 @@ public class AirplaneFrame extends JFrame {
 			}).start();
 
 		}
-		
 
 		@Override
 		protected void paintComponent(Graphics g) {
@@ -452,9 +428,9 @@ public class AirplaneFrame extends JFrame {
 
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new AirplaneFrame();
-		
+
 	}
 }
