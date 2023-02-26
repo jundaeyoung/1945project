@@ -29,7 +29,7 @@ public class BackgroundEnemyService implements Runnable {
 	// 위쪽 벽은 확인할 필요가 없어 삭제함
 	
 	// + 수정 : if문에 따라 보정 값을 조정했더니, 충돌 여부 확인하는 부분에서 해당 변수를 인식하지 못해서
-	// 지역 변수 대신 멤벼 변수로 바꿈
+	// 지역 변수 대신 멤버 변수로 바꿈
 	
 	@Override
 	public void run() {
@@ -43,7 +43,7 @@ public class BackgroundEnemyService implements Runnable {
 			if (enemy instanceof EnemyUnit1) {
 				leftColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY()));
 				rightColor = new Color(image.getRGB(enemy.getX() + 440, enemy.getY()));
-				bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 110));
+				bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 80));
 				
 			} else if (enemy instanceof EnemyUnit2) {
 				leftColor = new Color(image.getRGB(enemy.getX() - 20, enemy.getY()));

@@ -18,7 +18,9 @@ public class EnemyUnit2 extends Enemy{
 
 	public void initData() {
 		hp = 1;
-		speed = 1;
+		speed = 2;
+		attackSpeed = 2000;
+		point = 100;
 		alive = 0;
 		enemyImage = new ImageIcon("imagesProject/enemy2.png");
 	}

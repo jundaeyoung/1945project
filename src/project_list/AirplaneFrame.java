@@ -1,5 +1,7 @@
 package project_list;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
@@ -46,6 +48,10 @@ public class AirplaneFrame extends JFrame {
 	private Life life0;
 	private Life life1;
 	private Life life2;
+
+	// 점수
+	private Score scoreTitle;
+	private int score;
 
 	// 게임 종료 여부 : 객체 생성하지 않고 사용 가능하게 (0 : 실행, 1 : 종료)
 	private static int gameState = 0;
@@ -133,6 +139,14 @@ public class AirplaneFrame extends JFrame {
 		this.enemyList = enemyList;
 	}
 
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 	// 생성자 메서드 1
 	private void initData() {
 		gameStart = new JLabel(new ImageIcon("imagesProject/GameTitle.gif"));
@@ -158,7 +172,7 @@ public class AirplaneFrame extends JFrame {
 	// 생성자 메서드 2
 	public void setInitLayout() {
 		setLayout(null); // 좌표기반
-		setResizable(false); // 창 크기 조절 기능( 거짓 )
+		setResizable(false); // 창 크기 조절 기능 (불가능)
 		setLocationRelativeTo(null); // JFrame 가운데 배치
 		setVisible(true);
 
@@ -205,9 +219,6 @@ public class AirplaneFrame extends JFrame {
 					if (player.isDown() == false && player.isDownWallCrash() == false) {
 						player.down();
 					}
-					break;
-				case KeyEvent.VK_SPACE:
-
 					break;
 				case KeyEvent.VK_ENTER:
 					gameState = 1;
@@ -256,8 +267,6 @@ public class AirplaneFrame extends JFrame {
 			}
 
 		});
-		
-		
 
 	}
 
@@ -294,7 +303,7 @@ public class AirplaneFrame extends JFrame {
 		// 초기 x 위치는 랜덤
 		Random random = new Random();
 		targetEnemy.setX(random.nextInt(500) + 50);
-		targetEnemy.setY(40);
+		targetEnemy.setY(200);
 		targetEnemy.setLocation(targetEnemy.getX(), targetEnemy.getY());
 
 		// 추가
@@ -304,7 +313,8 @@ public class AirplaneFrame extends JFrame {
 		new Thread(new BackgroundEnemyService(targetEnemy)).start();
 
 		// 랜덤한 방향으로 이동
-		targetEnemy.randomDirection();
+//		targetEnemy.randomDirection();
+		targetEnemy.attack(targetEnemy.getAttackSpeed());
 	}
 
 	// 유닛4 배열을 소환하는 메서드
@@ -317,8 +327,19 @@ public class AirplaneFrame extends JFrame {
 		int enemyCount = 4;
 		int index2 = index1 + (enemyCount - 1);
 
+		Random random = new Random();
+		// 첫 객체의 위치 왼쪽 OR 오른쪽 랜덤
+		int num = random.nextInt(2);
+		int initX;
+
+		if (num == 0) {
+			initX = 50;
+		} else {
+			initX = 550;
+		}
+
 		// x 위치를 배열 값으로 지정해두기
-		int[] intArrX = { 110, 310, 510, 710 };
+		int[] intArrX = { initX, initX += 80, initX += 80, initX += 80 };
 
 		for (int i = index1; i <= index2; i++) {
 			// 인스턴스화 및 리스트에 추가
@@ -341,13 +362,14 @@ public class AirplaneFrame extends JFrame {
 
 			// 백그라운드 서비스 적용
 			new Thread(new BackgroundEnemyService(targetEnemy)).start();
+			targetEnemy.attack(targetEnemy.getAttackSpeed());
 
 		}
 
 		// 아래로만 움직임
 		for (int i = index1; i <= index2; i++) {
 			enemyList.get(i).down(enemyList.get(i).getSpeed());
-			enemyList.get(i).attack();
+
 		}
 	}
 
@@ -388,9 +410,12 @@ public class AirplaneFrame extends JFrame {
 
 		// 아래로만 움직임
 		for (int i = index1; i <= index2; i++) {
-//			enemyList.get(i).down(enemyList.get(i).getSpeed());
-			enemyList.get(i).attack();
-			
+			// 알아보기 쉽게 변수로 선언
+			Enemy targetEnemy = enemyList.get(i);
+
+			targetEnemy.down(targetEnemy.getSpeed());
+			targetEnemy.attack(targetEnemy.getAttackSpeed());
+
 		}
 
 	}
@@ -424,6 +449,11 @@ public class AirplaneFrame extends JFrame {
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			g.drawImage(backImg, -10, backY, 950, 18327, this);
+			g.setColor(new Color(255, 255, 255));
+			g.setFont(new Font(null, 30, 30));
+			g.drawString("SCORE : ", 380, 45);
+			g.drawString(Integer.toString(mContext.getScore()), 530, 45);
+
 			life0.setLocation(20, 10);
 			life1.setLocation(60, 10);
 			life2.setLocation(100, 10);
@@ -436,4 +466,5 @@ public class AirplaneFrame extends JFrame {
 		new AirplaneFrame();
 
 	}
+
 }

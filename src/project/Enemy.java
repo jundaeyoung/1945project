@@ -173,7 +173,7 @@ public class Enemy extends JLabel implements Moveable {
 				}
 
 				// 이동 방향을 랜덤으로 선택함
-				int randomDirection = random.nextInt(2); // 0 또는 1 생성
+				int randomDirection = random.nextInt(3); // 0 or 1 or 2 생성
 
 				// 이동 메서드 안에 적군이 죽으면 중간에 중단하라는 if 문이 있어서
 				// 죽으면 left(), right() 메서드를 빠져나간 뒤 반복이 종료됨
@@ -185,23 +185,18 @@ public class Enemy extends JLabel implements Moveable {
 						continue;
 					}
 					left();
-//					if (downWallCrash == true) {
-//						up();
-//					}
-					down();
 
 					// 값이 1인 경우 오른쪽으로
-				} else {
+				} else if (randomDirection == 1) {
 					// 오른쪽 벽에 부딪친 상태면 right() 실행 X
 					if (rightWallCrash == true) {
 						continue;
 					}
 					right();
-//					if (downWallCrash == true) {
-//						up();
-//					}
+				} else {
 					down();
 				}
+					
 
 				try {
 					Thread.sleep(600);

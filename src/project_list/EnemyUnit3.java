@@ -20,15 +20,11 @@ public class EnemyUnit3 extends Enemy {
 	private void initData() {
 		hp = 2;
 		speed = 2; // 이동속도
+		attackSpeed = 3000;
+		point = 1000;
 		alive = 0; // 살아 있는 상태
 		enemyImage = new ImageIcon("imagesProject/enemy3.png");
 		
-		// 초기 x 위치는 랜덤
-		double randomX = Math.random(); // 0~1 범위의 소수 난수 생성
-		x = (int) ((FRAME_SIZE_X - 200) * randomX);
-
-		// 초기 y 위치는 일단 고정 (임시)
-		y = 80;
 	}
 	
 	private void setInitLayout() {
@@ -37,5 +33,37 @@ public class EnemyUnit3 extends Enemy {
 		setIcon(enemyImage);
 	}
 	
-	
+	@Override
+	public void attack(int attackSpeed) {
+		super.attack(attackSpeed);
+		// 게임 중일 때만 공격함
+		if (mContext.getGameState() == 1) {
+			new Thread(() -> {
+				while (alive == 0) {
+					// 연발 쏘고 3초 쉬기
+					EnemyBullet enemyBullet;
+					
+					for (int i = 0; i < 2; i++) {
+						enemyBullet = new EnemyBullet(mContext, myIndex);
+						mContext.add(enemyBullet);
+						
+						try {
+							Thread.sleep(300);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+					try {
+						Thread.sleep(attackSpeed);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+			}).start();
+		}
+	}
 }

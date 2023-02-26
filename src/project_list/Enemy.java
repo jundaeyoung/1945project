@@ -16,11 +16,16 @@ public class Enemy extends JLabel implements Moveable {
 	// 적군 이동속도 -> 생성자에서 초기화
 	protected int speed;
 
-//	// 적군 공격속도
-//	private int attackSpeed;
-	
+	protected int downSpeed = 1;
+
+	// 적군 공격속도 (attack 메서드의 쓰레드 sleep 값으로 조정)
+	protected int attackSpeed;
+
 	// 적군 생명력
 	protected int hp;
+	
+	// 적군 점수
+	protected int point;
 
 	// 생존 여부 (살아 있음 : 0, 죽음 : 1, 범위 벗어나서 사라짐 : 2)
 	protected int alive;
@@ -58,7 +63,7 @@ public class Enemy extends JLabel implements Moveable {
 			while (alive == 0) {
 
 				// 이동 방향을 랜덤으로 선택함
-				int randomDirection = random.nextInt(2); // 0 또는 1 생성
+				int randomDirection = random.nextInt(3); // 0~2 생성
 
 				// 이동 메서드 안에 적군이 죽으면 중간에 중단하라는 if 문이 있어서
 				// 죽으면 left(), right() 메서드를 빠져나간 뒤 반복이 종료됨
@@ -70,24 +75,20 @@ public class Enemy extends JLabel implements Moveable {
 						continue;
 					}
 					left(speed);
-//					if (downWallCrash == true) {
-//						up();
-//					}
-					down(speed);
 
 					// 값이 1인 경우 오른쪽으로
-				} else {
+				} else if (randomDirection == 1) {
 					// 오른쪽 벽에 부딪친 상태면 right() 실행 X
 					if (rightWallCrash == true) {
 						continue;
 					}
 					right(speed);
-//					if (downWallCrash == true) {
-//						up();
-//					}
+
+					// 그 외의 값은 아래쪽으로
+				} else {
 					down(speed);
 				}
-				
+
 				try {
 					Thread.sleep(600);
 				} catch (InterruptedException e) {
@@ -165,29 +166,6 @@ public class Enemy extends JLabel implements Moveable {
 		}).start();
 	} // end of right
 
-//	// up 메서드는 아래 벽과 충돌했을 때만 실행
-//	@Override
-//	public void up(int speed) {
-//		new Thread(() -> {
-//			up = true;
-//			for (int i = 0; i < (400 / speed); i++) {
-//				// 적군이 죽었거나, 위쪽 벽에 부딪치면 중단
-//				if (alive == 1 || up == false) {
-//					return;
-//				}
-//				y = y - speed;
-//				setLocation(x, y);
-//
-//				try {
-//					Thread.sleep(10);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//			up = false;
-//		}).start();
-//	}
-
 	@Override
 	public void down(int speed) {
 		new Thread(() -> {
@@ -197,12 +175,12 @@ public class Enemy extends JLabel implements Moveable {
 				if (alive == 1) {
 					return;
 				}
-				y = y + speed;
+				y = y + downSpeed;
 				setLocation(x, y);
 
 				contact();
 				try {
-					Thread.sleep(50);
+					Thread.sleep(10);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -217,116 +195,6 @@ public class Enemy extends JLabel implements Moveable {
 		}).start();
 	} // end of down
 
-	@Override
-	public void downLeft() {
-		// TODO Auto-generated method stub
-		Moveable.super.downLeft();
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public int getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(int speed) {
-		this.speed = speed;
-	}
-
-	public int getAlive() {
-		return alive;
-	}
-
-	public void setAlive(int alive) {
-		this.alive = alive;
-	}
-
-	public boolean isLeft() {
-		return left;
-	}
-
-	public void setLeft(boolean left) {
-		this.left = left;
-	}
-
-	public boolean isRight() {
-		return right;
-	}
-
-	public void setRight(boolean right) {
-		this.right = right;
-	}
-
-	public boolean isUp() {
-		return up;
-	}
-
-	public void setUp(boolean up) {
-		this.up = up;
-	}
-
-	public boolean isDown() {
-		return down;
-	}
-
-	public void setDown(boolean down) {
-		this.down = down;
-	}
-
-	public boolean isLeftWallCrash() {
-		return leftWallCrash;
-	}
-
-	public void setLeftWallCrash(boolean leftWallCrash) {
-		this.leftWallCrash = leftWallCrash;
-	}
-
-	public boolean isRightWallCrash() {
-		return rightWallCrash;
-	}
-
-	public void setRightWallCrash(boolean rightWallCrash) {
-		this.rightWallCrash = rightWallCrash;
-	}
-	
-	public int getMyIndex() {
-		return myIndex;
-	}
-
-	public void setMyIndex(int myIndex) {
-		this.myIndex = myIndex;
-	}
-
-	public boolean isDownWallCrash() {
-		return downWallCrash;
-	}
-
-	public void setDownWallCrash(boolean downWallCrash) {
-		this.downWallCrash = downWallCrash;
-	}
-
-	public int getHp() {
-		return hp;
-	}
-
-	public void setHp(int hp) {
-		this.hp = hp;
-	}
-
 	public void crash() {
 		mContext.getPlayer().beAttack();
 
@@ -335,7 +203,7 @@ public class Enemy extends JLabel implements Moveable {
 		}
 	}
 
-	public void attack() {
+	public void attack(int attackSpeed) {
 		// 게임 중일 때만 공격함
 		if (mContext.getGameState() == 1) {
 			new Thread(() -> {
@@ -343,13 +211,12 @@ public class Enemy extends JLabel implements Moveable {
 					EnemyBullet enemyBullet = new EnemyBullet(mContext, myIndex);
 					mContext.add(enemyBullet);
 					try {
-						Thread.sleep(500);
+						Thread.sleep(attackSpeed);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-				
+
 			}).start();
 		}
 	}
@@ -389,4 +256,125 @@ public class Enemy extends JLabel implements Moveable {
 
 	} // end of method
 
+	public int getX() {
+		return x;
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public int getSpeed() {
+		return speed;
+	}
+	
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	
+	public int getAlive() {
+		return alive;
+	}
+	
+	public void setAlive(int alive) {
+		this.alive = alive;
+	}
+	
+	public boolean isLeft() {
+		return left;
+	}
+	
+	public void setLeft(boolean left) {
+		this.left = left;
+	}
+	
+	public boolean isRight() {
+		return right;
+	}
+	
+	public void setRight(boolean right) {
+		this.right = right;
+	}
+	
+	public boolean isUp() {
+		return up;
+	}
+	
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+	
+	public boolean isDown() {
+		return down;
+	}
+	
+	public void setDown(boolean down) {
+		this.down = down;
+	}
+	
+	public boolean isLeftWallCrash() {
+		return leftWallCrash;
+	}
+	
+	public void setLeftWallCrash(boolean leftWallCrash) {
+		this.leftWallCrash = leftWallCrash;
+	}
+	
+	public boolean isRightWallCrash() {
+		return rightWallCrash;
+	}
+	
+	public void setRightWallCrash(boolean rightWallCrash) {
+		this.rightWallCrash = rightWallCrash;
+	}
+	
+	public int getMyIndex() {
+		return myIndex;
+	}
+	
+	public void setMyIndex(int myIndex) {
+		this.myIndex = myIndex;
+	}
+	
+	public boolean isDownWallCrash() {
+		return downWallCrash;
+	}
+	
+	public void setDownWallCrash(boolean downWallCrash) {
+		this.downWallCrash = downWallCrash;
+	}
+	
+	public int getHp() {
+		return hp;
+	}
+	
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+	
+	public int getAttackSpeed() {
+		return attackSpeed;
+	}
+	
+	public void setAttackSpeed(int attackSpeed) {
+		this.attackSpeed = attackSpeed;
+	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+	
+	
 } // end of class

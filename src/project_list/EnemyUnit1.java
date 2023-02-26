@@ -17,8 +17,10 @@ public class EnemyUnit1 extends Enemy {
 	}
 
 	public void initData() {
-		hp = 4;
+		hp = 5;
 		speed = 1;
+		attackSpeed = 5000;
+		point = 2000;
 		alive = 0;
 		enemyImage = new ImageIcon("imagesProject/enemy1.png");
 	}
@@ -48,4 +50,6 @@ public class EnemyUnit1 extends Enemy {
 		}).start();
 	}
 
+
+	
 }

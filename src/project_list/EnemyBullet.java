@@ -3,9 +3,6 @@ package project_list;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 public class EnemyBullet extends JLabel implements Moveable {
 
 	private int x;
@@ -50,6 +47,8 @@ public class EnemyBullet extends JLabel implements Moveable {
 		// 1로 계속 초기화
 		attackCount = 1;
 		mContext.getPlayer().setIcon(player);
+		setIcon(enemyBullet);
+		setSize(100, 100);
 
 	}
 
@@ -73,6 +72,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 			y = targetEnemy.getY() + 24;
 
 		}
+		
 
 	}
 
@@ -122,7 +122,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 		while (true) {
 			y++;
 			setLocation(x, y);
-			if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 50) {
+			if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 40) {
 				if (mContext.getPlayer().getAlive() == 0) {
 					crash();
 				}
