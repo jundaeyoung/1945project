@@ -308,7 +308,7 @@ public class AirplaneFrame extends JFrame {
 		int index2 = index1 + (enemyCount - 1);
 
 		// 객체 생성 및 리스트에 추가
-		enemyList.add(new EnemyUnit4(mContext));
+		enemyList.add(new EnemyUnit3(mContext));
 
 		// 알아보기 쉽게 변수로 선언
 		Enemy targetEnemy = enemyList.get(index1);
