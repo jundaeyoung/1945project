@@ -50,6 +50,8 @@ public class EnemyBullet extends JLabel implements Moveable {
 		// 1로 계속 초기화
 		attackCount = 1;
 		mContext.getPlayer().setIcon(player);
+		setIcon(enemyBullet);
+		setSize(100, 100);
 
 	}
 
@@ -59,19 +61,22 @@ public class EnemyBullet extends JLabel implements Moveable {
 		if (targetEnemy instanceof EnemyUnit1) {
 			x = targetEnemy.getX() + 240;
 			y = targetEnemy.getY() + 80;
+		
 
 		} else if (targetEnemy instanceof EnemyUnit2) {
 			x = targetEnemy.getX() + 10;
 			y = targetEnemy.getY() + 10;
+	
 
 		} else if (targetEnemy instanceof EnemyUnit3) {
 			x = targetEnemy.getX() + 107;
 			y = targetEnemy.getY() + 80;
+		
 
 		} else if (targetEnemy instanceof EnemyUnit4) {
 			x = targetEnemy.getX() + 43;
 			y = targetEnemy.getY() + 24;
-
+		
 		}
 
 	}

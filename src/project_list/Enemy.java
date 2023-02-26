@@ -15,7 +15,10 @@ public class Enemy extends JLabel implements Moveable {
 
 	// 적군 이동속도 -> 생성자에서 초기화
 	protected int speed;
-
+	
+	// 적군 점수
+	protected int point;
+	
 //	// 적군 공격속도
 //	private int attackSpeed;
 	
@@ -222,6 +225,13 @@ public class Enemy extends JLabel implements Moveable {
 		// TODO Auto-generated method stub
 		Moveable.super.downLeft();
 	}
+	
+	
+
+	public int getPoint() {
+		return point;
+	}
+
 
 	public int getX() {
 		return x;
@@ -357,6 +367,7 @@ public class Enemy extends JLabel implements Moveable {
 	public void beattacked() {
 //		setIcon(boom);
 		setLocation(x, y);
+		
 	}
 
 	// 적군과 플레이어가 접촉하면 플레이어의 목숨이 하나 감소함

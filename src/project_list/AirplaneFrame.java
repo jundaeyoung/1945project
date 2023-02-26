@@ -1,6 +1,8 @@
 package project_list;
 
-import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics; 
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -32,6 +34,7 @@ public class AirplaneFrame extends JFrame {
 	private Time time;
 	private Player player;
 	private EnemyBullet enemyBullet;
+	private Bullet bullet;
 //	private Item item;
 
 	// 적군 관련
@@ -46,6 +49,10 @@ public class AirplaneFrame extends JFrame {
 	private Life life0;
 	private Life life1;
 	private Life life2;
+	
+	// 점수
+	private Score scoreTitle;
+	private int score;
 
 	// 게임 종료 여부 : 객체 생성하지 않고 사용 가능하게 (0 : 실행, 1 : 종료)
 	private static int gameState = 0;
@@ -60,6 +67,35 @@ public class AirplaneFrame extends JFrame {
 		new Thread(new BackgroundPlayerService(player)).start();
 
 	} // end of 생성자
+
+	
+	
+	public Bullet getBullet() {
+		return bullet;
+	}
+
+
+
+	public void setBullet(Bullet bullet) {
+		this.bullet = bullet;
+	}
+	
+
+
+
+
+	
+	public int getScore() {
+		return score;
+	}
+
+
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+
 
 	public EnemyBullet getEnemyBullet() {
 		return enemyBullet;
@@ -166,6 +202,7 @@ public class AirplaneFrame extends JFrame {
 			setContentPane(gameStart);
 		} else {
 			setContentPane(new MyPanel());
+//			setContentPane(backgroundMap);
 			add(player);
 			add(life0);
 			add(life1);
@@ -305,6 +342,7 @@ public class AirplaneFrame extends JFrame {
 
 		// 랜덤한 방향으로 이동
 		targetEnemy.randomDirection();
+		targetEnemy.attack();
 	}
 
 	// 유닛4 배열을 소환하는 메서드
@@ -424,6 +462,11 @@ public class AirplaneFrame extends JFrame {
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			g.drawImage(backImg, -10, backY, 950, 18327, this);
+			g.setColor(new Color(255,255,255));
+			g.setFont(new Font(null, 30, 30));
+			g.drawString("SCORE : ", 400, 30);
+			g.drawString(Integer.toString(mContext.getScore()), 550, 30);
+
 			life0.setLocation(20, 10);
 			life1.setLocation(60, 10);
 			life2.setLocation(100, 10);

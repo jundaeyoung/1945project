@@ -10,6 +10,10 @@ public class Bullet extends JLabel implements Moveable {
 
 	private boolean up;
 
+	// 적군 점수
+	private int score;
+	protected int point;
+
 	private int state;
 	private ImageIcon bullet;
 	private ImageIcon boom;
@@ -20,6 +24,16 @@ public class Bullet extends JLabel implements Moveable {
 
 	private Item item;
 	private Enemy targetEnemy;
+
+	
+	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
 
 	public int getState() {
 		return state;
@@ -41,6 +55,7 @@ public class Bullet extends JLabel implements Moveable {
 		bullet = new ImageIcon("imagesProject/PlayerBullet1.png");
 		boom = new ImageIcon("imagesProject/explosion.gif");
 		state = 0;
+		score=0;
 		up = false;
 	}
 
@@ -61,22 +76,24 @@ public class Bullet extends JLabel implements Moveable {
 	}
 
 	public void crash() {
-		
+
 		// 한 대 맞으면 Hp 1 감소
 		targetEnemy.setHp(targetEnemy.getHp() - 1);
 		// 총알이 사라진 상태
 		state = 1;
 		System.out.println("적군 피격");
 		setIcon(null);
-		
+
 		// Hp가 0이 된다면
 		if (targetEnemy.getHp() == 0) {
 			targetEnemy.setAlive(1);
 			mContext.remove(targetEnemy);
 			System.out.println("적군 사망");
 			item();
+			score += targetEnemy.getPoint();
+			System.out.println("score : " + score);
 		}
-		
+
 //		System.out.println("");
 //		setIcon(boom);
 //		mContext.getItem().setDown(true);
@@ -120,6 +137,8 @@ public class Bullet extends JLabel implements Moveable {
 						enemy.beattacked();
 						targetEnemy = enemy;
 						if (this.state == 0) {
+							mContext.setScore(targetEnemy.getPoint());
+
 							crash();
 							setIcon(boom);
 						}
@@ -130,6 +149,8 @@ public class Bullet extends JLabel implements Moveable {
 						enemy.beattacked();
 						targetEnemy = enemy;
 						if (this.state == 0) {
+							mContext.setScore(targetEnemy.getPoint());
+
 							crash();
 							setIcon(boom);
 						}
@@ -140,6 +161,8 @@ public class Bullet extends JLabel implements Moveable {
 						enemy.beattacked();
 						targetEnemy = enemy;
 						if (this.state == 0) {
+							mContext.setScore(targetEnemy.getPoint());
+
 							crash();
 							setIcon(boom);
 						}
@@ -150,6 +173,8 @@ public class Bullet extends JLabel implements Moveable {
 						enemy.beattacked();
 						targetEnemy = enemy;
 						if (this.state == 0) {
+							mContext.setScore(targetEnemy.getPoint());
+
 							crash();
 							setIcon(boom);
 						}
