@@ -15,12 +15,22 @@ public class Enemy extends JLabel implements Moveable {
 
 	// 적군 이동속도 -> 생성자에서 초기화
 	protected int speed;
+<<<<<<< HEAD
 
 	protected int downSpeed = 1;
 
 	// 적군 공격속도 (attack 메서드의 쓰레드 sleep 값으로 조정)
 	protected int attackSpeed;
 
+=======
+	
+	// 적군 점수
+	protected int point;
+	
+//	// 적군 공격속도
+//	private int attackSpeed;
+	
+>>>>>>> 2aa3ed2d41fed2db25f71ed0bfe729ffe403a578
 	// 적군 생명력
 	protected int hp;
 	
@@ -195,6 +205,126 @@ public class Enemy extends JLabel implements Moveable {
 		}).start();
 	} // end of down
 
+<<<<<<< HEAD
+=======
+	@Override
+	public void downLeft() {
+		// TODO Auto-generated method stub
+		Moveable.super.downLeft();
+	}
+	
+	
+
+	public int getPoint() {
+		return point;
+	}
+
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public int getAlive() {
+		return alive;
+	}
+
+	public void setAlive(int alive) {
+		this.alive = alive;
+	}
+
+	public boolean isLeft() {
+		return left;
+	}
+
+	public void setLeft(boolean left) {
+		this.left = left;
+	}
+
+	public boolean isRight() {
+		return right;
+	}
+
+	public void setRight(boolean right) {
+		this.right = right;
+	}
+
+	public boolean isUp() {
+		return up;
+	}
+
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+
+	public boolean isDown() {
+		return down;
+	}
+
+	public void setDown(boolean down) {
+		this.down = down;
+	}
+
+	public boolean isLeftWallCrash() {
+		return leftWallCrash;
+	}
+
+	public void setLeftWallCrash(boolean leftWallCrash) {
+		this.leftWallCrash = leftWallCrash;
+	}
+
+	public boolean isRightWallCrash() {
+		return rightWallCrash;
+	}
+
+	public void setRightWallCrash(boolean rightWallCrash) {
+		this.rightWallCrash = rightWallCrash;
+	}
+	
+	public int getMyIndex() {
+		return myIndex;
+	}
+
+	public void setMyIndex(int myIndex) {
+		this.myIndex = myIndex;
+	}
+
+	public boolean isDownWallCrash() {
+		return downWallCrash;
+	}
+
+	public void setDownWallCrash(boolean downWallCrash) {
+		this.downWallCrash = downWallCrash;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
+>>>>>>> 2aa3ed2d41fed2db25f71ed0bfe729ffe403a578
 	public void crash() {
 		mContext.getPlayer().beAttack();
 
@@ -224,6 +354,7 @@ public class Enemy extends JLabel implements Moveable {
 	public void beattacked() {
 //		setIcon(boom);
 		setLocation(x, y);
+		
 	}
 
 	// 적군과 플레이어가 접촉하면 플레이어의 목숨이 하나 감소함

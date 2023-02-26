@@ -6,6 +6,7 @@ public class EnemyUnit3 extends Enemy {
 	
 	AirplaneFrame mContext;
 	
+	
 	// 생성자
 	public EnemyUnit3(AirplaneFrame mContext) {
 		super(mContext);
@@ -23,6 +24,7 @@ public class EnemyUnit3 extends Enemy {
 		attackSpeed = 3000;
 		point = 1000;
 		alive = 0; // 살아 있는 상태
+		point = 1000;
 		enemyImage = new ImageIcon("imagesProject/enemy3.png");
 		
 	}
