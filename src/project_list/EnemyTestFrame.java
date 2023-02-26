@@ -1,4 +1,4 @@
-package project;
+package project_list;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class EnemyTestFrame extends JFrame {
 	// 이 두 변수 외에 enemy 관련 다른 변수는 선언하지 않아도 됨
 	// 생성된 적군 객체들을 담을 리스트
 	// 생성될 때마다 순서대로 리스트에 담김
-	ArrayList<Enemy2> enemyList = new ArrayList<>();
+	ArrayList<Enemy> enemyList = new ArrayList<>();
 
 	// 다른 클래스에서 적군 객체 각각에 접근할 수 있어야함
 	// (현재 전부 mContext.getEnemy()로 적군 각각에 접근해서 사용하고 있으므로)
@@ -29,8 +29,6 @@ public class EnemyTestFrame extends JFrame {
 	// key와 value를 사용하는 Map에 인덱스 정보를 저장하면 어떨까 생각해봄
 	HashMap<String, int[]> enemyIndexMap = new HashMap<>();
 	
-	// 또는
-	ArrayList<int[]> enemyIndexList = new ArrayList<>();
 	
 	
 	// 첫 번째 적군 소환 메서드 
@@ -51,11 +49,11 @@ public class EnemyTestFrame extends JFrame {
 		// 맵에 인덱스 정보를 저장함
 		enemyIndexMap.put("1번째 적군", indexArray);
 		
-		// 적군 객체 생성
-		for (int i = 0; i < enemyCount; i++) {
-			enemyList.add(new EnemyUnit3(mContext));  // 객체를 리스트에 하나씩 넣어줌
-		}
-		
+//		// 적군 객체 생성
+//		for (int i = 0; i < enemyCount; i++) {
+//			enemyList.add(new EnemyUnit3(mContext));  // 객체를 리스트에 하나씩 넣어줌
+//		}
+//		
 		// 적군 이동 패턴 코드 작성
 		
 		// ~~~~~~~~~
@@ -90,8 +88,6 @@ public class EnemyTestFrame extends JFrame {
 	public EnemyTestFrame() {
 		initData();
 		setInitLayout();
-		createEnemy();
-		createEnemy2();
 		
 		
 
@@ -116,121 +112,121 @@ public class EnemyTestFrame extends JFrame {
 	}
 
 	// 생성자 메서드 - 적군 소환 흐름
-	public void createEnemy() {
-//		// 1개의 enemyUnit3 생성
-//		unit3OneMove();
+//	public void createEnemy() {
+////		// 1개의 enemyUnit3 생성
+////		unit3OneMove();
+//
+//		delay = 1000L;
+//		TimerTask task1 = new TimerTask() {
+//			@Override
+//			public void run() {
+////				 1개의 enemyUnit3 생성
+//				unit3OneMove();
+//				
+////				unit3ArrayMove();
+//			}
+//		};
+//		timer.schedule(task1, delay);
+//	}
 
-		delay = 1000L;
-		TimerTask task1 = new TimerTask() {
-			@Override
-			public void run() {
-//				 1개의 enemyUnit3 생성
-				unit3OneMove();
-				
-//				unit3ArrayMove();
-			}
-		};
-		timer.schedule(task1, delay);
-	}
+//	// 생성자 메서드 - 적군 소환 흐름
+//	public void createEnemy2() {
+//
+//		TimerTask task2 = new TimerTask() {
+//			@Override
+//			public void run() {
+//				// 4개의 enemyUnit4 생성
+//				unit4ArrayMove();
+//				
+//			}
+//		};
+//		delay = 1000L;
+//		//
+//		timer.schedule(task2, delay, 1000);
+//	}
 
-	// 생성자 메서드 - 적군 소환 흐름
-	public void createEnemy2() {
+//	// 유닛3 하나를 소환하는 메서드
+//	public void unit3OneMove() {
+//		EnemyUnit3 unit3 = new EnemyUnit3(mContext);
+//
+//		// y 위치 고정
+//		unit3.setY(70);
+//
+//		// 초기 x 위치는 랜덤
+//		Random random = new Random();
+//		unit3.setX(random.nextInt(700) + 50);
+//		unit3.setLocation(unit3.getX(), unit3.getY());
+//
+//		mContext.add(unit3);
+//
+//		// 랜덤한 방향으로 이동
+//		unit3.randomDirection();
+//
+//	}
 
-		TimerTask task2 = new TimerTask() {
-			@Override
-			public void run() {
-				// 4개의 enemyUnit4 생성
-				unit4ArrayMove();
-				
-			}
-		};
-		delay = 1000L;
-		//
-		timer.schedule(task2, delay, 1000);
-	}
+//	// 유닛3 배열을 소환하는 메서드
+//	public void unit3ArrayMove() {
+//		// 한 번에 3개씩 소환됨
+//		EnemyUnit3[] units = new EnemyUnit3[3];
+//
+//		// x 위치를 배열 값으로 넣기
+//		int[] intArrX = { 200, 500, 350 };
+//
+//		// y 위치를 배열 값으로 넣기
+//		int[] intArrY = { 150, 150, 50 };
+//
+//		for (int i = 0; i < units.length; i++) {
+//			// 인스턴스화
+//			units[i] = new EnemyUnit3(mContext);
+//			// x 값 세팅
+//			units[i].setX(intArrX[i]);
+//			// y 값 세팅 (동일하게)
+//			units[i].setY(intArrY[i]);
+//			// 위치시키기
+//			units[i].setLocation(units[i].getX(), units[i].getY());
+//			mContext.add(units[i]);
+//		}
+//		for (int i = 0; i < units.length; i++) {
+//			units[i].down(units[i].getSpeed());
+//		}
+//		
+//	}
 
-	// 유닛3 하나를 소환하는 메서드
-	public void unit3OneMove() {
-		EnemyUnit3 unit3 = new EnemyUnit3(mContext);
-
-		// y 위치 고정
-		unit3.setY(70);
-
-		// 초기 x 위치는 랜덤
-		Random random = new Random();
-		unit3.setX(random.nextInt(700) + 50);
-		unit3.setLocation(unit3.getX(), unit3.getY());
-
-		mContext.add(unit3);
-
-		// 랜덤한 방향으로 이동
-		unit3.randomDirection();
-
-	}
-
-	// 유닛3 배열을 소환하는 메서드
-	public void unit3ArrayMove() {
-		// 한 번에 3개씩 소환됨
-		EnemyUnit3[] units = new EnemyUnit3[3];
-
-		// x 위치를 배열 값으로 넣기
-		int[] intArrX = { 200, 500, 350 };
-
-		// y 위치를 배열 값으로 넣기
-		int[] intArrY = { 150, 150, 50 };
-
-		for (int i = 0; i < units.length; i++) {
-			// 인스턴스화
-			units[i] = new EnemyUnit3(mContext);
-			// x 값 세팅
-			units[i].setX(intArrX[i]);
-			// y 값 세팅 (동일하게)
-			units[i].setY(intArrY[i]);
-			// 위치시키기
-			units[i].setLocation(units[i].getX(), units[i].getY());
-			mContext.add(units[i]);
-		}
-		for (int i = 0; i < units.length; i++) {
-			units[i].down(units[i].getSpeed());
-		}
-		
-	}
-
-	// 유닛4 배열을 소환하는 메서드
-	public void unit4ArrayMove() {
-		// 한 번에 4개씩 소환됨
-		EnemyUnit4[] units = new EnemyUnit4[4];
-
-		// x 위치를 배열 값으로 넣기
-		int[] intArrX = { 110, 310, 510, 710 };
-
-		for (int i = 0; i < units.length; i++) {
-			// 인스턴스화
-			units[i] = new EnemyUnit4(mContext);
-			// x 값 세팅
-			units[i].setX(intArrX[i]);
-			// y 값 세팅 (동일하게)
-			units[i].setY(80);
-			// 위치시키기
-			units[i].setLocation(units[i].getX(), units[i].getY());
-			mContext.add(units[i]);
-		}
-
-		// 백그라운드서비스
-
-		for (int i = 0; i < units.length; i++) {
-			units[i].down(units[i].getSpeed());
-		}
-		
-	}
+//	// 유닛4 배열을 소환하는 메서드
+//	public void unit4ArrayMove() {
+//		// 한 번에 4개씩 소환됨
+//		EnemyUnit4[] units = new EnemyUnit4[4];
+//
+//		// x 위치를 배열 값으로 넣기
+//		int[] intArrX = { 110, 310, 510, 710 };
+//
+//		for (int i = 0; i < units.length; i++) {
+//			// 인스턴스화
+//			units[i] = new EnemyUnit4(mContext);
+//			// x 값 세팅
+//			units[i].setX(intArrX[i]);
+//			// y 값 세팅 (동일하게)
+//			units[i].setY(80);
+//			// 위치시키기
+//			units[i].setLocation(units[i].getX(), units[i].getY());
+//			mContext.add(units[i]);
+//		}
+//
+//		// 백그라운드서비스
+//
+//		for (int i = 0; i < units.length; i++) {
+//			units[i].down(units[i].getSpeed());
+//		}
+//		
+//	}
 	
 	
 
-	public ArrayList<Enemy2> getEnemyList() {
+	public ArrayList<Enemy> getEnemyList() {
 		return enemyList;
 	}
 
-	public void setEnemyList(ArrayList<Enemy2> enemyList) {
+	public void setEnemyList(ArrayList<Enemy> enemyList) {
 		this.enemyList = enemyList;
 	}
 
