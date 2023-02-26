@@ -35,7 +35,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 
 	public EnemyBullet(AirplaneFrame mContext, int targetEnemyIndex) {
 		this.mContext = mContext;
-		this.targetEnemy = mContext.getEnemyList().get(targetEnemyIndex);
+		this.targetEnemy = this.mContext.getEnemyList().get(targetEnemyIndex);
 		initData();
 		setInitLayout();
 		backgroundenemyBulletService = new BackgroundEnemyBulletService(this);
@@ -91,7 +91,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 			attackCount--;
 			mContext.getPlayer().beAttack();
 			System.out.println("공격?");
-			setIcon(null);
+//			setIcon(null);
 			if (mContext.getPlayer().getLife() == 0) {
 				setIcon(boom);
 				state = 1;

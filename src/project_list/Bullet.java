@@ -61,12 +61,24 @@ public class Bullet extends JLabel implements Moveable {
 	}
 
 	public void crash() {
-		targetEnemy.setAlive(1);
+		
+		// 한 대 맞으면 Hp 1 감소
+		targetEnemy.setHp(targetEnemy.getHp() - 1);
+		// 총알이 사라진 상태
 		state = 1;
-		mContext.remove(targetEnemy);
-		System.out.println("3333");
+		System.out.println("적군 피격");
+		setIcon(null);
+		
+		// Hp가 0이 된다면
+		if (targetEnemy.getHp() == 0) {
+			targetEnemy.setAlive(1);
+			mContext.remove(targetEnemy);
+			System.out.println("적군 사망");
+			item();
+		}
+		
+//		System.out.println("");
 //		setIcon(boom);
-		System.out.println("111111");
 //		mContext.getItem().setDown(true);
 //		mContext.getItem().down();
 //		mContext.repaint();
@@ -76,7 +88,6 @@ public class Bullet extends JLabel implements Moveable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		setIcon(null);
 
 	}
 
@@ -102,47 +113,50 @@ public class Bullet extends JLabel implements Moveable {
 		while (true) {
 			y--;
 			setLocation(x, y);
-			
+
 			for (Enemy enemy : mContext.getEnemyList()) {
 				if (enemy instanceof EnemyUnit1 && enemy.getAlive() == 0) {
-					if (Math.abs(x - (enemy.getX()+250)) < 230 && (y - enemy.getY()) < 100) {
+					if (Math.abs(x - (enemy.getX() + 250)) < 230 && (y - enemy.getY()) < 100) {
 						enemy.beattacked();
 						targetEnemy = enemy;
-						crash();
-						setIcon(boom);
-						item();
+						if (this.state == 0) {
+							crash();
+							setIcon(boom);
+						}
 					}
 
 				} else if (enemy instanceof EnemyUnit2 && enemy.getAlive() == 0) {
-					if (Math.abs(x - (enemy.getX() + 15)) < 15 && (y - enemy.getY()) < 15) {
+					if (Math.abs(x - (enemy.getX() + 10)) < 15 && (y - enemy.getY()) < 15) {
 						enemy.beattacked();
 						targetEnemy = enemy;
-						crash();
-						setIcon(boom);
-						item();
+						if (this.state == 0) {
+							crash();
+							setIcon(boom);
+						}
 					}
 
 				} else if (enemy instanceof EnemyUnit3 && enemy.getAlive() == 0) {
-					if (Math.abs(x - (enemy.getX() + 100)) < 100 && (y - enemy.getY()) < 90) {
+					if (Math.abs(x - (enemy.getX() + 100)) < 100 && (y - (enemy.getY() + 80)) < 30) {
 						enemy.beattacked();
 						targetEnemy = enemy;
-						crash();
-						setIcon(boom);
-						item();
-					}	
+						if (this.state == 0) {
+							crash();
+							setIcon(boom);
+						}
+					}
 
 				} else if (enemy instanceof EnemyUnit4 && enemy.getAlive() == 0) {
 					if (Math.abs(x - (enemy.getX() + 43)) < 45 && (y - enemy.getY()) < 45) {
 						enemy.beattacked();
 						targetEnemy = enemy;
-						crash();
-						setIcon(boom);
-						item();
+						if (this.state == 0) {
+							crash();
+							setIcon(boom);
+						}
 					}
 				}
 			} // end of for
-			
-			
+
 			try {
 				Thread.sleep(3);
 			} catch (InterruptedException e) {
@@ -154,8 +168,7 @@ public class Bullet extends JLabel implements Moveable {
 			}
 		}
 	}
-	
-	
+
 	@Override
 	public void down() {
 

@@ -7,6 +7,7 @@ public class EnemyUnit1 extends Enemy {
 	AirplaneFrame mContext;
 
 	public EnemyUnit1(AirplaneFrame mContext) {
+		super(mContext);
 		this.mContext = mContext;
 		initData();
 		setInitLayout();

@@ -336,7 +336,7 @@ public class Player extends JLabel implements Moveable {
 		// 게임 중일 때만 공격
 		if (mContext.getGameState() == 1) {
 			Bullet bullet = new Bullet(mContext);
-			System.out.println("1010101");
+//			System.out.println("1010101");
 			mContext.add(bullet);
 		}
 	}

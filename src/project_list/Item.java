@@ -114,7 +114,7 @@ public class Item extends JLabel implements Moveable {
 
 		while (down) {
 			setLocation(itemX, itemY++);
-			System.out.println("2313123");
+//			System.out.println("2313123");
 			if (Math.abs(itemX - mContext.getPlayer().getX()) < 50
 					&& Math.abs(itemY - mContext.getPlayer().getY()) < 50) {
 				setIcon(null);

@@ -15,11 +15,11 @@ public class Enemy extends JLabel implements Moveable {
 
 	// 적군 이동속도 -> 생성자에서 초기화
 	protected int speed;
-	
+
 //	// 적군 공격속도
 //	private int attackSpeed;
 	
-	// 적군 생명력 -> 생성자에서 초기화
+	// 적군 생명력
 	protected int hp;
 
 	// 생존 여부 (살아 있음 : 0, 죽음 : 1)
@@ -42,13 +42,15 @@ public class Enemy extends JLabel implements Moveable {
 	protected boolean leftWallCrash;
 	protected boolean rightWallCrash;
 	protected boolean downWallCrash;
-	
+
 	// 아예 자신의 순서를 자기가 가지고 있는 게 더 편할 거 같아서 이 방법으로 바꿔봄
 	protected static int enemyCount; // 생성된 적군의 총 숫자
 	protected int myIndex; // 자신이 생성된 순서
 
-	
-	
+	public Enemy(AirplaneFrame mContext) {
+		this.mContext = mContext;
+	}
+
 	protected void randomDirection() {
 		Random random = new Random();
 
@@ -93,7 +95,7 @@ public class Enemy extends JLabel implements Moveable {
 				}
 
 				try {
-					Thread.sleep(800);
+					Thread.sleep(600);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -196,23 +198,25 @@ public class Enemy extends JLabel implements Moveable {
 	public void down(int speed) {
 		new Thread(() -> {
 			down = true;
-			while(down) {
+			while (down) {
 				// 적군이 죽었거나, 아래쪽 벽에 부딪치면 중단
-				if (alive == 1 || down == false) {
+				if (alive == 1) {
 					return;
 				}
 				y = y + speed;
 				setLocation(x, y);
 
+				contact();
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			contact();
 			attack();
 			down = false;
+			
+			
 		}).start();
 	} // end of down
 
@@ -221,9 +225,7 @@ public class Enemy extends JLabel implements Moveable {
 		// TODO Auto-generated method stub
 		Moveable.super.downLeft();
 	}
-	
-	
-	
+
 	public int getX() {
 		return x;
 	}
@@ -312,15 +314,29 @@ public class Enemy extends JLabel implements Moveable {
 		this.downWallCrash = downWallCrash;
 	}
 	
-	
-	
-	public void crash() {
-		if (hp == 0) {
-			mContext.getPlayer().beAttack();
+	public int getMyIndex() {
+		return myIndex;
+	}
 
-			if (mContext.getPlayer().getLife() == 0) {
-				mContext.remove(mContext.getPlayer());
-			}
+	public void setMyIndex(int myIndex) {
+		this.myIndex = myIndex;
+	}
+	
+	
+
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
+	public void crash() {
+		mContext.getPlayer().beAttack();
+
+		if (mContext.getPlayer().getLife() == 0) {
+			mContext.remove(mContext.getPlayer());
 		}
 	}
 
@@ -336,31 +352,34 @@ public class Enemy extends JLabel implements Moveable {
 //		setIcon(boom);
 		setLocation(x, y);
 	}
-	
+
 	// 적군과 플레이어가 접촉하면 플레이어의 목숨이 하나 감소함
 	public void contact() {
 		if (this instanceof EnemyUnit1 && mContext.getPlayer().getAlive() == 0) {
-			if (Math.abs((x + 220) - mContext.getPlayer().getX()) < 200 && Math.abs((y + 50) - mContext.getPlayer().getY()) < 40) {
+			if (Math.abs((x + 220) - mContext.getPlayer().getX()) < 200
+					&& Math.abs((y + 50) - mContext.getPlayer().getY()) < 40) {
 				crash();
 			}
-			
+
 		} else if (this instanceof EnemyUnit2 && mContext.getPlayer().getAlive() == 0) {
-			if (Math.abs(x - (mContext.getPlayer().getX())) < 30 && Math.abs((y + 10) - mContext.getPlayer().getY()) < 20) {
+			if (Math.abs(x - (mContext.getPlayer().getX())) < 30
+					&& Math.abs((y + 10) - mContext.getPlayer().getY()) < 20) {
 				crash();
 			}
-		
+
 		} else if (this instanceof EnemyUnit3 && mContext.getPlayer().getAlive() == 0) {
-			if (Math.abs((x + 100) - mContext.getPlayer().getX()) < 100 && Math.abs((y + 40) - mContext.getPlayer().getY()) < 40) {
+			if (Math.abs((x + 100) - mContext.getPlayer().getX()) < 100
+					&& Math.abs((y + 40) - mContext.getPlayer().getY()) < 40) {
 				crash();
 			}
-			
+
 		} else if (this instanceof EnemyUnit4 && mContext.getPlayer().getAlive() == 0) {
-			if (Math.abs(x - mContext.getPlayer().getX()) < 40 && Math.abs((y + 25) - mContext.getPlayer().getY()) < 30) {
+			if (Math.abs(x - mContext.getPlayer().getX()) < 40
+					&& Math.abs((y + 25) - mContext.getPlayer().getY()) < 30) {
 				crash();
 			}
-			
+
 		}
-		
 
 	} // end of method
 

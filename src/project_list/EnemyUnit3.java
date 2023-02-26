@@ -8,6 +8,7 @@ public class EnemyUnit3 extends Enemy {
 	
 	// 생성자
 	public EnemyUnit3(AirplaneFrame mContext) {
+		super(mContext);
 		this.mContext = mContext;
 		initData();
 		setInitLayout();
@@ -17,8 +18,8 @@ public class EnemyUnit3 extends Enemy {
 	}
 	
 	private void initData() {
-		speed = 3; // 이동속도
-		hp = 3; // 생명력, 0이 되면 alive = 1;
+		hp = 3;
+		speed = 2; // 이동속도
 		alive = 0; // 살아 있는 상태
 		enemyImage = new ImageIcon("imagesProject/enemy3.png");
 		

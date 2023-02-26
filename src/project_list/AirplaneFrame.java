@@ -61,9 +61,6 @@ public class AirplaneFrame extends JFrame {
 		new Thread(new BackgroundPlayerService(player)).start();
 		
 
-		
-		// 이거는 적군 소환 메서드 각각에 넣기
-//		new Thread(new BackgroundEnemyService(enemy)).start();
 	} // end of 생성자
 
 	public EnemyBullet getEnemyBullet() {
@@ -266,6 +263,8 @@ public class AirplaneFrame extends JFrame {
 
 	// 적군 소환 흐름 1
 	public void createEnemy() {
+//		unit4ArrayMove();
+		
 		
 		Timer timer = new Timer();
 		long delay;
@@ -274,7 +273,7 @@ public class AirplaneFrame extends JFrame {
 		TimerTask task1 = new TimerTask() {
 			@Override
 			public void run() {
-				unit4ArrayMove();
+				unit3OneMove();
 			}
 		};
 		timer.schedule(task1, delay);
@@ -287,10 +286,9 @@ public class AirplaneFrame extends JFrame {
 		
 		int enemyCount = 1;
 		int index2 = index1 + (enemyCount - 1);
-		
 
 		// 객체 생성 및 리스트에 추가
-		enemyList.add(new EnemyUnit4(mContext));
+		enemyList.add(new EnemyUnit3(mContext));
 		
 		// 알아보기 쉽게 변수로 선언
 		Enemy targetEnemy = enemyList.get(index1);
@@ -298,6 +296,7 @@ public class AirplaneFrame extends JFrame {
 		// 초기 x 위치는 랜덤
 		Random random = new Random();
 		targetEnemy.setX(random.nextInt(700) + 50);
+		targetEnemy.setY(10);
 		targetEnemy.setLocation(targetEnemy.getX(), targetEnemy.getY());
 		
 		// 추가
@@ -390,9 +389,26 @@ public class AirplaneFrame extends JFrame {
 		}
 		
 		// 아래로만 움직임
-		for (int i = index1; i <= index2; i++) {
-			enemyList.get(i).down(enemyList.get(i).getSpeed());
-		}
+		new Thread(() -> {
+			while (true) {
+				for (int i = index1; i <= index2; i++) {
+					// 살아 있다면
+					if (enemyList.get(i).getAlive() == 0) {
+						enemyList.get(i).down(enemyList.get(i).getSpeed());
+						if (enemyList.get(i).downWallCrash == true) {
+							enemyList.get(i).up(enemyList.get(i).getSpeed());
+						}	
+					}
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}			
+		}).start();
+		
 	}
 	
 	
