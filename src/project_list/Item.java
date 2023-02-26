@@ -72,9 +72,20 @@ public class Item extends JLabel implements Moveable {
 		setInitLayout();
 		
 		// 유닛별로 아이템 위치 보정해야 함
+		if (targetEnemy instanceof EnemyUnit1) {
+			itemX = targetEnemy.getX() + 220;
+			itemY = targetEnemy.getY();			
+		} else if (targetEnemy instanceof EnemyUnit2) {
+			itemX = targetEnemy.getX();
+			itemY = targetEnemy.getY();	
+		} else if (targetEnemy instanceof EnemyUnit3) {
+			itemX = targetEnemy.getX() + 100;
+			itemY = targetEnemy.getY();	
+		} else if (targetEnemy instanceof EnemyUnit4) {
+			itemX = targetEnemy.getX() + 20;
+			itemY = targetEnemy.getY();	
+		}
 		
-		itemX = targetEnemy.getX();
-		itemY = targetEnemy.getY();
 
 //		createRandomItem();
 		initThread();
