@@ -31,6 +31,7 @@ public class AirplaneFrame extends JFrame {
 	private Background background;
 	private JLabel backgroundMap;
 	private JLabel gameStart;
+	private JLabel gameOver;
 	private Time time;
 	private Player player;
 	private EnemyBullet enemyBullet;
@@ -163,6 +164,7 @@ public class AirplaneFrame extends JFrame {
 	// 생성자 메서드 1
 	private void initData() {
 		gameStart = new JLabel(new ImageIcon("imagesProject/GameTitle.gif"));
+		gameOver = new JLabel(new ImageIcon("imagesProject/GameOver.png"));
 		backgroundMap = new JLabel(new ImageIcon("imagesProject/backgroundservice.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
