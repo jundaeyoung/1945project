@@ -92,7 +92,7 @@ public class Bullet extends JLabel implements Moveable {
 			
 			// 점수 : 현재 점수 + 잡은 유닛의 점수
 			score = mContext.getScore() + targetEnemy.getPoint();
-			mContext.setScore(targetEnemy.getPoint());
+			mContext.setScore(score);
 			System.out.println("score : " + score);
 		}
 
