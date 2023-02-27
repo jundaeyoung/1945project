@@ -86,13 +86,14 @@ public class Bullet extends JLabel implements Moveable {
 			targetEnemy.setAlive(1);
 			mContext.remove(targetEnemy);
 			System.out.println("적군 사망");
-			
+
 			// 확률에 따라 아이템 생성됨
 			item();
-			
+
 			// 점수 : 현재 점수 + 잡은 유닛의 점수
 			score = mContext.getScore() + targetEnemy.getPoint();
-			mContext.setScore(score); 
+			mContext.setScore(score);
+//			mContext.setScore(score);
 			System.out.println("score : " + score);
 		}
 

@@ -289,21 +289,33 @@ public class AirplaneFrame extends JFrame {
 
 	}
 
-	// 적군 소환 흐름 1
+	// 적군 소환 흐름
 	public void createEnemy() {
-//		unit4ArrayMove();
+		// 첫 적군 소환
+		unit3OneMove();
 
 		Timer timer = new Timer();
-		long delay;
 
-		delay = 1000L;
+		long delay1 = 1000L;
 		TimerTask task1 = new TimerTask() {
 			@Override
 			public void run() {
-				unit3OneMove();
+				unit4ArrayMove();
 			}
 		};
-		timer.schedule(task1, delay);
+		
+		long delay2 = 3000L;
+		TimerTask task2 = new TimerTask() {
+			
+			@Override
+			public void run() {
+				unit3ArrayMove();
+				
+			}
+		};
+		
+		timer.schedule(task1, delay1);
+		timer.schedule(task2, delay2);
 	}
 
 	// 유닛3 하나를 소환하는 메서드
