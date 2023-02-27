@@ -155,6 +155,10 @@ public class AirplaneFrame extends JFrame {
 	public void setScore(int score) {
 		this.score = score;
 	}
+	
+	public void gameOver() {
+		add(gameOver);
+	}
 
 	// 생성자 메서드 1
 	private void initData() {
@@ -190,7 +194,7 @@ public class AirplaneFrame extends JFrame {
 
 			add(label);
 			setContentPane(gameStart);
-		} else {
+		} else if(gameState ==1) {
 			setContentPane(new MyPanel());
 //			setContentPane(backgroundMap);
 			add(player);
@@ -202,6 +206,8 @@ public class AirplaneFrame extends JFrame {
 			add(time.timeLabel);
 			createEnemy();
 
+		} else if (gameState == 2) {
+			mContext.getPlayer().gameOver();
 		}
 	}
 
