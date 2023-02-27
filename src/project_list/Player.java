@@ -183,7 +183,7 @@ public class Player extends JLabel implements Moveable {
 	}
 
 	public void setInitLayout() {
-		x = 470;
+		x = 440;
 		y = 805;
 		setSize(100, 70);
 		setLocation(x, y);
@@ -310,15 +310,15 @@ public class Player extends JLabel implements Moveable {
 			System.out.println("2번째 추락");
 
 		} else {
-			setIcon(gost);
+			alive = 1;
+			setIcon(null);
 			mContext.getLife0().setIcon(null);
 			System.out.println("3번째 추락");
 
 			// 게임 재시작
-			mContext.setGameState(0);
-			new AirplaneFrame();
+// 			new AirplaneFrame();
 //			Frame frame = new Frame();
-			mContext.dispose();
+// 			mContext.dispose();
 
 		}
 		try {
