@@ -253,6 +253,9 @@ public class AirplaneFrame extends JFrame {
 					if (gameState == 0 || gameState == 2) {
 						gameState = 1;
 						setInitLayout();
+					} else if (gameState == 1) {
+						return;
+					
 					} else if (player.getAlive() == 1) {
 						reStart();
 
@@ -510,7 +513,7 @@ public class AirplaneFrame extends JFrame {
 		timer1.schedule(task17, delay17);
 
 		// 게임 클리어 출력
-		long delayClear = 60000L;
+		long delayClear = 58000L;
 		TimerTask taskClear = new TimerTask() {
 			
 			@Override

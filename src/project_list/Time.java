@@ -66,17 +66,14 @@ public class Time {
 					return;
 				}
 				
-				// 게임이 종료되어서 시간이 멈춤
-				if (mContext.getGameState() == 0) {
-					return;
-				}
-
-				timeS--;					
-
-				if (timeS < 0) {
-					if (timeM > 0) {
-						timeM--;												
-						timeS += 60;
+				// 게임 진행 중에만 시간이 흐름
+				if (mContext.getGameState() == 1) {
+					timeS--;					
+					if (timeS < 0) {
+						if (timeM > 0) {
+							timeM--;												
+							timeS += 60;
+						}
 					}
 				}
 
