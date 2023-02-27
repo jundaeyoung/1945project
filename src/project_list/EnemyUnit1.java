@@ -19,7 +19,8 @@ public class EnemyUnit1 extends Enemy {
 	public void initData() {
 		hp = 5;
 		speed = 1;
-		attackSpeed = 5000;
+		downSpeed = 1;
+		attackSpeed = 2000;
 		point = 2000;
 		alive = 0;
 		enemyImage = new ImageIcon("imagesProject/enemy1.png");
@@ -31,14 +32,14 @@ public class EnemyUnit1 extends Enemy {
 	}
 
 	@Override
-	public void down(int speed) {
+	public void down() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				down = true;
 				while (alive == 0) {
 //					attack();
-					y += speed;
+					y += downSpeed;
 					setLocation(x, y);
 					try {
 						Thread.sleep(30);

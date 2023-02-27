@@ -99,6 +99,8 @@ public class EnemyBullet extends JLabel implements Moveable {
 				setIcon(boom);
 				state = 1;
 				mContext.remove(mContext.getPlayer());
+				mContext.getEnemyList().clear();
+				Enemy.enemyCount = 0;
 			}
 		}
 

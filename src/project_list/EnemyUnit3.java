@@ -44,18 +44,9 @@ public class EnemyUnit3 extends Enemy {
 					// 연발 쏘고 3초 쉬기
 					EnemyBullet enemyBullet;
 					
-					for (int i = 0; i < 2; i++) {
 						enemyBullet = new EnemyBullet(mContext, myIndex);
 						mContext.add(enemyBullet);
-						
-						try {
-							Thread.sleep(300);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					
+			
 					try {
 						Thread.sleep(attackSpeed);
 					} catch (InterruptedException e) {

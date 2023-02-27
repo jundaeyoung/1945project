@@ -32,7 +32,7 @@ public class Time {
 	private void initData() {
 		
 		// 초기 값 세팅 (임시)
-		timeM = 2;
+		timeM = 1;
 		timeS = 0;
 
 		timeLabel = new JLabel();

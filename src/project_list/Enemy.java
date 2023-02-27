@@ -63,21 +63,22 @@ public class Enemy extends JLabel implements Moveable {
 			while (alive == 0) {
 
 				// 이동 방향을 랜덤으로 선택함
-				int randomDirection = random.nextInt(3); // 0~2 생성
+				int randomDirection = random.nextInt(5); // 0~4 생성
+				// 아래로 내려가는 빈도가 더 적게 하기 위해 숫자를 더 생성했음
 
 				// 이동 메서드 안에 적군이 죽으면 중간에 중단하라는 if 문이 있어서
 				// 죽으면 left(), right() 메서드를 빠져나간 뒤 반복이 종료됨
 
-				// 값이 0인 경우 왼쪽으로
-				if (randomDirection == 0) {
+				// 값이 0 or 1인 경우 왼쪽으로
+				if (randomDirection == 0 || randomDirection == 1) {
 					// 왼쪽 벽에 부딪친 상태면 left() 실행 X
 					if (leftWallCrash == true) {
 						continue;
 					}
 					left(speed);
 
-					// 값이 1인 경우 오른쪽으로
-				} else if (randomDirection == 1) {
+					// 값이 2 or 3인 경우 오른쪽으로
+				} else if (randomDirection == 2 || randomDirection == 3) {
 					// 오른쪽 벽에 부딪친 상태면 right() 실행 X
 					if (rightWallCrash == true) {
 						continue;
@@ -86,7 +87,7 @@ public class Enemy extends JLabel implements Moveable {
 
 					// 그 외의 값은 아래쪽으로
 				} else {
-					down(speed);
+					down();
 				}
 
 				try {
@@ -167,7 +168,7 @@ public class Enemy extends JLabel implements Moveable {
 	} // end of right
 
 	@Override
-	public void down(int speed) {
+	public void down() {
 		new Thread(() -> {
 			down = true;
 			while (down) {
@@ -382,6 +383,15 @@ public class Enemy extends JLabel implements Moveable {
 	public void setPoint(int point) {
 		this.point = point;
 	}
+
+	public static int getEnemyCount() {
+		return enemyCount;
+	}
+
+	public static void setEnemyCount(int enemyCount) {
+		Enemy.enemyCount = enemyCount;
+	}
+	
 	
 	
 } // end of class
