@@ -168,6 +168,10 @@ public class Player extends JLabel implements Moveable {
 	public void setSpeed(int speed) {
 		this.speed += speed;
 	}
+	
+	public void gameOver() {
+		setSize(100, 100);
+	}
 
 	public Player(AirplaneFrame mContext) {
 		this.mContext = mContext;
