@@ -13,7 +13,7 @@ public class Player extends JLabel implements Moveable {
 
 	private final static int playerX = 250;
 	private final static int playerY = 700;
-	
+
 	private int x;
 	private int y;
 	private int bulletX;
@@ -171,7 +171,7 @@ public class Player extends JLabel implements Moveable {
 	public void setSpeed(int speed) {
 		this.speed += speed;
 	}
-	
+
 	public void gameOver() {
 		setSize(100, 100);
 	}
@@ -321,6 +321,9 @@ public class Player extends JLabel implements Moveable {
 			setIcon(null);
 			mContext.getLife0().setIcon(null);
 			System.out.println("3번째 추락");
+//	         mContext.setGameState(2);
+			System.exit(0);
+			mContext.gameOver();
 
 			// 게임 재시작
 // 			new AirplaneFrame();
@@ -335,9 +338,6 @@ public class Player extends JLabel implements Moveable {
 		}
 		setIcon(player);
 	}
-	
-	
-	
 
 	public void attack() {
 		// 게임 중일 때만 공격

@@ -31,6 +31,7 @@ public class AirplaneFrame extends JFrame {
 	private Background background;
 	private JLabel backgroundMap;
 	private JLabel gameStart;
+	private JLabel gameOver;
 	private Time time;
 	private Player player;
 	private EnemyBullet enemyBullet;
@@ -155,7 +156,7 @@ public class AirplaneFrame extends JFrame {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
+
 	public void gameOver() {
 		add(gameOver);
 	}
@@ -163,6 +164,7 @@ public class AirplaneFrame extends JFrame {
 	// 생성자 메서드 1
 	private void initData() {
 		gameStart = new JLabel(new ImageIcon("imagesProject/GameTitle.gif"));
+		gameOver = new JLabel(new ImageIcon("imagesProject/GameOver.png"));
 		backgroundMap = new JLabel(new ImageIcon("imagesProject/backgroundservice.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -194,7 +196,7 @@ public class AirplaneFrame extends JFrame {
 
 			add(label);
 			setContentPane(gameStart);
-		} else if(gameState ==1) {
+		} else if (gameState == 1) {
 			setContentPane(new MyPanel());
 //			setContentPane(backgroundMap);
 			add(player);
@@ -240,31 +242,24 @@ public class AirplaneFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_ENTER:
-					// 처음 시작
-					gameState = 1;
-					setInitLayout();
-
-<<<<<<< HEAD
-					if (getPlayer().getAlive() == 1) {
-						enemyList = null;
-						new AirplaneFrame();
-//						player.setLocation(getPlayer().setX(200), getPlayer().setY(200));
-=======
-					// 재시작
-					if (player.getAlive() == 1) {
-						// 죽은 상태
+					if (gameState == 0 || gameState == 2) {
+						gameState = 1;
+						setInitLayout();
+					} else if (player.getAlive() == 1) {
 						reStart();
->>>>>>> 2dcbf76e97df5d50904b8cc4fe0e3e3948938c8d
+
 					}
 					break;
 				}
 
 			}
-			
+
 			public void reStart() {
 				System.out.println("---------- 게임 재 시작 하기 ----------");
 				// 초기화 해야 될 부분추가
-				player.setInitLayout();
+				new AirplaneFrame();
+				dispose();
+//				setInitLayout();
 			}
 
 			@Override
@@ -357,7 +352,7 @@ public class AirplaneFrame extends JFrame {
 			}
 		};
 		timer1.schedule(task4, delay4);
-		
+
 		// 여섯 번째 적군 소환
 		long delay5 = 16000L;
 		TimerTask task5 = new TimerTask() {
@@ -428,7 +423,7 @@ public class AirplaneFrame extends JFrame {
 		targetEnemy.randomDirection();
 		targetEnemy.attack(targetEnemy.getAttackSpeed());
 	}
-	
+
 	// 유닛4 배열을 왼쪽에 소환하는 메서드
 	public void unit4ArrayLeftMove() {
 		// 적군 객체를 담기 전에 지금 리스트의 사이즈를 확인함
@@ -619,7 +614,7 @@ public class AirplaneFrame extends JFrame {
 			// 메서드 오버라이드 부분에서 매개변수를 없게 해서 멤버변수 speed를 바로 받게 함
 //		         int speed = enemyList.get(i + index1).getSpeed();
 			enemyList.get(i + index1).down();
-			 targetEnemy.attack(targetEnemy.getAttackSpeed());
+			targetEnemy.attack(targetEnemy.getAttackSpeed());
 		}
 	}
 
@@ -645,7 +640,7 @@ public class AirplaneFrame extends JFrame {
 			// 메서드 오버라이드 부분에서 매개변수를 없게 해서 멤버변수 speed를 바로 받게 함
 //		         int speed = enemyList.get(i + index1).getSpeed();
 			enemyList.get(i + index1).down();
-			 targetEnemy.attack(targetEnemy.getAttackSpeed());
+			targetEnemy.attack(targetEnemy.getAttackSpeed());
 		}
 	}
 

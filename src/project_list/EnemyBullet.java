@@ -32,7 +32,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 
 	public EnemyBullet(AirplaneFrame mContext, int targetEnemyIndex) {
 		this.mContext = mContext;
-		this.targetEnemy = this.mContext.getEnemyList().get(targetEnemyIndex);
+		this.targetEnemy = this.mContext.getEnemyList().get(targetEnemyIndex);			
 		initData();
 		setInitLayout();
 		backgroundenemyBulletService = new BackgroundEnemyBulletService(this);
