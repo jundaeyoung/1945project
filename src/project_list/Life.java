@@ -38,6 +38,7 @@ public class Life extends JLabel {
 	}
 
 	public void lifeUp() {
+		mContext.getPlayer().setLife(mContext.getPlayer().getLife() + 1);
 			setIcon(life);
 	}
 }

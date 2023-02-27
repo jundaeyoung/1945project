@@ -147,7 +147,7 @@ public class Bullet extends JLabel implements Moveable {
 					}
 
 				} else if (enemy instanceof EnemyUnit2 && enemy.getAlive() == 0) {
-					if (Math.abs(x - (enemy.getX() + 10)) < 15 && Math.abs(y - enemy.getY()) < 15) {
+					if (Math.abs(x - (enemy.getX() + 10)) < 20 && Math.abs(y - enemy.getY()) < 15) {
 						enemy.beattacked();
 						targetEnemy = enemy;
 						if (this.state == 0) {

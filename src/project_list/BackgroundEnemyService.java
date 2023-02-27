@@ -41,9 +41,9 @@ public class BackgroundEnemyService implements Runnable {
 			// + 수정 : 자료형에 따라 보정 값 조정 (enemy2 기준)
 			
 			if (enemy instanceof EnemyUnit1) {
-				leftColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY()));
-				rightColor = new Color(image.getRGB(enemy.getX() + 440, enemy.getY()));
-				bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 80));
+				leftColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 100));
+				rightColor = new Color(image.getRGB(enemy.getX() + 440, enemy.getY() + 100));
+				bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 100));
 				
 			} else if (enemy instanceof EnemyUnit2) {
 				leftColor = new Color(image.getRGB(enemy.getX(), enemy.getY()));
@@ -52,7 +52,7 @@ public class BackgroundEnemyService implements Runnable {
 			
 			} else if (enemy instanceof EnemyUnit3) {
 				leftColor = new Color(image.getRGB(enemy.getX(), enemy.getY()));
-				rightColor = new Color(image.getRGB(enemy.getX() + 200, enemy.getY()));
+				rightColor = new Color(image.getRGB(enemy.getX() + 160, enemy.getY()));
 				bottomColor = new Color(image.getRGB(enemy.getX() + 10, enemy.getY() + 130));
 				
 			} else if (enemy instanceof EnemyUnit4) {

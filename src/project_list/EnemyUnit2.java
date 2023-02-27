@@ -17,38 +17,48 @@ public class EnemyUnit2 extends Enemy{
 	}
 
 	public void initData() {
+		x = 0;
+		y = 0;
 		hp = 1;
 		speed = 2;
 		downSpeed = 2;
-		attackSpeed = 2000;
+		attackSpeed = 2500;
 		point = 100;
 		alive = 0;
 		enemyImage = new ImageIcon("imagesProject/enemy2.png");
 	}
 
 	private void setInitLayout() {
-		setSize(500, 500);
+		setSize(40, 40);
 		setIcon(enemyImage);
 	}
 
 	@Override
 	public void down() {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				down = true;
-				while (alive == 0) {
-//					attack();
-					y += downSpeed;
-					setLocation(x, y);
-					try {
-						Thread.sleep(80);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+		new Thread(() -> {
+			down = true;
+			while (down) {
+				// 적군이 죽으면 중단
+				if (alive == 1) {
+					return;
+				}
+				y = y + downSpeed;
+				setLocation(x, y);
+
+				contact();
+				try {
+					Thread.sleep(30);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				if (downWallCrash == true) {
+					alive = 2;
+				}
+				if (y == 950) {
+					setIcon(null);
 				}
 			}
+//			down = false;
 		}).start();
-	}
-
+	} // end of down
 }

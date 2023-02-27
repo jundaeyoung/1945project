@@ -20,7 +20,7 @@ public class Enemy extends JLabel implements Moveable {
 
 	// 적군 공격속도 (attack 메서드의 쓰레드 sleep 값으로 조정)
 	protected int attackSpeed;
-	
+
 	// 적군 점수
 	protected int point;
 
@@ -111,7 +111,7 @@ public class Enemy extends JLabel implements Moveable {
 		int currentX = this.getX();
 
 		// 최대 이동 거리
-		int tempX = currentX - 100;
+		int tempX = currentX - this.getWidth();
 
 		// 이동할 거리
 		int goX = (int) (currentX * Math.random());
@@ -139,10 +139,10 @@ public class Enemy extends JLabel implements Moveable {
 	@Override
 	public void right(int speed) {
 
-		int currentX = this.getX();
+		int currentX = this.getX() + this.getWidth();
 
 		// 최대 이동 거리
-		int tempX = (FRAME_SIZE_X - 250) - currentX;
+		int tempX = (FRAME_SIZE_X - 100) - currentX;
 
 		// 이동할 거리
 		int goX = (int) (tempX * Math.random());
@@ -201,7 +201,7 @@ public class Enemy extends JLabel implements Moveable {
 		// TODO Auto-generated method stub
 		Moveable.super.downLeft();
 	}
-	
+
 	public void crash() {
 		mContext.getPlayer().beAttack();
 
@@ -231,7 +231,7 @@ public class Enemy extends JLabel implements Moveable {
 	public void beattacked() {
 //		setIcon(boom);
 		setLocation(x, y);
-		
+
 	}
 
 	// 적군과 플레이어가 접촉하면 플레이어의 목숨이 하나 감소함
@@ -243,8 +243,8 @@ public class Enemy extends JLabel implements Moveable {
 			}
 
 		} else if (this instanceof EnemyUnit2 && mContext.getPlayer().getAlive() == 0) {
-			if (Math.abs(x - (mContext.getPlayer().getX())) < 30
-					&& Math.abs((y + 10) - mContext.getPlayer().getY()) < 20) {
+			if (Math.abs(x - (mContext.getPlayer().getX())) < 20 // 30
+					&& Math.abs((y + 15) - mContext.getPlayer().getY()) < 15) {
 				crash();
 			}
 
@@ -255,7 +255,7 @@ public class Enemy extends JLabel implements Moveable {
 			}
 
 		} else if (this instanceof EnemyUnit4 && mContext.getPlayer().getAlive() == 0) {
-			if (Math.abs(x - mContext.getPlayer().getX()) < 40
+			if (Math.abs(x - mContext.getPlayer().getX()) < 20 // 40
 					&& Math.abs((y + 25) - mContext.getPlayer().getY()) < 30) {
 				crash();
 			}
@@ -267,111 +267,111 @@ public class Enemy extends JLabel implements Moveable {
 	public int getX() {
 		return x;
 	}
-	
+
 	public void setX(int x) {
 		this.x = x;
 	}
-	
+
 	public int getY() {
 		return y;
 	}
-	
+
 	public void setY(int y) {
 		this.y = y;
 	}
-	
+
 	public int getSpeed() {
 		return speed;
 	}
-	
+
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-	
+
 	public int getAlive() {
 		return alive;
 	}
-	
+
 	public void setAlive(int alive) {
 		this.alive = alive;
 	}
-	
+
 	public boolean isLeft() {
 		return left;
 	}
-	
+
 	public void setLeft(boolean left) {
 		this.left = left;
 	}
-	
+
 	public boolean isRight() {
 		return right;
 	}
-	
+
 	public void setRight(boolean right) {
 		this.right = right;
 	}
-	
+
 	public boolean isUp() {
 		return up;
 	}
-	
+
 	public void setUp(boolean up) {
 		this.up = up;
 	}
-	
+
 	public boolean isDown() {
 		return down;
 	}
-	
+
 	public void setDown(boolean down) {
 		this.down = down;
 	}
-	
+
 	public boolean isLeftWallCrash() {
 		return leftWallCrash;
 	}
-	
+
 	public void setLeftWallCrash(boolean leftWallCrash) {
 		this.leftWallCrash = leftWallCrash;
 	}
-	
+
 	public boolean isRightWallCrash() {
 		return rightWallCrash;
 	}
-	
+
 	public void setRightWallCrash(boolean rightWallCrash) {
 		this.rightWallCrash = rightWallCrash;
 	}
-	
+
 	public int getMyIndex() {
 		return myIndex;
 	}
-	
+
 	public void setMyIndex(int myIndex) {
 		this.myIndex = myIndex;
 	}
-	
+
 	public boolean isDownWallCrash() {
 		return downWallCrash;
 	}
-	
+
 	public void setDownWallCrash(boolean downWallCrash) {
 		this.downWallCrash = downWallCrash;
 	}
-	
+
 	public int getHp() {
 		return hp;
 	}
-	
+
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
-	
+
 	public int getAttackSpeed() {
 		return attackSpeed;
 	}
-	
+
 	public void setAttackSpeed(int attackSpeed) {
 		this.attackSpeed = attackSpeed;
 	}
@@ -391,7 +391,5 @@ public class Enemy extends JLabel implements Moveable {
 	public static void setEnemyCount(int enemyCount) {
 		Enemy.enemyCount = enemyCount;
 	}
-	
-	
-	
+
 } // end of class

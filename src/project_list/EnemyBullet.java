@@ -32,7 +32,11 @@ public class EnemyBullet extends JLabel implements Moveable {
 
 	public EnemyBullet(AirplaneFrame mContext, int targetEnemyIndex) {
 		this.mContext = mContext;
-		this.targetEnemy = this.mContext.getEnemyList().get(targetEnemyIndex);			
+		try {
+			this.targetEnemy = this.mContext.getEnemyList().get(targetEnemyIndex);			
+		} catch (Exception e) {
+			System.out.println("게임 종료 후 적군 총 발사");
+		}
 		initData();
 		setInitLayout();
 		backgroundenemyBulletService = new BackgroundEnemyBulletService(this);
@@ -127,7 +131,7 @@ public class EnemyBullet extends JLabel implements Moveable {
 		while (true) {
 			y++;
 			setLocation(x, y);
-			if (Math.abs(x - mContext.getPlayer().getX() - 40) < 50 && Math.abs(y - mContext.getPlayer().getY()) < 40) {
+			if (Math.abs(x - mContext.getPlayer().getX() - 30) < 40 && Math.abs(y - mContext.getPlayer().getY() - 10) < 30) {
 				if (mContext.getPlayer().getAlive() == 0) {
 					crash();
 				}

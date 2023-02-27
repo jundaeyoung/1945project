@@ -19,9 +19,11 @@ public class EnemyUnit3 extends Enemy {
 	}
 	
 	private void initData() {
+		x = 0;
+		y = 0;
 		hp = 3;
 		speed = 2; // 이동속도
-		attackSpeed = 3000;
+		attackSpeed = 1500;
 		point = 1000;
 		alive = 0; // 살아 있는 상태
 		enemyImage = new ImageIcon("imagesProject/enemy3.png");

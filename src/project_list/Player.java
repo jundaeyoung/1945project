@@ -1,6 +1,8 @@
 package project_list;
 
 import java.awt.Frame;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
@@ -175,6 +177,10 @@ public class Player extends JLabel implements Moveable {
 	public void gameOver() {
 		setSize(100, 100);
 	}
+	
+	public void gameClear() {
+		setSize(100, 100);
+	}
 
 	public Player(AirplaneFrame mContext) {
 		this.mContext = mContext;
@@ -321,15 +327,21 @@ public class Player extends JLabel implements Moveable {
 			setIcon(null);
 			mContext.getLife0().setIcon(null);
 			System.out.println("3번째 추락");
-//	         mContext.setGameState(2);
-			System.exit(0);
-			mContext.gameOver();
-
-			// 게임 재시작
-// 			new AirplaneFrame();
-//			Frame frame = new Frame();
-// 			mContext.dispose();
-
+	        mContext.setGameState(2);
+	        mContext.gameOver();
+	        
+	        Timer timer = new Timer();
+	        TimerTask task = new TimerTask() {
+				
+				@Override
+				public void run() {
+					System.exit(0);
+				}
+			};
+			
+			long delay = 2000L;
+			timer.schedule(task, delay);
+			
 		}
 		try {
 			Thread.sleep(500);
