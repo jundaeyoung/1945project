@@ -130,56 +130,67 @@ public class Bullet extends JLabel implements Moveable {
 	@Override
 	public synchronized void up() {
 		up = true;
-		while (true) {
+		while (up) {
 			y--;
 			setLocation(x, y);
+			// 불렛이 위에 닿으면 up을 false로 바꾸기
+			if (y == 3) {
+				up = false;
+				setIcon(null);
+				return;
+			}
 
-			for (Enemy enemy : mContext.getEnemyList()) {
-				if (enemy instanceof EnemyUnit1 && enemy.getAlive() == 0) {
-					if (Math.abs(x - (enemy.getX() + 250)) < 230 && Math.abs(y - (enemy.getY())) < 30) {
-						enemy.beattacked();
-						targetEnemy = enemy;
-						if (this.state == 0) {
-
-							crash();
-							setIcon(boom);
+			try {
+				for (Enemy enemy : mContext.getEnemyList()) {
+					if (enemy instanceof EnemyUnit1 && enemy.getAlive() == 0) {
+						if (Math.abs(x - (enemy.getX() + 250)) < 230 && Math.abs(y - (enemy.getY())) < 30) {
+							enemy.beattacked();
+							targetEnemy = enemy;
+							if (this.state == 0) {
+								
+								crash();
+								setIcon(boom);
+							}
+						}
+						
+					} else if (enemy instanceof EnemyUnit2 && enemy.getAlive() == 0) {
+						if (Math.abs(x - (enemy.getX() + 10)) < 20 && Math.abs(y - enemy.getY()) < 15) {
+							enemy.beattacked();
+							targetEnemy = enemy;
+							if (this.state == 0) {
+								
+								crash();
+								setIcon(boom);
+							}
+						}
+						
+					} else if (enemy instanceof EnemyUnit3 && enemy.getAlive() == 0) {
+						if (Math.abs(x - (enemy.getX() + 100)) < 100 && Math.abs(y - (enemy.getY() + 80)) < 30) {
+							enemy.beattacked();
+							targetEnemy = enemy;
+							if (this.state == 0) {
+								
+								crash();
+								setIcon(boom);
+							}
+						}
+						
+					} else if (enemy instanceof EnemyUnit4 && enemy.getAlive() == 0) {
+						if (Math.abs(x - (enemy.getX() + 43)) < 45 && Math.abs(y - enemy.getY()) < 30) {
+							enemy.beattacked();
+							targetEnemy = enemy;
+							if (this.state == 0) {
+								
+								crash();
+								setIcon(boom);
+							}
 						}
 					}
-
-				} else if (enemy instanceof EnemyUnit2 && enemy.getAlive() == 0) {
-					if (Math.abs(x - (enemy.getX() + 10)) < 20 && Math.abs(y - enemy.getY()) < 15) {
-						enemy.beattacked();
-						targetEnemy = enemy;
-						if (this.state == 0) {
-
-							crash();
-							setIcon(boom);
-						}
-					}
-
-				} else if (enemy instanceof EnemyUnit3 && enemy.getAlive() == 0) {
-					if (Math.abs(x - (enemy.getX() + 100)) < 100 && Math.abs(y - (enemy.getY() + 80)) < 30) {
-						enemy.beattacked();
-						targetEnemy = enemy;
-						if (this.state == 0) {
-
-							crash();
-							setIcon(boom);
-						}
-					}
-
-				} else if (enemy instanceof EnemyUnit4 && enemy.getAlive() == 0) {
-					if (Math.abs(x - (enemy.getX() + 43)) < 45 && Math.abs(y - enemy.getY()) < 30) {
-						enemy.beattacked();
-						targetEnemy = enemy;
-						if (this.state == 0) {
-
-							crash();
-							setIcon(boom);
-						}
-					}
-				}
-			} // end of for
+				} // end of for
+				
+			} catch (Exception e) {
+				System.out.println("게임 종료 시 오류가 날 수 있음");
+			}
 
 			try {
 				Thread.sleep(3);

@@ -152,8 +152,6 @@ public class Item extends JLabel implements Moveable {
 
 				}
 
-				// setSpeed에서 += 사용하기
-//				mContext.getPlayer().setSpeed(5);
 
 			}
 			try {
