@@ -234,17 +234,31 @@ public class AirplaneFrame extends JFrame {
 					}
 					break;
 				case KeyEvent.VK_ENTER:
+					// 처음 시작
 					gameState = 1;
 					setInitLayout();
 
+<<<<<<< HEAD
 					if (getPlayer().getAlive() == 1) {
 						enemyList = null;
 						new AirplaneFrame();
 //						player.setLocation(getPlayer().setX(200), getPlayer().setY(200));
+=======
+					// 재시작
+					if (player.getAlive() == 1) {
+						// 죽은 상태
+						reStart();
+>>>>>>> 2dcbf76e97df5d50904b8cc4fe0e3e3948938c8d
 					}
 					break;
 				}
 
+			}
+			
+			public void reStart() {
+				System.out.println("---------- 게임 재 시작 하기 ----------");
+				// 초기화 해야 될 부분추가
+				player.setInitLayout();
 			}
 
 			@Override
