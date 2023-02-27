@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.text.AbstractDocument.Content;
 
 public class AirplaneFrame extends JFrame {
 
@@ -22,7 +23,7 @@ public class AirplaneFrame extends JFrame {
 
 	// 배경 흐르기 실험
 
-	ImageIcon backIc = new ImageIcon("imagesProject/stage1.png");
+	ImageIcon backIc = new ImageIcon("imagesProject/stage2.png");
 	Image backImg = backIc.getImage();
 
 	int backY = -17200;
@@ -34,6 +35,7 @@ public class AirplaneFrame extends JFrame {
 	private Player player;
 	private EnemyBullet enemyBullet;
 	private Bullet bullet;
+	private JLabel label;
 //	private Item item;
 
 	// 적군 관련
@@ -48,11 +50,11 @@ public class AirplaneFrame extends JFrame {
 	private Life life0;
 	private Life life1;
 	private Life life2;
-	
+
 	// 점수
 	private Score scoreTitle;
 	private int score;
-	
+
 	// 게임 종료 여부 : 객체 생성하지 않고 사용 가능하게 (0 : 실행, 1 : 종료)
 	private static int gameState = 0;
 
@@ -64,16 +66,11 @@ public class AirplaneFrame extends JFrame {
 //		mContext.getItem().setDown(false);
 
 		new Thread(new BackgroundPlayerService(player)).start();
-
 	} // end of 생성자
 
-	
-	
 	public Bullet getBullet() {
 		return bullet;
 	}
-
-
 
 	public void setBullet(Bullet bullet) {
 		this.bullet = bullet;
@@ -173,6 +170,7 @@ public class AirplaneFrame extends JFrame {
 		life0 = new Life(mContext);
 		life1 = new Life(mContext);
 		life2 = new Life(mContext);
+		label = new JLabel(new ImageIcon("imagesProject/enter.png"));
 //		item = new Item(mContext);
 
 //		// 테스트
@@ -189,6 +187,8 @@ public class AirplaneFrame extends JFrame {
 		setVisible(true);
 
 		if (gameState == 0) {
+			
+			add(label);
 			setContentPane(gameStart);
 		} else {
 			setContentPane(new MyPanel());
@@ -236,6 +236,12 @@ public class AirplaneFrame extends JFrame {
 				case KeyEvent.VK_ENTER:
 					gameState = 1;
 					setInitLayout();
+					
+					if(getPlayer().getAlive() ==1 ) {
+						enemyList = null;
+						new AirplaneFrame();
+//						player.setLocation(getPlayer().setX(200), getPlayer().setY(200));
+					}
 					break;
 				}
 
@@ -476,6 +482,7 @@ public class AirplaneFrame extends JFrame {
 	}
 
 	public static void main(String[] args) {
+		new Bgm();
 		new AirplaneFrame();
 
 	}
