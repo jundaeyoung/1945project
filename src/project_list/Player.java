@@ -11,6 +11,9 @@ public class Player extends JLabel implements Moveable {
 	PlayerWay playerWay;
 	AirplaneFrame mContext;
 
+	private final static int playerX = 250;
+	private final static int playerY = 700;
+	
 	private int x;
 	private int y;
 	private int bulletX;
