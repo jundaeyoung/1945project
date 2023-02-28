@@ -410,7 +410,7 @@ public class AirplaneFrame extends JFrame {
 
 			@Override
 			public void run() {
-				unit2ArrayRightMove();
+				unit2ArrayLeftMove();
 				unit2ArrayRightMove();
 			}
 		};
