@@ -55,8 +55,8 @@
 
 
 ## 📌 주요 기능
-#### Enemy 클래스 - <a href="https://github.com/jundaeyoung/1945project/wiki" >상세보기 - WIKI 이동</a>
-#### EnemyUnit1 클래스 - <a href="https://github.com/jundaeyoung/1945project/wiki" >상세보기 - WIKI 이동</a>
+#### 클래스 - <a href="https://github.com/jundaeyoung/1945project/wiki" >상세보기 - WIKI 이동</a>
+
 - DB값 검증
 - ID찾기, PW찾기
 - 로그인 시 쿠키(Cookie) 및 세션(Session) 생성
