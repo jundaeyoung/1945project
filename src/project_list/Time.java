@@ -16,7 +16,7 @@ public class Time {
 
 	// 시간을 표시할 라벨
 	JLabel timeLabel;
-	
+
 	AirplaneFrame mContext;
 
 	// 시간
@@ -31,7 +31,7 @@ public class Time {
 	}
 
 	private void initData() {
-		
+
 		// 초기 값 세팅 (임시)
 		timeM = 1;
 		timeS = 0;
@@ -47,8 +47,8 @@ public class Time {
 		timeLabel.setHorizontalAlignment(JLabel.CENTER); // 텍스트 가운데 정렬
 
 		timeLabel.setSize(100, 40);
-//		timeLabel.setOpaque(true); // 배경색 보이게
-//		timeLabel.setBackground(Color.black);
+//      timeLabel.setOpaque(true); // 배경색 보이게
+//      timeLabel.setBackground(Color.black);
 	}
 
 	private void timerStart() {
@@ -61,6 +61,7 @@ public class Time {
 
 			@Override
 			public void run() {
+<<<<<<< HEAD
 				
 				// 시간이 끝나서 게임 종료
 				if (timeS <= 1 && timeM == 0) {
@@ -70,16 +71,29 @@ public class Time {
 					return;
 				}
 				
+=======
+
+>>>>>>> 604cabb4d3fa8004d73dedac9153b94c31312bb3
 				// 게임 진행 중에만 시간이 흐름
 				if (mContext.getGameState() == 1) {
-					timeS--;					
+					timeS--;
 					if (timeS < 0) {
 						if (timeM > 0) {
-							timeM--;												
+							timeM--;
 							timeS += 60;
 						}
 					}
 				}
+
+				// 시간이 끝나서 게임 종료 (클리어)
+				if (timeS <= 0 && timeM == 0) {
+					timeS = 0;
+					mContext.setGameState(3);
+					mContext.gameClear();
+					System.out.println("121211212");
+				}
+				
+				
 
 				// 분이 1 자릿수인 경우 01 이런 식으로 표시
 				if (timeM < 10) {

@@ -327,7 +327,7 @@ public class Player extends JLabel implements Moveable {
 			setIcon(null);
 			mContext.getLife0().setIcon(null);
 			System.out.println("3번째 추락");
-	        mContext.setGameState(1);
+	        mContext.setGameState(2);
 	        mContext.gameOver();
 	        
 	        Timer timer = new Timer();

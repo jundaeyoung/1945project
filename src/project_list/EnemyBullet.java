@@ -128,8 +128,16 @@ public class EnemyBullet extends JLabel implements Moveable {
 	@Override
 	public void down() {
 		down = true;
-		while (true) {
+		while (down) {
 			y++;
+			
+			// 화면 밖으로 총알이 나가면 사라짐
+			if (y == 840) {
+				setIcon(null);
+				down = false;
+				return;
+			}
+			
 			setLocation(x, y);
 			if (Math.abs(x - mContext.getPlayer().getX() - 30) < 40 && Math.abs(y - mContext.getPlayer().getY() - 10) < 30) {
 				if (mContext.getPlayer().getAlive() == 0) {
@@ -141,10 +149,6 @@ public class EnemyBullet extends JLabel implements Moveable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 
-			}
-			// 화면 밖으로 총알이 나가면 사라짐
-			if (y == 840) {
-				setIcon(null);
 			}
 		}
 
