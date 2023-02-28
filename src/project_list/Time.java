@@ -64,8 +64,8 @@ public class Time {
 
 				
 				// 시간이 끝나서 게임 종료
-				if (timeS <= 1 && timeM == 0) {
-					timeS = 0;
+				if (timeS == 1 && timeM == 0) {
+					timeS--;
 					mContext.setGameState(3);
 					mContext.gameClear();
 					System.out.println("121211212");
