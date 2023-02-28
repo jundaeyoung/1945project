@@ -61,7 +61,7 @@ public class Time {
 
 			@Override
 			public void run() {
-<<<<<<< HEAD
+
 				
 				// 시간이 끝나서 게임 종료
 				if (timeS <= 1 && timeM == 0) {
@@ -71,9 +71,7 @@ public class Time {
 					return;
 				}
 				
-=======
 
->>>>>>> 604cabb4d3fa8004d73dedac9153b94c31312bb3
 				// 게임 진행 중에만 시간이 흐름
 				if (mContext.getGameState() == 1) {
 					timeS--;
