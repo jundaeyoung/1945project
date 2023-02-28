@@ -23,7 +23,8 @@ public class Time {
 	int timeS; // 초
 	int timeM; // 분
 
-	public Time() {
+	public Time(AirplaneFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
 		timerStart();
@@ -62,7 +63,10 @@ public class Time {
 			public void run() {
 				
 				// 시간이 끝나서 게임 종료
-				if (timeS == 0 && timeM == 0) {
+				if (timeS <= 1 && timeM == 0) {
+					mContext.setGameState(3);
+					mContext.gameClear();
+					System.out.println("121211212");
 					return;
 				}
 				

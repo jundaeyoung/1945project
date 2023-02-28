@@ -210,7 +210,7 @@ public class AirplaneFrame extends JFrame {
 			add(life1);
 			add(life2);
 //			mContext.getItem().setDown(false);
-			time = new Time();
+			time = new Time(this);
 			add(time.timeLabel);
 			createEnemy();
 
@@ -253,13 +253,7 @@ public class AirplaneFrame extends JFrame {
 					if (gameState == 0 || gameState == 2) {
 						gameState = 1;
 						setInitLayout();
-					} else if (gameState == 1) {
-						return;
-					
-					} else if (player.getAlive() == 1) {
-						reStart();
-
-					}
+					} 
 					break;
 				}
 
@@ -876,7 +870,7 @@ public class AirplaneFrame extends JFrame {
 			life2.setLocation(100, 10);
 			time.timeLabel.setLocation(840, 20);
 			gameOver.setLocation(250, 300);
-			gameClear.setLocation(170, 250);
+			gameClear.setLocation(200, 250);
 
 		}
 	}
