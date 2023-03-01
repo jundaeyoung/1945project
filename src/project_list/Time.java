@@ -66,6 +66,19 @@ public class Time {
 				// 시간이 끝나서 게임 종료
 				if (timeS == 1 && timeM == 0) {
 					timeS--;
+					// 분이 1 자릿수인 경우 01 이런 식으로 표시
+					if (timeM < 10) {
+						textTimeM = "0" + timeM;
+					} else {
+						textTimeM = "" + timeM;
+					}
+
+					// 초가 1 자릿수인 경우
+					if (timeS < 10) {
+						textTimeS = "0" + timeS;
+					} else {
+						textTimeS = "" + timeS;
+					}
 					timeLabel.setText(textTimeM + " : " + textTimeS);
 					mContext.setGameState(3);
 					mContext.gameClear();
@@ -84,15 +97,6 @@ public class Time {
 						}
 					}
 				}
-
-				// 시간이 끝나서 게임 종료 (클리어)
-				if (timeS <= 0 && timeM == 0) {
-					timeS = 0;
-					mContext.setGameState(3);
-					mContext.gameClear();
-					System.out.println("121211212");
-				}
-				
 				
 
 				// 분이 1 자릿수인 경우 01 이런 식으로 표시
