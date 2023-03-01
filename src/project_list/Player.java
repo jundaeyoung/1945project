@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Player extends JLabel implements Moveable {
+public class Player extends JLabel implements PlayerMoveable {
 
 	PlayerWay playerWay;
 	AirplaneFrame mContext;

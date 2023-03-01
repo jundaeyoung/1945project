@@ -2,13 +2,13 @@ package project_list;
 
 import javax.swing.ImageIcon;
 
-public class EnemyUnit3 extends Enemy {
+public class EnemyUnitThree extends Enemy {
 	
 	AirplaneFrame mContext;
 	
 	
 	// 생성자
-	public EnemyUnit3(AirplaneFrame mContext) {
+	public EnemyUnitThree(AirplaneFrame mContext) {
 		super(mContext);
 		this.mContext = mContext;
 		initData();

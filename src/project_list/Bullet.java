@@ -3,7 +3,7 @@ package project_list;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Bullet extends JLabel implements Moveable {
+public class Bullet extends JLabel implements PlayerMoveable {
 
 	private int x;
 	private int y;
@@ -142,7 +142,7 @@ public class Bullet extends JLabel implements Moveable {
 
 			try {
 				for (Enemy enemy : mContext.getEnemyList()) {
-					if (enemy instanceof EnemyUnit1 && enemy.getAlive() == 0) {
+					if (enemy instanceof EnemyUnitOne && enemy.getAlive() == 0) {
 						if (Math.abs(x - (enemy.getX() + 250)) < 230 && Math.abs(y - (enemy.getY())) < 30) {
 							enemy.beattacked();
 							targetEnemy = enemy;
@@ -153,7 +153,7 @@ public class Bullet extends JLabel implements Moveable {
 							}
 						}
 						
-					} else if (enemy instanceof EnemyUnit2 && enemy.getAlive() == 0) {
+					} else if (enemy instanceof EnemyUnitTwo && enemy.getAlive() == 0) {
 						if (Math.abs(x - (enemy.getX() + 10)) < 20 && Math.abs(y - enemy.getY()) < 15) {
 							enemy.beattacked();
 							targetEnemy = enemy;
@@ -164,7 +164,7 @@ public class Bullet extends JLabel implements Moveable {
 							}
 						}
 						
-					} else if (enemy instanceof EnemyUnit3 && enemy.getAlive() == 0) {
+					} else if (enemy instanceof EnemyUnitThree && enemy.getAlive() == 0) {
 						if (Math.abs(x - (enemy.getX() + 100)) < 100 && Math.abs(y - (enemy.getY() + 80)) < 30) {
 							enemy.beattacked();
 							targetEnemy = enemy;
@@ -175,7 +175,7 @@ public class Bullet extends JLabel implements Moveable {
 							}
 						}
 						
-					} else if (enemy instanceof EnemyUnit4 && enemy.getAlive() == 0) {
+					} else if (enemy instanceof EnemyUnitFour && enemy.getAlive() == 0) {
 						if (Math.abs(x - (enemy.getX() + 43)) < 45 && Math.abs(y - enemy.getY()) < 30) {
 							enemy.beattacked();
 							targetEnemy = enemy;

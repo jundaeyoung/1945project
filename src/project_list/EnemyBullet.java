@@ -3,7 +3,7 @@ package project_list;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class EnemyBullet extends JLabel implements Moveable {
+public class EnemyBullet extends JLabel implements PlayerMoveable {
 
 	private int x;
 	private int y;
@@ -59,22 +59,22 @@ public class EnemyBullet extends JLabel implements Moveable {
 	public void setInitLayout() {
 
 		// + 수정 : 자료형에 따라 보정 (발사 위치)
-		if (targetEnemy instanceof EnemyUnit1) {
+		if (targetEnemy instanceof EnemyUnitOne) {
 			x = targetEnemy.getX() + 240;
 			y = targetEnemy.getY() + 80;
 		
 
-		} else if (targetEnemy instanceof EnemyUnit2) {
+		} else if (targetEnemy instanceof EnemyUnitTwo) {
 			x = targetEnemy.getX() + 10;
 			y = targetEnemy.getY() + 10;
 	
 
-		} else if (targetEnemy instanceof EnemyUnit3) {
+		} else if (targetEnemy instanceof EnemyUnitThree) {
 			x = targetEnemy.getX() + 107;
 			y = targetEnemy.getY() + 80;
 		
 
-		} else if (targetEnemy instanceof EnemyUnit4) {
+		} else if (targetEnemy instanceof EnemyUnitFour) {
 			x = targetEnemy.getX() + 43;
 			y = targetEnemy.getY() + 24;
 		

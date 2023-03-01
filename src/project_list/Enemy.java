@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Enemy extends JLabel implements Moveable {
+public class Enemy extends JLabel implements EnemyMoveable {
 
 	protected AirplaneFrame mContext;
 
@@ -87,7 +87,7 @@ public class Enemy extends JLabel implements Moveable {
 
 					// 그 외의 값은 아래쪽으로
 				} else {
-					down();
+					down(downSpeed);
 				}
 
 				try {
@@ -168,7 +168,7 @@ public class Enemy extends JLabel implements Moveable {
 	} // end of right
 
 	@Override
-	public void down() {
+	public void down(int downSpeed) {
 		new Thread(() -> {
 			down = true;
 			while (down) {
@@ -195,12 +195,6 @@ public class Enemy extends JLabel implements Moveable {
 //			down = false;
 		}).start();
 	} // end of down
-
-	@Override
-	public void downLeft() {
-		// TODO Auto-generated method stub
-		Moveable.super.downLeft();
-	}
 
 	public void crash() {
 		mContext.getPlayer().beAttack();
@@ -236,25 +230,25 @@ public class Enemy extends JLabel implements Moveable {
 
 	// 적군과 플레이어가 접촉하면 플레이어의 목숨이 하나 감소함
 	public void contact() {
-		if (this instanceof EnemyUnit1 && mContext.getPlayer().getAlive() == 0) {
+		if (this instanceof EnemyUnitOne && mContext.getPlayer().getAlive() == 0) {
 			if (Math.abs((x + 220) - mContext.getPlayer().getX()) < 200
 					&& Math.abs((y + 50) - mContext.getPlayer().getY()) < 40) {
 				crash();
 			}
 
-		} else if (this instanceof EnemyUnit2 && mContext.getPlayer().getAlive() == 0) {
+		} else if (this instanceof EnemyUnitTwo && mContext.getPlayer().getAlive() == 0) {
 			if (Math.abs(x - (mContext.getPlayer().getX())) < 20 // 30
 					&& Math.abs((y + 15) - mContext.getPlayer().getY()) < 15) {
 				crash();
 			}
 
-		} else if (this instanceof EnemyUnit3 && mContext.getPlayer().getAlive() == 0) {
+		} else if (this instanceof EnemyUnitThree && mContext.getPlayer().getAlive() == 0) {
 			if (Math.abs((x + 100) - mContext.getPlayer().getX()) < 100
 					&& Math.abs((y + 40) - mContext.getPlayer().getY()) < 40) {
 				crash();
 			}
 
-		} else if (this instanceof EnemyUnit4 && mContext.getPlayer().getAlive() == 0) {
+		} else if (this instanceof EnemyUnitFour && mContext.getPlayer().getAlive() == 0) {
 			if (Math.abs(x - mContext.getPlayer().getX()) < 20 // 40
 					&& Math.abs((y + 25) - mContext.getPlayer().getY()) < 30) {
 				crash();
@@ -366,6 +360,14 @@ public class Enemy extends JLabel implements Moveable {
 
 	public void setHp(int hp) {
 		this.hp = hp;
+	}
+
+	public int getDownSpeed() {
+		return downSpeed;
+	}
+
+	public void setDownSpeed(int downSpeed) {
+		this.downSpeed = downSpeed;
 	}
 
 	public int getAttackSpeed() {

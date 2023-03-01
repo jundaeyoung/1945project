@@ -38,10 +38,7 @@ public class AirplaneFrame extends JFrame {
 	private EnemyBullet enemyBullet;
 	private Bullet bullet;
 	private JLabel label;
-//	private Item item;
 
-	// 적군 관련
-	// 이 두 변수 외에 enemy 관련 다른 변수는 선언하지 않아도 됨
 	// 생성된 적군 객체들을 담을 리스트
 	// 생성될 때마다 순서대로 리스트에 담김
 	ArrayList<Enemy> enemyList = new ArrayList<>();
@@ -65,7 +62,6 @@ public class AirplaneFrame extends JFrame {
 		initData();
 		setInitLayout();
 		addEventListener();
-//		mContext.getItem().setDown(false);
 
 		new Thread(new BackgroundPlayerService(player)).start();
 	} // end of 생성자
@@ -183,12 +179,6 @@ public class AirplaneFrame extends JFrame {
 		life1 = new Life(mContext);
 		life2 = new Life(mContext);
 		label = new JLabel(new ImageIcon("imagesProject/enter.png"));
-//		item = new Item(mContext);
-
-//		// 테스트
-//		for (int i = 0; i < enemies.length; i++) {
-//			enemies[i] = new Enemy(mContext);
-//		}
 	}
 
 	// 생성자 메서드 2
@@ -204,12 +194,10 @@ public class AirplaneFrame extends JFrame {
 			setContentPane(gameStart);
 		} else if (gameState == 1) {
 			setContentPane(new MyPanel());
-//			setContentPane(backgroundMap);
 			add(player);
 			add(life0);
 			add(life1);
 			add(life2);
-//			mContext.getItem().setDown(false);
 			time = new Time(this);
 			add(time.timeLabel);
 			createEnemy();
@@ -257,14 +245,6 @@ public class AirplaneFrame extends JFrame {
 					break;
 				}
 
-			}
-
-			public void reStart() {
-				System.out.println("---------- 게임 재 시작 하기 ----------");
-				// 초기화 해야 될 부분추가
-				new AirplaneFrame();
-				dispose();
-//				setInitLayout();
 			}
 
 			@Override
@@ -524,10 +504,8 @@ public class AirplaneFrame extends JFrame {
 	public void unit3OneMove() {
 		int index1 = enemyList.size();
 
-//		int enemyCount = 1;
-
 		// 객체 생성 및 리스트에 추가
-		enemyList.add(new EnemyUnit3(mContext));
+		enemyList.add(new EnemyUnitThree(mContext));
 
 		// 알아보기 쉽게 변수로 선언
 		Enemy targetEnemy = enemyList.get(index1);
@@ -556,7 +534,7 @@ public class AirplaneFrame extends JFrame {
 //		int enemyCount = 1;
 
 		// 객체 생성 및 리스트에 추가
-		enemyList.add(new EnemyUnit1(mContext));
+		enemyList.add(new EnemyUnitOne(mContext));
 
 		// 알아보기 쉽게 변수로 선언
 		Enemy targetEnemy = enemyList.get(index1);
@@ -582,10 +560,8 @@ public class AirplaneFrame extends JFrame {
 	public void unit4OneMove() {
 		int index1 = enemyList.size();
 
-//		int enemyCount = 1;
-
 		// 객체 생성 및 리스트에 추가
-		enemyList.add(new EnemyUnit4(mContext));
+		enemyList.add(new EnemyUnitFour(mContext));
 
 		// 알아보기 쉽게 변수로 선언
 		Enemy targetEnemy = enemyList.get(index1);
@@ -593,7 +569,7 @@ public class AirplaneFrame extends JFrame {
 		// 초기 x 위치는 랜덤
 		Random random = new Random();
 		targetEnemy.setX(random.nextInt(500) + 50);
-		targetEnemy.setY(10);
+		targetEnemy.setY(30);
 		targetEnemy.setLocation(targetEnemy.getX(), targetEnemy.getY());
 
 		// 추가
@@ -627,7 +603,7 @@ public class AirplaneFrame extends JFrame {
 
 		for (int i = 0; i < enemyCount; i++) {
 			// 인스턴스화 및 리스트에 추가
-			enemyList.add(new EnemyUnit4(mContext));
+			enemyList.add(new EnemyUnitFour(mContext));
 
 			// 알아보기 쉽게 변수로 선언
 			Enemy targetEnemy = enemyList.get(index1 + i);
@@ -652,7 +628,7 @@ public class AirplaneFrame extends JFrame {
 
 		// 아래로만 움직임
 		for (int i = index1; i <= index2; i++) {
-			enemyList.get(i).down();
+			enemyList.get(i).down(enemyList.get(i).getDownSpeed());
 
 		}
 	}
@@ -673,7 +649,7 @@ public class AirplaneFrame extends JFrame {
 
 		for (int i = 0; i < enemyCount; i++) {
 			// 인스턴스화 및 리스트에 추가
-			enemyList.add(new EnemyUnit4(mContext));
+			enemyList.add(new EnemyUnitFour(mContext));
 
 			// 알아보기 쉽게 변수로 선언
 			Enemy targetEnemy = enemyList.get(index1 + i);
@@ -698,7 +674,7 @@ public class AirplaneFrame extends JFrame {
 
 		// 아래로만 움직임
 		for (int i = index1; i <= index2; i++) {
-			enemyList.get(i).down();
+			enemyList.get(i).down(enemyList.get(i).getDownSpeed());
 
 		}
 	}
@@ -719,7 +695,7 @@ public class AirplaneFrame extends JFrame {
 
 		for (int i = 0; i < enemyCount; i++) {
 			// 인스턴스화 및 리스트에 추가
-			enemyList.add(new EnemyUnit3(mContext));
+			enemyList.add(new EnemyUnitThree(mContext));
 
 			// 알아보기 쉽게 변수로 선언
 			Enemy targetEnemy = enemyList.get(index1 + i);
@@ -743,7 +719,7 @@ public class AirplaneFrame extends JFrame {
 		for (int i = index1; i <= index2; i++) {
 			// 알아보기 쉽게 변수로 선언
 			Enemy targetEnemy = enemyList.get(i);
-			targetEnemy.down();
+			targetEnemy.down(targetEnemy.getDownSpeed());
 
 		}
 
@@ -759,7 +735,7 @@ public class AirplaneFrame extends JFrame {
 		int[] intArrY = { 100, -50 };
 
 		for (int i = 0; i < enemyCount; i++) {
-			enemyList.add(new EnemyUnit1(mContext));
+			enemyList.add(new EnemyUnitOne(mContext));
 
 			Enemy targetEnemy = enemyList.get(i + index1);
 			targetEnemy.setX(intArrX[i]);
@@ -774,7 +750,7 @@ public class AirplaneFrame extends JFrame {
 		for (int i = index1; i <= index2; i++) {
 			// 알아보기 쉽게 변수로 선언
 			Enemy targetEnemy = enemyList.get(i);
-			targetEnemy.down();
+			targetEnemy.down(targetEnemy.getDownSpeed());
 
 		}
 	}
@@ -788,7 +764,7 @@ public class AirplaneFrame extends JFrame {
 		int[] intArrY = { 80, 110, 140, 170 };
 
 		for (int i = 0; i < createCount; i++) {
-			enemyList.add(new EnemyUnit2(mContext));
+			enemyList.add(new EnemyUnitTwo(mContext));
 
 			Enemy targetEnemy = enemyList.get(i + index1);
 			targetEnemy.setX(intArrX[i]);
@@ -797,10 +773,8 @@ public class AirplaneFrame extends JFrame {
 			add(targetEnemy);
 		}
 		for (int i = 0; i < createCount; i++) {
-			Enemy targetEnemy = enemyList.get(i);
-			// 메서드 오버라이드 부분에서 매개변수를 없게 해서 멤버변수 speed를 바로 받게 함
-//		         int speed = enemyList.get(i + index1).getSpeed();
-			enemyList.get(i + index1).down();
+			Enemy targetEnemy = enemyList.get(i + index1);
+			targetEnemy.down(targetEnemy.getDownSpeed());
 			targetEnemy.attack(targetEnemy.getAttackSpeed());
 		}
 	}
@@ -814,7 +788,7 @@ public class AirplaneFrame extends JFrame {
 		int[] intArrY = { 80, 110, 140, 170 };
 
 		for (int i = 0; i < createCount; i++) {
-			enemyList.add(new EnemyUnit2(mContext));
+			enemyList.add(new EnemyUnitTwo(mContext));
 
 			Enemy targetEnemy = enemyList.get(i + index1);
 			targetEnemy.setX(intArrX[i]);
@@ -823,10 +797,10 @@ public class AirplaneFrame extends JFrame {
 			add(targetEnemy);
 		}
 		for (int i = 0; i < createCount; i++) {
-			Enemy targetEnemy = enemyList.get(i);
+			Enemy targetEnemy = enemyList.get(i + index1);
 			// 메서드 오버라이드 부분에서 매개변수를 없게 해서 멤버변수 speed를 바로 받게 함
 //		         int speed = enemyList.get(i + index1).getSpeed();
-			enemyList.get(i + index1).down();
+			targetEnemy.down(targetEnemy.getDownSpeed());
 			targetEnemy.attack(targetEnemy.getAttackSpeed());
 		}
 	}
