@@ -486,18 +486,6 @@ public class AirplaneFrame extends JFrame {
 		};
 		timer1.schedule(task17, delay17);
 
-		// 게임 클리어 출력
-		long delayClear = 58000L;
-		TimerTask taskClear = new TimerTask() {
-
-			@Override
-			public void run() {
-				mContext.setGameState(3);
-				mContext.gameClear();
-
-			}
-		};
-
 	}
 
 	// 유닛3 하나를 소환하는 메서드
