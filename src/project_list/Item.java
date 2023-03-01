@@ -14,7 +14,7 @@ recoverIcon 먹으면 생명력 추가 : 최대 목숨 3개 !상수로 선언!)
 */
 
 // Bullet 클래스에 적군과 충돌했을 때 아이템 객체를 new 하고 화면에 붙여야 됨
-public class Item extends JLabel implements ItemMoveable {
+public class Item extends JLabel implements Moveable {
 
 	Random rd = new Random();
 	private AirplaneFrame mContext;

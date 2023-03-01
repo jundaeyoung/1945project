@@ -3,7 +3,7 @@ package project_list;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Bullet extends JLabel implements PlayerMoveable {
+public class Bullet extends JLabel implements Moveable {
 
 	private int x;
 	private int y;
