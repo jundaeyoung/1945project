@@ -55,6 +55,6 @@
 
 
 ## 📌 주요 기능
-#### 클래스 - <a href="https://github.com/jundaeyoung/1945project/wiki" >상세보기 - WIKI 이동</a>
+#### 클래스 - <a href="https://github.com/jundaeyoung/1945project/wiki/AirplaneFrame.java" >상세보기 - WIKI 이동</a>
 
 
