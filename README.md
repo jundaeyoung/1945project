@@ -62,14 +62,24 @@
  - <a href="https://github.com/jundaeyoung/1945project/wiki/BackgroundEnemyService.java" >상세보기 - WIKI 이동</a>
 #### BackgroundPlayerService .java
  - <a href="https://github.com/jundaeyoung/1945project/wiki/BackgroundPlayerService-.java" >상세보기 - WIKI 이동</a>
-#### 메인클래스 - <a href="" >상세보기 - WIKI 이동</a>
-#### 메인클래스 - <a href="" >상세보기 - WIKI 이동</a>
-#### 메인클래스 - <a href="" >상세보기 - WIKI 이동</a>
-#### 메인클래스 - <a href="" >상세보기 - WIKI 이동</a>
-#### 메인클래스 - <a href="" >상세보기 - WIKI 이동</a>
-#### 메인클래스 - <a href="" >상세보기 - WIKI 이동</a>
-#### 메인클래스 - <a href="" >상세보기 - WIKI 이동</a>
-#### 메인클래스 - <a href="" >상세보기 - WIKI 이동</a>
-#### 메인클래스 - <a href="" >상세보기 - WIKI 이동</a>
-#### 메인클래스 - <a href="" >상세보기 - WIKI 이동</a>
+#### Bgm.java
+ - <a href="https://github.com/jundaeyoung/1945project/wiki/Bgm.java" >상세보기 - WIKI 이동</a>
+#### Bullet.java
+ - <a href="https://github.com/jundaeyoung/1945project/wiki/Bullet.java" >상세보기 - WIKI 이동</a>
+#### Enemy.java - <a href="https://github.com/jundaeyoung/1945project/wiki/Enemy.java" >상세보기 - WIKI 이동</a>
+#### EnemyBullet.java - <a href="https://github.com/jundaeyoung/1945project/wiki/EnemyBullet.java" >상세보기 - WIKI 이동</a>
+#### EnemyUnit1.java - <a href="https://github.com/jundaeyoung/1945project/wiki/EnemyUnit1.java" >상세보기 - WIKI 이동</a>
+#### EnemyUnit2.java - <a href="https://github.com/jundaeyoung/1945project/wiki/EnemyUnit2.java" >상세보기 - WIKI 이동</a>
+#### EnemyUnit3.java - <a href="https://github.com/jundaeyoung/1945project/wiki/EnemyUnit3.java" >상세보기 - WIKI 이동</a>
+#### EnemyUnit4 - <a href="https://github.com/jundaeyoung/1945project/wiki/EnemyUnit4-.java" >상세보기 - WIKI 이동</a>
+#### Item.java
+ .java - <a href="https://github.com/jundaeyoung/1945project/wiki/Item.java" >상세보기 - WIKI 이동</a>
+
+#### ItemWay.java - <a href="https://github.com/jundaeyoung/1945project/wiki/ItemWay.java" >상세보기 - WIKI 이동</a>
+#### Life .java - <a href="https://github.com/jundaeyoung/1945project/wiki/Life-.java" >상세보기 - WIKI 이동</a>
+#### Moveable.java - <a href="https://github.com/jundaeyoung/1945project/wiki/Moveable.java" >상세보기 - WIKI 이동</a>
+#### Player.java - <a href="https://github.com/jundaeyoung/1945project/wiki/Player.java" >상세보기 - WIKI 이동</a>
+#### PlayerWay.java - <a href="https://github.com/jundaeyoung/1945project/wiki/PlayerWay.java" >상세보기 - WIKI 이동</a>
+#### Score .java - <a href="https://github.com/jundaeyoung/1945project/wiki/Score-.java" >상세보기 - WIKI 이동</a>
+
 
