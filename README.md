@@ -58,14 +58,10 @@
 #### 메인클래스 - <a href="https://github.com/jundaeyoung/1945project/wiki/AirplaneFrame.java" >상세보기 - WIKI 이동</a>
 #### BackgroundBulletService .java - <a href="https://github.com/jundaeyoung/1945project/wiki/BackgroundBulletService-.java" >상세보기 - WIKI 이동</a>
 #### BackgroundEnemyBulletService.java - <a href="https://github.com/jundaeyoung/1945project/wiki/BackgroundEnemyBulletService.java" >상세보기 - WIKI 이동</a>
-#### BackgroundEnemyService.java
- - <a href="https://github.com/jundaeyoung/1945project/wiki/BackgroundEnemyService.java" >상세보기 - WIKI 이동</a>
-#### BackgroundPlayerService .java
- - <a href="https://github.com/jundaeyoung/1945project/wiki/BackgroundPlayerService-.java" >상세보기 - WIKI 이동</a>
-#### Bgm.java
- - <a href="https://github.com/jundaeyoung/1945project/wiki/Bgm.java" >상세보기 - WIKI 이동</a>
-#### Bullet.java
- - <a href="https://github.com/jundaeyoung/1945project/wiki/Bullet.java" >상세보기 - WIKI 이동</a>
+#### BackgroundEnemyService.java - <a href="https://github.com/jundaeyoung/1945project/wiki/BackgroundEnemyService.java" >상세보기 - WIKI 이동</a>
+#### BackgroundPlayerService .java - <a href="https://github.com/jundaeyoung/1945project/wiki/BackgroundPlayerService-.java" >상세보기 - WIKI 이동</a>
+#### Bgm.java - <a href="https://github.com/jundaeyoung/1945project/wiki/Bgm.java" >상세보기 - WIKI 이동</a>
+#### Bullet.java - <a href="https://github.com/jundaeyoung/1945project/wiki/Bullet.java" >상세보기 - WIKI 이동</a>
 #### Enemy.java - <a href="https://github.com/jundaeyoung/1945project/wiki/Enemy.java" >상세보기 - WIKI 이동</a>
 #### EnemyBullet.java - <a href="https://github.com/jundaeyoung/1945project/wiki/EnemyBullet.java" >상세보기 - WIKI 이동</a>
 #### EnemyUnit1.java - <a href="https://github.com/jundaeyoung/1945project/wiki/EnemyUnit1.java" >상세보기 - WIKI 이동</a>
