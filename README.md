@@ -77,5 +77,5 @@
 #### PlayerWay.java - <a href="https://github.com/jundaeyoung/1945project/wiki/PlayerWay.java" >상세보기 - WIKI 이동</a>
 #### Score .java - <a href="https://github.com/jundaeyoung/1945project/wiki/Score-.java" >상세보기 - WIKI 이동</a>
 
-#### 사용된이미지  - <a href="https://github.com/jundaeyoung/1945project/issues/1" >상세보기 - WIKI 이동</a>
+📷 사용된이미지  - <a href="https://github.com/jundaeyoung/1945project/issues/1" >상세보기 - WIKI 이동</a>
 
