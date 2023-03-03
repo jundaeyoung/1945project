@@ -68,8 +68,7 @@
 #### EnemyUnit2.java - <a href="https://github.com/jundaeyoung/1945project/wiki/EnemyUnit2.java" >상세보기 - WIKI 이동</a>
 #### EnemyUnit3.java - <a href="https://github.com/jundaeyoung/1945project/wiki/EnemyUnit3.java" >상세보기 - WIKI 이동</a>
 #### EnemyUnit4 - <a href="https://github.com/jundaeyoung/1945project/wiki/EnemyUnit4-.java" >상세보기 - WIKI 이동</a>
-#### Item.java
- .java - <a href="https://github.com/jundaeyoung/1945project/wiki/Item.java" >상세보기 - WIKI 이동</a>
+#### Item.java - <a href="https://github.com/jundaeyoung/1945project/wiki/Item.java" >상세보기 - WIKI 이동</a>
 
 #### ItemWay.java - <a href="https://github.com/jundaeyoung/1945project/wiki/ItemWay.java" >상세보기 - WIKI 이동</a>
 #### Life .java - <a href="https://github.com/jundaeyoung/1945project/wiki/Life-.java" >상세보기 - WIKI 이동</a>
