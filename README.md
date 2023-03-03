@@ -55,7 +55,7 @@
 
 
 ## 📌 주요 기능
-#### 메인클래스 - <a href="https://github.com/jundaeyoung/1945project/wiki/AirplaneFrame.java" >상세보기 - WIKI 이동</a>
+#### AirplaneFrame.java - <a href="https://github.com/jundaeyoung/1945project/wiki/AirplaneFrame.java" >상세보기 - WIKI 이동</a>
 #### BackgroundBulletService .java - <a href="https://github.com/jundaeyoung/1945project/wiki/BackgroundBulletService-.java" >상세보기 - WIKI 이동</a>
 #### BackgroundEnemyBulletService.java - <a href="https://github.com/jundaeyoung/1945project/wiki/BackgroundEnemyBulletService.java" >상세보기 - WIKI 이동</a>
 #### BackgroundEnemyService.java - <a href="https://github.com/jundaeyoung/1945project/wiki/BackgroundEnemyService.java" >상세보기 - WIKI 이동</a>
